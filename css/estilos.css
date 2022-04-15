@@ -1,0 +1,48 @@
+
+/* Sobreescribimos la fuente de todo el sitio */
+* {
+    font-family: "Segoe UI Emoji", sans-serif;
+    /* system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+}
+
+.encabezado {
+
+    color: whitesmoke;
+    background-color: forestgreen;
+}
+
+.encabezado a {
+
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.encabezado a:hover {
+
+    color: lightgray;
+}
+
+footer a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: lightgray;
+}
+
+.miga-de-pan {
+
+    background-color: yellowgreen;
+}
+
+.miga-de-pan a {
+
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.miga-de-pan a:hover {
+
+    color: lightgray;
+}
