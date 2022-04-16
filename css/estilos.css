@@ -46,3 +46,14 @@ footer a:hover {
 
     color: lightgray;
 }
+
+.card a {
+
+    text-decoration: none;
+}
+
+.card a:hover {
+
+    color: yellowgreen;
+    text-decoration: none;
+}
