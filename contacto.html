@@ -78,24 +78,114 @@
 
     <!-- Inicio sección contacto -->
     <div class="container-fluid">
-      <div class="col-2"></div>
+      <form method="post" action="procesar-formulario.py">
+
+        <div class="row pb-3">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="nombre-completo">Nombre completo (*)</label>
+              <input type="text" class="form-control form-control-sm" id="nombre-completo" name="nombre-completo">
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+        
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="correo-electronico">Correo electrónico (*)</label>
+              <input type="email" class="form-control form-control-sm" id="correo-electronico" name="correo-electronico">
+            </div>
+          </div>
+          <div class="col-lg-9"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-6 col-lg-2">
+            <div class="form-group">
+              <label for="tipo-identificacion">Tipo de identificación (*)</label>
+                <select name="tipo-identificacion" id="tipo-identificacion" class="form-select form-select-sm">
+                  <option selected>RUT</option>
+                  <option>Pasaporte</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-6 col-lg-10"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="identificacion">Número de identificación (*)</label>
+              <input type="text" class="form-control form-control-sm" id="identificacion" name="identificacion">
+            </div>
+          </div>
+          <div class="col-lg-10"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" class="form-control form-control-sm" id="telefono" name="telefono">
+            </div>
+          </div>
+          <div class="col-lg-10"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="ciudad">Ciudad de residencia (*)</label>
+              <input type="text" class="form-control form-control-sm" id="ciudad" name="ciudad">
+            </div>
+          </div>
+          <div class="col-lg-10"></div>
+        </div>
+
+        <div class="row pb-4">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="comentario">Comente en qué le gustaría participar (*)</label>
+              <textarea class="form-control" id="comentario" rows="3"></textarea>
+              <figcaption class="figure-caption">Mínimo 50 caracteres</figcaption>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <button type="submit" class="btn btn-success" id="enviar">Enviar formulario</button>
+        <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
+
+      </form>
+    </div>
+    <!-- Fin sección contacto -->
+
+      <!-- <div class="col-2"></div>
       <div class="col-8">
         <form class="row g-3">
           <div class="col-md-6">
-            <label for="nombres" class="form-label">Nombres</label>
-            <input type="text" class="form-control" id="nombres" placeholder="(Ingrese su nombre)" required minlength="1" maxlength="50">
+            <label for="nombre-completo" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombre-completo" placeholder="(Ingrese su nombre completo)" maxlength="200">
           </div>
           <div class="col-md-6">
-            <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="apellidos" placeholder="(Ingrese su apellido)" required minlength="1" maxlength="50">
+            <label for="e-mail" class="form-label">e-mail</label>
+            <input type="email" class="form-control" id="e-mail" placeholder="(Ingrese su e-mail)">
+          </div>
+          <div class="col-md-2">
+            <label for="tipo-id" class="form-label">Tipo de identificación</label>
+            <select id="tipo-id" class="form-select">
+              <option selected>RUT</option>
+              <option selected>Pasaporte</option>
+            </select>
           </div>
           <div class="col-md-6">
             <label for="telefono" class="form-label">Telefono</label>
-            <input type="tel" class="form-control" id="telefono" placeholder="(Ingrese su teléfono)" required>
+            <input type="tel" class="form-control" id="telefono" placeholder="(Ingrese su teléfono)">
           </div>
           <div class="col-md-4">
-            <label for="inputState" class="form-label">Ciudad de residencia</label>
-            <select id="inputState" class="form-select" required>
+            <label for="ciudad" class="form-label">Ciudad de residencia</label>
+            <select id="ciudad" class="form-select">
               <option selected>Escoja ciudad...</option>
               <option>Alerce</option>
               <option>Algarrobo</option>
@@ -358,17 +448,13 @@
               <option>Yungay</option>
             </select>
           </div>
-          <div class="col-md-6">
-            <label for="e-mail" class="form-label">e-mail</label>
-            <input type="email" class="form-control" id="e-mail" placeholder="(Ingrese su correo)" required>
-          </div>
           <div class="col-12">
             <button type="submit" class="btn btn-success">Enviar</button>
           </div>
         </form>        
       </div>
       <div class="col-2"></div>
-    </div>
+    </div> -->
     <!-- Fin sección contacto -->
 
     <!-- Inicio pie de página -->
