@@ -57,3 +57,8 @@ a:hover {
     color: yellowgreen;
     text-decoration: none;
 }
+
+.filtro-byn{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}

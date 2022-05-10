@@ -14,8 +14,71 @@
     <!-- Estilos propios -->
     <link rel="stylesheet" href="css/estilos.css">
 
+    <!-- Añadimos JQuery -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+
     <!-- favicon -->
     <link  rel="icon"   href="img/logo.png" type="image/png" />
+
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        function geoloc() {
+          if (navigator.geolocation){
+             navigator.geolocation.getCurrentPosition(showPosition,showError);
+
+             alert(position.coords.latitude);
+
+          }
+          else {
+            alert("Lo sentimos, tu dispositivo no admite la geolocalización");
+            }
+        }
+
+        function showPosition(position){
+          latitud=position.coords.latitude;
+          longitud=position.coords.longitude;
+
+          $.get("http://api.weatherstack.com/current?access_key=bc6e10faea832b9b6bb4f0ebd11fd907&query=" + latitud + "," + longitud, function(data){
+
+            $("#texto-ubicacion").text(data.location.name);
+            $("#texto-pais").text(data.location.country);
+            $("#texto-region").text(data.location.region);
+            $("#texto-zona-horaria").text(data.location.timezone_id);
+            $("#texto-hora-local").text(data.location.localtime);
+            $("#texto-temperatura").text(data.current.temperature + "°C");
+            $("#texto-clima").text(data.current.weather_descriptions);
+
+            })
+
+
+        }
+
+        function showError(error){
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              alert("El usuario ha denegado el permiso a la localización");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("La información de la localización no está disponible");
+              break;
+            case error.TIMEOUT:
+              alert("<p>El tiempo de espera para buscar la localización ha expirado");
+              break;
+            case error.UNKNOWN_ERROR:
+              alert("Ha ocurrido un error desconocido");
+              break;
+            }
+          }
+
+        /* Activamos la geolocalización */
+        geoloc();
+
+      })
+    </script>
+
 
     <title>PET friends</title>
 </head>
@@ -246,6 +309,52 @@
       </div>
     </div>
     <!-- Fin sección donaciones -->
+
+    <!-- Inicio sección información del clima -->
+    <div class="container-fluid">
+      <div class="row pt-4">
+        <h5>Quieres ir a donar? Te ayudamos con la información del clima del día de hoy</h5>
+      </div>
+      <div class="row">
+        <div class="col-2 pt-2">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Ubicación</th>
+                <td>
+                  <p id="texto-ubicacion"></p>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">País</th>
+                <td><p id="texto-pais"></p></td>
+              </tr>
+              <tr>
+                <th scope="row">Región</th>
+                <td><p id="texto-region"></p></td>
+              </tr>
+              <tr>
+                <th scope="row">Zona horaria</th>
+                <td><p id="texto-zona-horaria"></p></td>
+              </tr>
+              <tr>
+                <th scope="row">Hora local</th>
+                <td><p id="texto-hora-local"></p></td>
+              </tr>
+              <tr>
+                <th scope="row">Temperatura</th>
+                <td><p id="texto-temperatura"></p></td>
+              </tr>
+              <tr>
+                <th scope="row">Clima</th>
+                <td><p id="texto-clima"></p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Fin sección información del clima -->
 
     <!-- Inicio pie de página -->
     <footer class="pie-de-pagina fixed-bottom encabezado">
