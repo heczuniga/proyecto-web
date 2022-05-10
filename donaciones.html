@@ -50,6 +50,7 @@
             $("#texto-hora-local").text(data.location.localtime);
             $("#texto-temperatura").text(data.current.temperature + "°C");
             $("#texto-clima").text(data.current.weather_descriptions);
+            $("#img-clima").attr("src", data.current.weather_icons);
 
             })
 
@@ -347,7 +348,7 @@
               </tr>
               <tr>
                 <th scope="row">Clima</th>
-                <td><p id="texto-clima"></p></td>
+                <td><img id="img-clima" src="" width="30rem" alt="imagen clima">&nbsp;<span id="texto-clima"></span></td>
               </tr>
             </tbody>
           </table>
