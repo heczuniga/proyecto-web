@@ -14,8 +14,156 @@
     <!-- Estilos propios -->
     <link rel="stylesheet" href="css/estilos.css">
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <!-- favicon -->
     <link  rel="icon"   href="img/logo.png" type="image/png" />
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+        function geoloc() {
+          if (navigator.geolocation){
+             navigator.geolocation.getCurrentPosition(showPosition,showError);
+
+          }
+          else {
+            alert("Lo sentimos, tu dispositivo no admite la geolocalización");
+            }
+        }
+
+        function showPosition(position){
+          latitud=position.coords.latitude;
+          longitud=position.coords.longitude;
+
+          $.get("http://api.weatherstack.com/current?access_key=bc6e10faea832b9b6bb4f0ebd11fd907&query=" + latitud + "," + longitud, function(data){
+
+            $("#texto-ubicacion").text(data.location.name);
+            $("#texto-pais").text(data.location.country);
+            $("#texto-region").text(data.location.region);
+            $("#texto-zona-horaria").text(data.location.timezone_id);
+            $("#texto-hora-local").text(data.location.localtime);
+            $("#texto-temperatura").text(data.current.temperature + "°C");
+            $("#texto-clima").text(data.current.weather_descriptions);
+            $("#img-clima").attr("src", data.current.weather_icons);
+
+            })
+        }
+
+        function showError(error){
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              alert("El usuario ha denegado el permiso a la localización");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("La información de la localización no está disponible");
+              break;
+            case error.TIMEOUT:
+              alert("<p>El tiempo de espera para buscar la localización ha expirado");
+              break;
+            case error.UNKNOWN_ERROR:
+              alert("Ha ocurrido un error desconocido");
+              break;
+            }
+          }
+
+        /* Activamos el menú en su opción inicio y cargamos opción inicio */
+        $("#menu-1").addClass("active");
+        $("#central").load("inicio.html");
+
+        $("#menu-1").on("click", function() {
+
+            /* Marcamos como no activos el resto de los menús */
+            $("#menu-2").removeClass("active");
+            $("#menu-3").removeClass("active");
+            $("#menu-4").removeClass("active");
+            $("#menu-5").removeClass("active");
+
+            /* Marcamos el menú seleccionado como activo */
+            $("#menu-1").addClass("active");
+
+            /* Cargamos el contenido central de la página */
+            $("#central").load("inicio.html");
+            
+            return false;
+        });
+    
+        $("#menu-2").on("click", function() {
+
+            /* Marcamos como no activos el resto de los menús */
+            $("#menu-1").removeClass("active");
+            $("#menu-3").removeClass("active");
+            $("#menu-4").removeClass("active");
+            $("#menu-5").removeClass("active");
+
+            /* Marcamos el menú seleccionado como activo */
+            $("#menu-2").addClass("active");
+
+            /* Cargamos el contenido central de la página */
+            $("#central").load("nosotros.html");
+            
+            return false;
+        });
+    
+        $("#menu-3").on("click", function() {
+
+            /* Marcamos como no activos el resto de los menús */
+            $("#menu-1").removeClass("active");
+            $("#menu-2").removeClass("active");
+            $("#menu-4").removeClass("active");
+            $("#menu-5").removeClass("active");
+
+            /* Marcamos el menú seleccionado como activo */
+            $("#menu-3").addClass("active");
+
+            /* Cargamos el contenido central de la página */
+            $("#central").load("contacto.html");
+            
+            return false;
+        });
+    
+        $("#menu-4").on("click", function() {
+          /* Activamos la geolocalización */
+          geoloc();
+
+
+          /* Marcamos como no activos el resto de los menús */
+            $("#menu-1").removeClass("active");
+            $("#menu-2").removeClass("active");
+            $("#menu-3").removeClass("active");
+            $("#menu-5").removeClass("active");
+
+            /* Marcamos el menú seleccionado como activo */
+            $("#menu-4").addClass("active");
+
+            /* Cargamos el contenido central de la página */
+            $("#central").load("donaciones.html");
+
+
+            return false;
+        });
+
+        $("#menu-5").on("click", function() {
+
+          /* Marcamos como no activos el resto de los menús */
+          $("#menu-2").removeClass("active");
+          $("#menu-3").removeClass("active");
+          $("#menu-4").removeClass("active");
+          $("#menu-5").removeClass("active");
+
+          /* Marcamos el menú seleccionado como activo */
+          $("#menu-5").addClass("active");
+
+          /* Cargamos el contenido central de la página */
+          $("#central").load("tienda.html");
+
+          return false;
+        });
+
+      });
+  </script>
+
 
     <title>PET friends</title>
 </head>
@@ -43,19 +191,19 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        <a class="nav-link" id="menu-1" aria-current="page" href="index.html">Inicio</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="nosotros.html">Nosotros</a>
+                        <a class="nav-link" id="menu-2" href="nosotros.html">Nosotros</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
+                        <a class="nav-link" id="menu-3" href="contacto.html">Contacto</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="donaciones.html">Donaciones</a>
+                        <a class="nav-link" id="menu-4" href="donaciones.html">Donaciones</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="tienda-bandanas.html">Tienda</a>
+                        <a class="nav-link" id="menu-5" href="tienda.html">Tienda</a>
                       </li>
                     </ul>
                   </div>
@@ -65,93 +213,13 @@
     </header>
     <!-- Fin encabezado -->
 
-    <!-- Inicio miga de pan -->
-    <div class="container-fluid pb-auto miga-de-pan">
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-        </ol>
-      </nav>
+    <!-- Contenido central a ser reemplazado -->
+    <div id="central">
     </div>
-    <!-- Fin miga de pan -->
 
-   <!-- Inicio carrusel de imágenes -->
-   <div class="container-fluid">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8">
-        
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-          </div>
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-              <a href="nosotros.html">
-                <img src="img/sección-nosotros.png" class="d-block w-100" alt="sección nosotros">
-                <div class="carousel-caption d-md-block text-dark">
-              </a>
-                <h2></h2>
-                <p class="text-light fs-1">Nosotros</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <a href="contacto.html">
-                <img src="img/sección-contacto.png" class="d-block w-100" alt="sección contacto">
-              </a>
-              <div class="carousel-caption d-md-block">
-                <h5></h5>
-                <p class="text-dark fs-1">Contacto</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <a href="donaciones.html">
-                <img src="img/sección-donaciones.png" class="d-block w-100" alt="sección donaciones">
-              </a>
-              <div class="carousel-caption d-md-block">
-                <h5></h5>
-                <p class="text-light fs-1">Donaciones</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <a href="tienda-bandanas.html">
-                <img src="img/sección-tienda.png" class="d-block w-100" alt="sección tienda">
-              </a>
-              <div class="carousel-caption d-md-block">
-                <h5></h5>
-                <p class="text-light fs-1">Tienda</p>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-      <div class="col-2"></div>
-    </div>
-   </div>
-    <!-- Fin carrusel de imágenes -->
-
-    <!-- Inicio texto central -->
-    <div class="container-fluid">
-      <div class="row text-center pt-4">
-        <h4><span class="badge bg-secondary">PETfriends</span> un lugar donde amamos a los perros.</h4>
-      </div>
-    </div>
-    <!-- Fin texto central -->
 
     <!-- Inicio pie de página -->
-    <footer class="pie-de-pagina fixed-bottom encabezado">
+    <footer class="pie-de-pagina mt-5 encabezado">
       <div class="container-fluid" id="pie-de-pagina">
         <div class="row align-items-center">
           <div class="col-sm-9 fs-6"><span class="d-none d-sm-inline-block">PETfriends:</span> Avenida Nueva Esperanza 2022, La Pintana</div>

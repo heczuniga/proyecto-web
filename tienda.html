@@ -1,0 +1,82 @@
+  <script type="text/javascript">
+
+    /* Cargamos la categoría inicial */
+    $("#tienda").load("tienda-bandanas.html");
+
+    $("#menu-tienda-1").click(function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-tienda-2").removeClass("active");
+      $("#menu-tienda-3").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-tienda-1").addClass("active");
+
+      /* Cargamos el contenido de la categoría respectiva */
+      $("#tienda").load("tienda-bandanas.html");
+
+      return false;
+
+    });
+
+    $("#menu-tienda-2").on("click", function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-tienda-1").removeClass("active");
+      $("#menu-tienda-3").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-tienda-2").addClass("active");
+
+      /* Cargamos el contenido de la categoría respectiva */
+      $("#tienda").load("tienda-correas.html");
+
+      return false;
+
+    });
+
+    $("#menu-tienda-3").click(function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-tienda-1").removeClass("active");
+      $("#menu-tienda-2").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-tienda-3").addClass("active");
+
+      /* Cargamos el contenido de la categoría respectiva */
+      $("#tienda").load("tienda-identificadores.html");
+
+      return false;
+
+    });
+
+  </script>
+
+    <!-- Inicio miga de pan -->
+    <div class="container-fluid pb-auto miga-de-pan">
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- Fin miga de pan -->
+
+    <!-- Inicio menú tienda -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-lg-1">
+          <div class="btn-group-vertical">
+            <a href="#" id="menu-tienda-1" class="btn btn-success active" aria-current="page">Bandanas</a>
+            <a href="#" id="menu-tienda-2" class="btn btn-success">Correas</a>
+            <a href="#" id="menu-tienda-3" class="btn btn-success">Identificadores</a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-11">
+          <div id="tienda"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Inicio menú tienda -->
