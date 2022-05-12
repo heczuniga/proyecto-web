@@ -1,3 +1,40 @@
+<script type="text/javascript">
+
+  /* Manejo de los clicks en el carrusel */
+
+  $("#carrusel-2").click(function() {
+
+    $("#menu-2").trigger("click");
+
+    return false;
+
+  });
+
+  $("#carrusel-3").click(function() {
+
+    $("#menu-3").trigger("click");
+
+    return false;
+
+  });
+
+  $("#carrusel-4").click(function() {
+
+    $("#menu-4").trigger("click");
+
+    return false;
+
+  });
+
+  $("#carrusel-5").click(function() {
+
+    $("#menu-5").trigger("click");
+
+    return false;
+
+  });
+
+</script>
 
 <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
@@ -25,7 +62,7 @@
   
           <div class="carousel-inner">
               <div class="carousel-item active">
-                <a href="nosotros.html">
+                <a href="#" id="carrusel-2">
                   <img src="img/sección-nosotros.png" class="d-block w-100" alt="sección nosotros">
                   <div class="carousel-caption d-md-block text-dark">
                 </a>
@@ -34,7 +71,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <a href="contacto.html">
+                <a href="#" id="carrusel-3">
                   <img src="img/sección-contacto.png" class="d-block w-100" alt="sección contacto">
                 </a>
                 <div class="carousel-caption d-md-block">
@@ -43,7 +80,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <a href="donaciones.html">
+                <a href="#" id="carrusel-4">
                   <img src="img/sección-donaciones.png" class="d-block w-100" alt="sección donaciones">
                 </a>
                 <div class="carousel-caption d-md-block">
@@ -52,7 +89,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <a href="tienda-bandanas.html">
+                <a href="#" id="carrusel-5">
                   <img src="img/sección-tienda.png" class="d-block w-100" alt="sección tienda">
                 </a>
                 <div class="carousel-caption d-md-block">
