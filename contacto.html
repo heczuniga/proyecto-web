@@ -1,4 +1,88 @@
 
+<script type="text/javascript">
+  
+  /* Ocultamos el error al principio */
+  $("#error").hide();
+  
+  var Fn = {
+
+    /* Valida celular en base a uso de expresiones regulares */
+    validaCelular : function(celular){
+      var re = /^[9][0-9]{8}$/;
+      return re.test(celular);
+    },
+
+    /* Valida correo en base a uso de expresiones regulares */
+    validaCorreo : function(email){
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+  }
+
+  /* Si presiona el botón limpiar, se ocultan también los errores */
+  $("#limpiar").click(function(){
+    $("#error").hide();
+  })
+
+        /* Validamos el formulario */
+        $("#formulario").submit(function() {
+          var label;
+          var mensaje = "";
+          var bullet = "<span>&#8226;</span> ";
+
+          /* Validamos que venga un nombre */
+          if ($("#nombres").val().trim().length == 0) {
+            label = $("#label-nombres").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que venga un apellido */
+          if ($("#apellidos").val().trim().length == 0) {
+            label = $("#label-apellidos").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que venga un teléfono */
+          if ($("#celular").val().trim().length == 0) {
+            label = $("#label-celular").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que el teléfono tenga solo digitos */
+          if (Fn.validaCelular($("#celular").val().trim()) == false) {
+            label = $("#label-celular").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Celular debe venir en el formato indicado (9 números y comenzar con dígito 9)" + "<br>";
+          }
+
+          /* Validamos que venga un correo */
+          if ($("#correo-electronico").val().trim().length == 0) {
+            label = $("#label-correo-electronico").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que el teléfono tenga solo digitos */
+          if (Fn.validaCorreo($("#correo-electronico").val().trim()) == false) {
+            label = $("#label-correo-electronico").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> El correo electrónico debe venir en formato válido" + "<br>";
+          }
+
+          /* Validamos que venga una dirección */
+          if ($("#direccion").val().trim().length == 0) {
+            label = $("#label-direccion").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Si hay error, lo mostramos y evitamos que se envíe el formulario */
+          if (mensaje != "") {
+              $("#error").html(mensaje);
+              $("#error").show();
+              event.preventDefault();
+          }
+
+        })
+
+</script>
+
     <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
       <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -12,84 +96,93 @@
 
     <!-- Inicio sección contacto -->
     <div class="container-fluid">
-      <form method="post" action="procesar-formulario.py">
+      <form method="post" id="formulario" action="procesar-formulario.py">
 
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="nombre-completo">Nombre completo (*)</label>
-              <input type="text" class="form-control form-control-sm" id="nombre-completo" name="nombre-completo">
+              <label for="nombres" id="label-nombres">Nombres (*)</label>
+              <input type="text" class="form-control form-control-sm" id="nombres" name="nombres" placeholder="(Ingrese su nombre)">
             </div>
           </div>
           <div class="col-lg-8"></div>
         </div>
-        
+
+        <div class="row pb-3">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="apellidos" id="label-apellidos">Apellidos (*)</label>
+              <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos" placeholder="(Ingrese sus apellidos)">
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
         <div class="row pb-3">
           <div class="col-lg-3">
             <div class="form-group">
-              <label for="correo-electronico">Correo electrónico (*)</label>
-              <input type="email" class="form-control form-control-sm" id="correo-electronico" name="correo-electronico">
+              <label for="celular" id="label-celular">Celular (*)</label>
+              <input type="text" class="form-control form-control-sm" id="celular" name="celular" placeholder="9NNNNNNNN">
+              <figcaption id="caption-comentario" class="figure-caption">Celular largo 9 y comenzar con dígito 9</figcaption>
             </div>
           </div>
           <div class="col-lg-9"></div>
         </div>
 
         <div class="row pb-3">
-          <div class="col-6 col-lg-2">
+          <div class="col-lg-3">
             <div class="form-group">
-              <label for="tipo-identificacion">Tipo de identificación (*)</label>
-                <select name="tipo-identificacion" id="tipo-identificacion" class="form-select form-select-sm">
-                  <option selected>RUT</option>
-                  <option>Pasaporte</option>
-                </select>
+              <label for="correo-electronico" id="label-correo-electronico">Correo electrónico (*)</label>
+              <input type="text" class="form-control form-control-sm" id="correo-electronico" name="correo-electronico" placeholder="(Ingrese se correo electrónico)">
             </div>
           </div>
-          <div class="col-6 col-lg-10"></div>
+          <div class="col-lg-9"></div>
         </div>
 
         <div class="row pb-3">
-          <div class="col-lg-2">
+          <div class="col-lg-5">
             <div class="form-group">
-              <label for="identificacion">Número de identificación (*)</label>
-              <input type="text" class="form-control form-control-sm" id="identificacion" name="identificacion">
+              <label for="identificacion" id="label-direccion">Dirección (*)</label>
+              <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" placeholder="(Ingrese su dirección)">
             </div>
           </div>
           <div class="col-lg-10"></div>
         </div>
 
         <div class="row pb-3">
-          <div class="col-lg-2">
-            <div class="form-group">
-              <label for="telefono">Teléfono</label>
-              <input type="tel" class="form-control form-control-sm" id="telefono" name="telefono">
-            </div>
-          </div>
-          <div class="col-lg-10"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-2">
-            <div class="form-group">
-              <label for="ciudad">Ciudad de residencia (*)</label>
-              <input type="text" class="form-control form-control-sm" id="ciudad" name="ciudad">
-            </div>
-          </div>
-          <div class="col-lg-10"></div>
-        </div>
-
-        <div class="row pb-4">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="comentario">Comente en qué le gustaría participar (*)</label>
-              <textarea class="form-control" id="comentario" rows="3"></textarea>
-              <figcaption class="figure-caption">Mínimo 50 caracteres</figcaption>
-            </div>
+              <label for="identificacion">Región (*)</label>
+              <select class="form-select" id="region" aria-label="Default select example">
+                <option selected>(Seleccione región)</option>
+                <option value="1">VI Región del Libertador General Bernardo O'Higgins</option>
+                <option value="2">Reg 2</option>
+                <option value="3">Reg 3</option>
+              </select>            </div>
           </div>
-          <div class="col-lg-8"></div>
+          <div class="col-lg-10"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="identificacion">Comuna (*)</label>
+              <select class="form-select" id="region" aria-label="Default select example">
+                <option selected>(Seleccione comuna)</option>
+                <option value="1">Comuna con un numbre bien reguleque por si acaso es largo</option>
+                <option value="2">Reg 2</option>
+                <option value="3">Reg 3</option>
+              </select>            </div>
+          </div>
+          <div class="col-lg-10"></div>
         </div>
 
         <button type="submit" class="btn btn-success" id="enviar">Enviar formulario</button>
         <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
+
+        <!-- Inicio sección de errores del formulario -->
+        <div id="error" class="alert alert-danger m-2 pt-3" role="alert">Texto de error con alerta</div>
+        <!-- Fin sección de errores del formulario -->
 
       </form>
     </div>
