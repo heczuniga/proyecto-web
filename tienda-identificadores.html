@@ -1,66 +1,168 @@
+<script type="text/javascript">
+
+  $("#mensaje-agregar-carro").hide();
+
+  $("#btn-prod-1").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-1").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-1").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-1").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-1").text());
+    $("#modal-precio").text($("#precio-prod-1").text());
+  })
+
+  $("#btn-prod-2").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-2").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-2").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-2").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-2").text());
+    $("#modal-precio").text($("#precio-prod-2").text());
+  })
+
+  $("#btn-prod-3").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-3").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-3").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-3").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-3").text());
+    $("#modal-precio").text($("#precio-prod-3").text());
+  })
+
+  $("#btn-prod-4").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-4").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-4").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-4").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-4").text());
+    $("#modal-precio").text($("#precio-prod-4").text());
+  })
+
+  $("#btn-prod-5").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-5").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-5").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-5").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-5").text());
+    $("#modal-precio").text($("#precio-prod-5").text());
+  })
 
 
-  <!-- Inicio sección tienda identificadores -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/identificador1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Identificador con scan</h5>
-            <p class="card-text">Identificador con scan para celular</p>
-            <p class="card-text">$26.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
+  $("#btn-agregar-carro").click(function () {
+    $("#mensaje-agregar-carro").show();
+  })
 
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/identificador2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Identificador rosa</h5>
-            <p class="card-text">Identificador de mascota color rosa</p>
-            <p class="card-text">$8.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/identificador3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Identificador saturno</h5>
-            <p class="card-text">Identificador con forma de saturno</p>
-            <p class="card-text">$7.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/identificador4.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Identificador amarillo</h5>
-            <p class="card-text">Identificador amarillo y centro rojo</p>
-            <p class="card-text">$5.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/identificador5.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Identificador felpa</h5>
-            <p class="card-text">Identificador de felpa</p>
-            <p class="card-text">$9.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-          </div>
+</script>
+
+
+<!-- Inicio sección tienda identificadores -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/identificador1.jpg" id="imagen-prod-1" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-1">Identificador con scan</h5>
+          <p class="card-text" id="nombre-largo-prod-1">Identificador con scan para celular</p>
+          <p class="card-text" id="precio-prod-1">$26.900</p>
+          <a href="#" id="btn-prod-1" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-1"> Identificador 1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero adipisci odio facere animi illum harum omnis possimus. Eos ullam assumenda obcaecati fugiat sit, aliquam praesentium in aperiam numquam, veritatis facere.</p>
         </div>
       </div>
     </div>
 
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/identificador2.jpg" id="imagen-prod-2" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-2">Identificador rosa</h5>
+          <p class="card-text" id="nombre-largo-prod-2">Identificador de mascota color rosa</p>
+          <p class="card-text" id="precio-prod-2">$8.900</p>
+          <a href="#" id="btn-prod-2" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-2"> Identificador 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda corporis ad quaerat possimus, quo ipsam qui porro consectetur esse eveniet accusantium nesciunt maiores minus laboriosam rerum dolorem veritatis quibusdam repellendus. </p>
+        </div>
+      </div>
     </div>
-  <!-- Fin sección tienda identificadores -->
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/identificador3.jpg" id="imagen-prod-3" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-3">Identificador saturno</h5>
+          <p class="card-text" id="nombre-largo-prod-3">Identificador con forma de saturno</p>
+          <p class="card-text" id="precio-prod-3">$7.900</p>
+          <a href="#" id="btn-prod-3" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-3"> Identificador 3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae ullam a dolor, autem numquam quibusdam ipsam excepturi alias corrupti, illo consequuntur. Qui eum expedita magni fuga! Vitae dolorem at odio. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/identificador4.jpg" id="imagen-prod-4" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-4">Identificador amarillo</h5>
+          <p class="card-text" id="nombre-largo-prod-4">Identificador amarillo y centro rojo</p>
+          <p class="card-text" id="precio-prod-4">$5.900</p>
+          <a href="#" id="btn-prod-4" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-4"> Identificador 4 Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum odit optio aut dolores esse error possimus in, doloribus quam nesciunt saepe tempora similique delectus. Nemo officia eum inventore voluptate.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/identificador5.jpg" id="imagen-prod-5" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-5">Identificador felpa</h5>
+          <p class="card-text" id="nombre-largo-prod-5">Identificador de felpa</p>
+          <p class="card-text" id="precio-prod-5">$9.900</p>
+          <a href="#" id="btn-prod-5" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-5"> Identificador 5 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe repellendus sed numquam, voluptatum quis voluptatibus corrupti nobis vel omnis ut vitae aliquam tenetur? Aperiam sit fuga totam molestiae, eum labore.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Inicio modal descripción de producto correa -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label-02" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-nombre-corto">Nombre corto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card mb-3" style="max-width: 1080px;">
+          <div class="row g-0">
+            <div class="col-md-8">
+              <img src="img/identificador2.jpg" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
+            </div>
+
+            <div class="col-md-4">
+              <div class="card-body">
+                <h5 class="card-title" id="modal-nombre-largo">Nombre largo</h5>
+                <p class="card-text text-start" id="modal-descripcion">Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Laudantium assumenda quis, mollitia impedit cumque adipisci nostrum nesciunt
+                  delectus iure dolore optio eveniet. Magnam odio reprehenderit quasi consectetur provident iusto
+                  deserunt.</p>
+                <h3 class="card-text" id="modal-precio">Precio</h3>
+                <button type="button" id="btn-agregar-carro" class="btn btn-success mt-5">Agregar al carro</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-success" id="mensaje-agregar-carro" role="alert">
+          Producto agregado al carro!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fin sección tienda identificadores -->

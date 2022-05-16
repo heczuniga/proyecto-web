@@ -1,65 +1,167 @@
+<script type="text/javascript">
 
-  <!-- Inicio sección tienda correas -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/correa1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Correa retráctil</h5>
-            <p class="card-text">Correa retráctil para perros y gatos</p>
-            <p class="card-text">$10.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
+  $("#mensaje-agregar-carro").hide();
 
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/correa2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Correa rosa</h5>
-            <p class="card-text">Correa color rosa perros y gatos</p>
-            <p class="card-text">$8.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/correa3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Correa roja</h5>
-            <p class="card-text">Correa color rojo perros y gatos</p>
-            <p class="card-text">$3.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/correa4.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Correa cuerina</h5>
-            <p class="card-text">Correa de cuerina perros y gatos</p>
-            <p class="card-text">$15.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 me-3">
-        <div class="card" style="width: 18rem;">
-          <img src="img/correa5.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Correa de montaña</h5>
-            <p class="card-text">Correa de montaña perros y gatos</p>
-            <p class="card-text">$18.900</p>
-            <a href="#" class="btn btn-success">Comprar</a>
-          </div>
-          </div>
+  $("#btn-prod-1").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-1").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-1").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-1").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-1").text());
+    $("#modal-precio").text($("#precio-prod-1").text());
+  })
+
+  $("#btn-prod-2").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-2").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-2").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-2").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-2").text());
+    $("#modal-precio").text($("#precio-prod-2").text());
+  })
+
+  $("#btn-prod-3").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-3").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-3").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-3").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-3").text());
+    $("#modal-precio").text($("#precio-prod-3").text());
+  })
+
+  $("#btn-prod-4").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-4").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-4").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-4").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-4").text());
+    $("#modal-precio").text($("#precio-prod-4").text());
+  })
+
+  $("#btn-prod-5").click(function () {
+
+    /* Modificamos los datos del modal */
+    $("#modal-nombre-corto").text($("#nombre-corto-prod-5").text());
+    $("#modal-nombre-largo").text($("#nombre-largo-prod-5").text());
+    $("#modal-imagen").attr("src", $("#imagen-prod-5").attr("src"));
+    $("#modal-descripcion").text($("#descripcion-prod-5").text());
+    $("#modal-precio").text($("#precio-prod-5").text());
+  })
+
+
+  $("#btn-agregar-carro").click(function () {
+    $("#mensaje-agregar-carro").show();
+  })
+
+</script>
+
+<!-- Inicio sección tienda correas -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/correa1.jpg" id="imagen-prod-1" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-1">Correa retráctil</h5>
+          <p class="card-text" id="nombre-largo-prod-1">Correa retráctil para perros y gatos</p>
+          <p class="card-text" id="precio-prod-1">$10.900</p>
+          <a href="#" id="btn-prod-1" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-1"> La correa 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dicta quod reiciendis numquam, perferendis quis tempore dolor minima voluptate nam ab dignissimos quas architecto, aspernatur at? Suscipit voluptatibus vitae eaque?</p>
         </div>
       </div>
     </div>
 
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/correa2.jpg" id="imagen-prod-2" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-2"> Correa rosa</h5>
+          <p class="card-text" id="nombre-largo-prod-2">Correa color rosa perros y gatos</p>
+          <p class="card-text" id="precio-prod-2">$8.900</p>
+          <a href="#" id="btn-prod-2" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-2"> La correa 2 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam earum, quasi necessitatibus possimus nihil ea, quaerat, voluptas perspiciatis iure nisi aut reprehenderit dignissimos consequuntur optio. Voluptatum culpa nobis doloremque vel.</p>
+        </div>
+      </div>
     </div>
-  <!-- Fin sección tienda correas -->
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/correa3.jpg" id="imagen-prod-3" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-3">Correa roja</h5>
+          <p class="card-text" id="nombre-largo-prod-3" >Correa color rojo perros y gatos</p>
+          <p class="card-text" id="precio-prod-3">$3.900</p>
+          <a href="#" id="btn-prod-3" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-3"> La correa 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates maiores sunt, debitis voluptas obcaecati temporibus hic minima dolorem provident officiis sequi quod? Facilis, explicabo error tempora accusamus eaque asperiores eveniet.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/correa4.jpg" id="imagen-prod-4" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-4">Correa cuerina</h5>
+          <p class="card-text" id="nombre-largo-prod-4" >Correa de cuerina perros y gatos</p>
+          <p class="card-text"id="precio-prod-4" >$15.900</p>
+          <a href="#" id="btn-prod-4" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-4"> La correa 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius similique veritatis modi neque ex pariatur amet aspernatur perferendis, voluptate deserunt ad iusto harum eaque, dolores, corrupti enim adipisci repudiandae ducimus!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2 me-3">
+      <div class="card" style="width: 18rem;">
+        <img src="img/correa5.jpg" id="imagen-prod-5" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="nombre-corto-prod-5">Correa de montaña</h5>
+          <p class="card-text" id="nombre-largo-prod-5">Correa de montaña perros y gatos</p>
+          <p class="card-text"id="precio-prod-5" >$18.900</p>
+          <a href="#" id="btn-prod-5" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
+          <p class="visually-hidden" id="descripcion-prod-5"> La correa 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aut sit accusantium aliquid totam dolorem neque excepturi quas earum magni doloribus vel, officiis quidem sint adipisci similique temporibus deserunt assumenda?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Inicio modal descripción de producto correa -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label-02" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-nombre-corto">Nombre corto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card mb-3" style="max-width: 1080px;">
+          <div class="row g-0">
+            <div class="col-md-8">
+              <img src="img/correa2.jpg" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
+            </div>
+
+            <div class="col-md-4">
+              <div class="card-body">
+                <h5 class="card-title" id="modal-nombre-largo">Nombre largo</h5>
+                <p class="card-text text-start" id="modal-descripcion">Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Laudantium assumenda quis, mollitia impedit cumque adipisci nostrum nesciunt
+                  delectus iure dolore optio eveniet. Magnam odio reprehenderit quasi consectetur provident iusto
+                  deserunt.</p>
+                <h3 class="card-text" id="modal-precio">Precio</h3>
+                <button type="button" id="btn-agregar-carro" class="btn btn-success mt-5">Agregar al carro</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-success" id="mensaje-agregar-carro" role="alert">
+          Producto agregado al carro!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fin sección tienda correas -->
