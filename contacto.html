@@ -1,6 +1,50 @@
 
 <script type="text/javascript">
-  
+
+  var valueSeleccione = "seleccione";
+  var seleccioneRegion = "(Seleccione región)";
+  var seleccioneComuna = "(Seleccione comuna)";
+
+  /* Llamamos a la API que llena los select de región y comuna */
+  var urlAPIRegiones = "https://apis.digital.gob.cl/dpa/regiones";
+  var urlAPIComunas = "https://apis.digital.gob.cl/dpa/comunas";
+
+  /* API de regiones */
+  /* Agregamos el ítem de selección */
+  $('#region').append('<option value="' + valueSeleccione + '">' + seleccioneRegion + '</option>');
+  $.get(urlAPIRegiones, function(data){
+    $.each(data, function(i, item){
+      /* Agregamos las regiones */
+        $('#region').append('<option value="' + item.codigo + '">' + item.nombre + '</option>');
+      });
+  });
+
+  /* API de comunas */
+  /* Agregamos el ítem de selección */
+  $('#comuna').append('<option value="' + valueSeleccione + '">' + seleccioneComuna + '</option>');
+  $.get(urlAPIComunas, function(data){
+    $.each(data, function(i, item){
+      /* Agregamos las comunas */
+        $('#comuna').append('<option value="' + item.codigo.substr(0, 2) + '">' + item.nombre + '</option>');
+      });
+
+      /* Ocultamos las comunas la primera vez */
+      $('#comuna option[value!="' + valueSeleccione +'"]').hide();
+
+  });
+
+  /* Filtramos las comunas de acuerdo a la región seleccionada */
+  $("#region").on('change',function(){
+
+    var region = $("#region").val();
+
+    $('#comuna option[value!="'+ region +'"]').hide();
+    $('#comuna option[value="' + valueSeleccione + '"]').show();
+    $('#comuna').val(valueSeleccione);
+    $('#comuna option[value="'+ region +'"]').show();
+
+  });
+
   /* Ocultamos el error al principio */
   $("#error").hide();
   
@@ -22,6 +66,8 @@
   /* Si presiona el botón limpiar, se ocultan también los errores */
   $("#limpiar").click(function(){
     $("#error").hide();
+    $('#comuna option[value!="' + valueSeleccione + '"]').hide();
+
   })
 
         /* Validamos el formulario */
@@ -66,6 +112,18 @@
             mensaje = mensaje + bullet + "<strong>" + label + ":</strong> El correo electrónico debe venir en formato válido" + "<br>";
           }
 
+          /* Validamos que se seleccione región */
+           if ($("#region").val() == valueSeleccione) {
+            label = $("#label-region").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
+          /* Validamos que se seleccione comuna */
+          if ($("#comuna").val() == valueSeleccione) {
+            label = $("#label-comuna").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
           /* Validamos que venga una dirección */
           if ($("#direccion").val().trim().length == 0) {
             label = $("#label-direccion").text().replace(" (*)", "");
@@ -96,7 +154,7 @@
 
     <!-- Inicio sección contacto -->
     <div class="container-fluid">
-      <form method="post" id="formulario" action="procesar-formulario.py">
+      <form method="get" id="formulario" action="index.html">
 
         <div class="row pb-3">
           <div class="col-lg-4">
@@ -152,13 +210,10 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="identificacion">Región (*)</label>
-              <select class="form-select" id="region" aria-label="Default select example">
-                <option selected>(Seleccione región)</option>
-                <option value="1">VI Región del Libertador General Bernardo O'Higgins</option>
-                <option value="2">Reg 2</option>
-                <option value="3">Reg 3</option>
-              </select>            </div>
+              <label for="identificacion" id="label-region">Región (*)</label>
+              <select class="form-select form-select-sm" id="region" aria-label="Default select example">
+              </select>
+            </div>
           </div>
           <div class="col-lg-10"></div>
         </div>
@@ -166,13 +221,10 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="identificacion">Comuna (*)</label>
-              <select class="form-select" id="region" aria-label="Default select example">
-                <option selected>(Seleccione comuna)</option>
-                <option value="1">Comuna con un numbre bien reguleque por si acaso es largo</option>
-                <option value="2">Reg 2</option>
-                <option value="3">Reg 3</option>
-              </select>            </div>
+              <label for="identificacion" id="label-comuna">Comuna (*)</label>
+              <select class="form-select form-select-sm" id="comuna" aria-label="Default select example">
+              </select>
+            </div>
           </div>
           <div class="col-lg-10"></div>
         </div>
