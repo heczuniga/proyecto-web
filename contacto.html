@@ -25,7 +25,7 @@
   $.get(urlAPIComunas, function(data){
     $.each(data, function(i, item){
       /* Agregamos las comunas */
-        $('#comuna').append('<option value="' + item.codigo.substr(0, 2) + '">' + item.nombre + '</option>');
+        $('#comuna').append('<option value="' + item.codigo + '" cod-region="' + item.codigo.substr(0, 2) + '">' + item.nombre + '</option>\n');
       });
 
       /* Ocultamos las comunas la primera vez */
@@ -38,10 +38,10 @@
 
     var region = $("#region").val();
 
-    $('#comuna option[value!="'+ region +'"]').hide();
+    $('#comuna option[cod-region!="'+ region +'"]').hide();
     $('#comuna option[value="' + valueSeleccione + '"]').show();
     $('#comuna').val(valueSeleccione);
-    $('#comuna option[value="'+ region +'"]').show();
+    $('#comuna option[cod-region="'+ region +'"]').show();
 
   });
 
@@ -112,6 +112,12 @@
             mensaje = mensaje + bullet + "<strong>" + label + ":</strong> El correo electrónico debe venir en formato válido" + "<br>";
           }
 
+          /* Validamos que venga una dirección */
+          if ($("#direccion").val().trim().length == 0) {
+            label = $("#label-direccion").text().replace(" (*)", "");
+            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+          }
+
           /* Validamos que se seleccione región */
            if ($("#region").val() == valueSeleccione) {
             label = $("#label-region").text().replace(" (*)", "");
@@ -121,12 +127,6 @@
           /* Validamos que se seleccione comuna */
           if ($("#comuna").val() == valueSeleccione) {
             label = $("#label-comuna").text().replace(" (*)", "");
-            mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-          }
-
-          /* Validamos que venga una dirección */
-          if ($("#direccion").val().trim().length == 0) {
-            label = $("#label-direccion").text().replace(" (*)", "");
             mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
           }
 
@@ -200,7 +200,7 @@
         <div class="row pb-3">
           <div class="col-lg-5">
             <div class="form-group">
-              <label for="identificacion" id="label-direccion">Dirección (*)</label>
+              <label for="direccion" id="label-direccion">Dirección (*)</label>
               <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" placeholder="(Ingrese su dirección)">
             </div>
           </div>
@@ -210,7 +210,7 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="identificacion" id="label-region">Región (*)</label>
+              <label for="region" id="label-region">Región (*)</label>
               <select class="form-select form-select-sm" id="region" aria-label="Default select example">
               </select>
             </div>
@@ -221,7 +221,7 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="identificacion" id="label-comuna">Comuna (*)</label>
+              <label for="comuna" id="label-comuna">Comuna (*)</label>
               <select class="form-select form-select-sm" id="comuna" aria-label="Default select example">
               </select>
             </div>
