@@ -1,3 +1,5 @@
+{% load static %}
+
 <script type="text/javascript">
 
   $("#mensaje-agregar-carro").hide();
@@ -59,77 +61,75 @@
 
 </script>
 
-<!-- Inicio sección tienda bandanas -->
+
+<!-- Inicio sección tienda identificadores -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/bandana1.jpg" id="imagen-prod-1" class="card-img-top" alt="...">
+        <img src="{% static 'img/identificador1.jpg' %}" id="imagen-prod-1" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-1">Bandana De Flores</h5>
-          <p class="card-text" id="nombre-largo-prod-1">Bandana para perro floreada</p>
-          <p class="card-text" id="precio-prod-1">$5.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-1">Identificador con scan</h5>
+          <p class="card-text" id="nombre-largo-prod-1">Identificador con scan para celular</p>
+          <p class="card-text" id="precio-prod-1">$26.900</p>
           <a href="#" id="btn-prod-1" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-1"> El producto 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dicta qui delectus quidem error ea sequi quam obcaecati alias impedit, eum assumenda, tempora, nisi ex praesentium ratione? Ad, facilis voluptates?</p>
+          <p class="visually-hidden" id="descripcion-prod-1"> Identificador 1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero adipisci odio facere animi illum harum omnis possimus. Eos ullam assumenda obcaecati fugiat sit, aliquam praesentium in aperiam numquam, veritatis facere.</p>
         </div>
       </div>
     </div>
 
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/bandana2.jpg" id="imagen-prod-2" class="card-img-top" alt="...">
+        <img src="{% static 'img/identificador2.jpg' %}" id="imagen-prod-2" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-2">Bandana Leopardo Amarilla</h5>
-          <p class="card-text" id="nombre-largo-prod-2">Bandana para perro estilo leopardo</p>
-          <p class="card-text" id="precio-prod-2">$7.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-2">Identificador rosa</h5>
+          <p class="card-text" id="nombre-largo-prod-2">Identificador de mascota color rosa</p>
+          <p class="card-text" id="precio-prod-2">$8.900</p>
           <a href="#" id="btn-prod-2" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-2"> El producto 2 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel neque quia aliquam officia consectetur veniam repellat quis accusamus velit, magnam qui doloribus amet rem. Non temporibus sint magnam laborum fuga.</p>
+          <p class="visually-hidden" id="descripcion-prod-2"> Identificador 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda corporis ad quaerat possimus, quo ipsam qui porro consectetur esse eveniet accusantium nesciunt maiores minus laboriosam rerum dolorem veritatis quibusdam repellendus. </p>
         </div>
       </div>
     </div>
-
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/bandana3.jpg" id="imagen-prod-3" class="card-img-top" alt="...">
+        <img src="{% static 'img/identificador3.jpg' %}" id="imagen-prod-3" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-3">Bandana De Corazones</h5>
-          <p class="card-text" id="nombre-largo-prod-3">Bandana para perro corazones</p>
-          <p class="card-text" id="precio-prod-3">$4.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-3">Identificador saturno</h5>
+          <p class="card-text" id="nombre-largo-prod-3">Identificador con forma de saturno</p>
+          <p class="card-text" id="precio-prod-3">$7.900</p>
           <a href="#" id="btn-prod-3" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-3"> El producto 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis aut saepe dolore alias, aliquam accusantium! Iure, saepe exercitationem animi obcaecati, hic excepturi quibusdam sit deleniti laboriosam perspiciatis labore architecto voluptatibus. </p>
+          <p class="visually-hidden" id="descripcion-prod-3"> Identificador 3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae ullam a dolor, autem numquam quibusdam ipsam excepturi alias corrupti, illo consequuntur. Qui eum expedita magni fuga! Vitae dolorem at odio. </p>
         </div>
       </div>
     </div>
-
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/bandana4.jpg" id="imagen-prod-4" class="card-img-top" alt="...">
+        <img src="{% static 'img/identificador4.jpg' %}" id="imagen-prod-4" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-4">Bandana Floreada Tropical</h5>
-          <p class="card-text" id="nombre-largo-prod-4">Bandana floreada tropical</p>
-          <p class="card-text" id="precio-prod-4">$8.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-4">Identificador amarillo</h5>
+          <p class="card-text" id="nombre-largo-prod-4">Identificador amarillo y centro rojo</p>
+          <p class="card-text" id="precio-prod-4">$5.900</p>
           <a href="#" id="btn-prod-4" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-4"> El producto 4 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae hic consequuntur quod blanditiis harum magnam at sit vero dolorum, aliquid ad suscipit ipsa molestiae vel est, esse, itaque reiciendis rerum!</p>
+          <p class="visually-hidden" id="descripcion-prod-4"> Identificador 4 Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum odit optio aut dolores esse error possimus in, doloribus quam nesciunt saepe tempora similique delectus. Nemo officia eum inventore voluptate.</p>
         </div>
       </div>
     </div>
-
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/bandana5.jpg" id="imagen-prod-5" class="card-img-top" alt="...">
+        <img src="{% static 'img/identificador5.jpg' %}" id="imagen-prod-5" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-5">Bandana De Los Simpson</h5>
-          <p class="card-text" id="nombre-largo-prod-5">Bandana para perro de los simpson</p>
-          <p class="card-text" id="precio-prod-5">$12.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-5">Identificador felpa</h5>
+          <p class="card-text" id="nombre-largo-prod-5">Identificador de felpa</p>
+          <p class="card-text" id="precio-prod-5">$9.900</p>
           <a href="#" id="btn-prod-5" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-5"> El producto 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus qui quam rerum mollitia dicta, sequi natus praesentium, iusto, asperiores quae in. Maiores repudiandae error ea natus dicta facere officia aspernatur?</p>
+          <p class="visually-hidden" id="descripcion-prod-5"> Identificador 5 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe repellendus sed numquam, voluptatum quis voluptatibus corrupti nobis vel omnis ut vitae aliquam tenetur? Aperiam sit fuga totam molestiae, eum labore.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Inicio modal descripción de producto -->
+<!-- Inicio modal descripción de producto correa -->
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label-02" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -142,7 +142,7 @@
         <div class="card mb-3" style="max-width: 1080px;">
           <div class="row g-0">
             <div class="col-md-8">
-              <img src="img/bandana3.jpg" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
+              <img src="" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
             </div>
 
             <div class="col-md-4">
@@ -166,6 +166,5 @@
     </div>
   </div>
 </div>
-<!-- Fin modal descripción de producto -->
 
-<!-- Fin sección tienda bandanas -->
+<!-- Fin sección tienda identificadores -->

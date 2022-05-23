@@ -1,3 +1,5 @@
+{% load static %}
+
 <script type="text/javascript">
 
   $("#mensaje-agregar-carro").hide();
@@ -59,68 +61,67 @@
 
 </script>
 
-
-<!-- Inicio sección tienda identificadores -->
+<!-- Inicio sección tienda correas -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/identificador1.jpg" id="imagen-prod-1" class="card-img-top" alt="...">
+        <img src="{% static 'img/correa1.jpg' %}" id="imagen-prod-1" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-1">Identificador con scan</h5>
-          <p class="card-text" id="nombre-largo-prod-1">Identificador con scan para celular</p>
-          <p class="card-text" id="precio-prod-1">$26.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-1">Correa retráctil</h5>
+          <p class="card-text" id="nombre-largo-prod-1">Correa retráctil para perros y gatos</p>
+          <p class="card-text" id="precio-prod-1">$10.900</p>
           <a href="#" id="btn-prod-1" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-1"> Identificador 1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero adipisci odio facere animi illum harum omnis possimus. Eos ullam assumenda obcaecati fugiat sit, aliquam praesentium in aperiam numquam, veritatis facere.</p>
+          <p class="visually-hidden" id="descripcion-prod-1"> La correa 1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum dicta quod reiciendis numquam, perferendis quis tempore dolor minima voluptate nam ab dignissimos quas architecto, aspernatur at? Suscipit voluptatibus vitae eaque?</p>
         </div>
       </div>
     </div>
 
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/identificador2.jpg" id="imagen-prod-2" class="card-img-top" alt="...">
+        <img src="{% static 'img/correa2.jpg' %}" id="imagen-prod-2" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-2">Identificador rosa</h5>
-          <p class="card-text" id="nombre-largo-prod-2">Identificador de mascota color rosa</p>
+          <h5 class="card-title" id="nombre-corto-prod-2"> Correa rosa</h5>
+          <p class="card-text" id="nombre-largo-prod-2">Correa color rosa perros y gatos</p>
           <p class="card-text" id="precio-prod-2">$8.900</p>
           <a href="#" id="btn-prod-2" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-2"> Identificador 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda corporis ad quaerat possimus, quo ipsam qui porro consectetur esse eveniet accusantium nesciunt maiores minus laboriosam rerum dolorem veritatis quibusdam repellendus. </p>
+          <p class="visually-hidden" id="descripcion-prod-2"> La correa 2 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam earum, quasi necessitatibus possimus nihil ea, quaerat, voluptas perspiciatis iure nisi aut reprehenderit dignissimos consequuntur optio. Voluptatum culpa nobis doloremque vel.</p>
         </div>
       </div>
     </div>
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/identificador3.jpg" id="imagen-prod-3" class="card-img-top" alt="...">
+        <img src="{% static 'img/correa3.jpg' %}" id="imagen-prod-3" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-3">Identificador saturno</h5>
-          <p class="card-text" id="nombre-largo-prod-3">Identificador con forma de saturno</p>
-          <p class="card-text" id="precio-prod-3">$7.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-3">Correa roja</h5>
+          <p class="card-text" id="nombre-largo-prod-3" >Correa color rojo perros y gatos</p>
+          <p class="card-text" id="precio-prod-3">$3.900</p>
           <a href="#" id="btn-prod-3" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-3"> Identificador 3 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae ullam a dolor, autem numquam quibusdam ipsam excepturi alias corrupti, illo consequuntur. Qui eum expedita magni fuga! Vitae dolorem at odio. </p>
+          <p class="visually-hidden" id="descripcion-prod-3"> La correa 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates maiores sunt, debitis voluptas obcaecati temporibus hic minima dolorem provident officiis sequi quod? Facilis, explicabo error tempora accusamus eaque asperiores eveniet.</p>
         </div>
       </div>
     </div>
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/identificador4.jpg" id="imagen-prod-4" class="card-img-top" alt="...">
+        <img src="{% static 'img/correa4.jpg' %}" id="imagen-prod-4" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-4">Identificador amarillo</h5>
-          <p class="card-text" id="nombre-largo-prod-4">Identificador amarillo y centro rojo</p>
-          <p class="card-text" id="precio-prod-4">$5.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-4">Correa cuerina</h5>
+          <p class="card-text" id="nombre-largo-prod-4" >Correa de cuerina perros y gatos</p>
+          <p class="card-text"id="precio-prod-4" >$15.900</p>
           <a href="#" id="btn-prod-4" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-4"> Identificador 4 Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, nostrum odit optio aut dolores esse error possimus in, doloribus quam nesciunt saepe tempora similique delectus. Nemo officia eum inventore voluptate.</p>
+          <p class="visually-hidden" id="descripcion-prod-4"> La correa 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius similique veritatis modi neque ex pariatur amet aspernatur perferendis, voluptate deserunt ad iusto harum eaque, dolores, corrupti enim adipisci repudiandae ducimus!</p>
         </div>
       </div>
     </div>
     <div class="col-lg-2 me-3">
       <div class="card" style="width: 18rem;">
-        <img src="img/identificador5.jpg" id="imagen-prod-5" class="card-img-top" alt="...">
+        <img src="{% static 'img/correa5.jpg' %}" id="imagen-prod-5" class="card-img-top" alt="imagen producto">
         <div class="card-body">
-          <h5 class="card-title" id="nombre-corto-prod-5">Identificador felpa</h5>
-          <p class="card-text" id="nombre-largo-prod-5">Identificador de felpa</p>
-          <p class="card-text" id="precio-prod-5">$9.900</p>
+          <h5 class="card-title" id="nombre-corto-prod-5">Correa de montaña</h5>
+          <p class="card-text" id="nombre-largo-prod-5">Correa de montaña perros y gatos</p>
+          <p class="card-text"id="precio-prod-5" >$18.900</p>
           <a href="#" id="btn-prod-5" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success">Comprar</a>
-          <p class="visually-hidden" id="descripcion-prod-5"> Identificador 5 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe repellendus sed numquam, voluptatum quis voluptatibus corrupti nobis vel omnis ut vitae aliquam tenetur? Aperiam sit fuga totam molestiae, eum labore.</p>
+          <p class="visually-hidden" id="descripcion-prod-5"> La correa 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aut sit accusantium aliquid totam dolorem neque excepturi quas earum magni doloribus vel, officiis quidem sint adipisci similique temporibus deserunt assumenda?</p>
         </div>
       </div>
     </div>
@@ -140,7 +141,7 @@
         <div class="card mb-3" style="max-width: 1080px;">
           <div class="row g-0">
             <div class="col-md-8">
-              <img src="img/identificador2.jpg" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
+              <img src="" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
             </div>
 
             <div class="col-md-4">
@@ -165,4 +166,4 @@
   </div>
 </div>
 
-<!-- Fin sección tienda identificadores -->
+<!-- Fin sección tienda correas -->

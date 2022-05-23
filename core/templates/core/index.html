@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,13 +13,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     <!-- Estilos propios -->
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- favicon -->
-    <link  rel="icon"   href="img/logo.png" type="image/png" />
+    <link  rel="icon" href="{% static 'img/logo.png' %}" type="image/png" />
 
     <script type="text/javascript">
       $(document).ready(function() {
@@ -70,7 +71,7 @@
 
         /* Activamos el menú en su opción inicio y cargamos opción inicio */
         $("#menu-1").addClass("active");
-        $("#central").load("inicio.html");
+        $("#central").load("inicio");
 
         $("#menu-1").on("click", function() {
 
@@ -84,7 +85,7 @@
             $("#menu-1").addClass("active");
 
             /* Cargamos el contenido central de la página */
-            $("#central").load("inicio.html");
+            $("#central").load("inicio");
             
             return false;
         });
@@ -101,7 +102,7 @@
             $("#menu-2").addClass("active");
 
             /* Cargamos el contenido central de la página */
-            $("#central").load("nosotros.html");
+            $("#central").load("nosotros");
             
             return false;
         });
@@ -118,7 +119,7 @@
             $("#menu-3").addClass("active");
 
             /* Cargamos el contenido central de la página */
-            $("#central").load("contacto.html");
+            $("#central").load("contacto");
             
             return false;
         });
@@ -138,7 +139,7 @@
             $("#menu-4").addClass("active");
 
             /* Cargamos el contenido central de la página */
-            $("#central").load("donaciones.html");
+            $("#central").load("donaciones");
 
 
             return false;
@@ -156,7 +157,7 @@
           $("#menu-5").addClass("active");
 
           /* Cargamos el contenido central de la página */
-          $("#central").load("tienda.html");
+          $("#central").load("tienda");
 
           return false;
         });
@@ -181,8 +182,8 @@
             </div>
             <nav class="navbar navbar-expand-lg navbar-dark encabezado">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="index.html">
-                    <img src="img/logo.png" alt="logo" width="45rem">
+                  <a class="navbar-brand" href="/">
+                    <img src="{% static 'img/logo.png' %}" alt="logo" width="45rem">
                     <strong>PET</strong>friends
                   </a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,19 +192,19 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                       <li class="nav-item">
-                        <a class="nav-link" id="menu-1" aria-current="page" href="index.html">Inicio</a>
+                        <a class="nav-link" id="menu-1" aria-current="page" href="#">Inicio</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="menu-2" href="nosotros.html">Nosotros</a>
+                        <a class="nav-link" id="menu-2" href="#">Nosotros</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="menu-3" href="contacto.html">Contacto</a>
+                        <a class="nav-link" id="menu-3" href="#">Contacto</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="menu-4" href="donaciones.html">Donaciones</a>
+                        <a class="nav-link" id="menu-4" href="#">Donaciones</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="menu-5" href="tienda.html">Tienda</a>
+                        <a class="nav-link" id="menu-5" href="#">Tienda</a>
                       </li>
                     </ul>
                   </div>

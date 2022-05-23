@@ -1,9 +1,10 @@
+{% load static %}
 
     <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
       <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
           <li class="breadcrumb-item active" aria-current="page">Donaciones</li>
         </ol>
       </nav>
@@ -15,7 +16,7 @@
       <div class="row justify-content-center pt-4">
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal-1">
-            <img src="img/donaciones-ayudapeludo.jpg" class="img-fluid img-thumbnail border" width="60%" alt="ayuda a un peludo">
+            <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="ayuda a un peludo">
           </a>
           <p class="fs-6 text-secondary">Ayuda a un peludo</p>
 
@@ -32,7 +33,7 @@
                     <div class="card mb-3" style="max-width: 1080px;">
                       <div class="row g-0">
                         <div class="col-md-8">
-                          <img src="img/donaciones-ayudapeludo.jpg" class="img-fluid rounded-start" alt="ayuda a un peludo">
+                          <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid rounded-start" alt="ayuda a un peludo">
                         </div>
                         <div class="col-md-4">
                           <div class="card-body">
@@ -56,7 +57,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal-2">
-            <img src="img/donaciones-abrazame.jpg" class="img-fluid img-thumbnail border" width="60%" alt="fundación abrázame">
+            <img src="{% static 'img/donaciones-abrazame.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación abrázame">
           </a>
           <p class="fs-6 text-secondary">Fundación Abrázame</p>
 
@@ -73,7 +74,7 @@
                     <div class="card mb-3" style="max-width: 1080px;">
                       <div class="row g-0">
                         <div class="col-md-8">
-                          <img src="img/donaciones-abrazame.jpg" class="img-fluid rounded-start" alt="fundación abrázame">
+                          <img src="{% static 'img/donaciones-abrazame.jpg' %}" class="img-fluid rounded-start" alt="fundación abrázame">
                         </div>
                         <div class="col-md-4">
                           <div class="card-body">
@@ -97,7 +98,7 @@
         </div>
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal-3">
-            <img src="img/donaciones-banigualdad.jpg" class="img-fluid img-thumbnail border" width="60%" alt="fundación banigualdad">
+            <img src="{% static 'img/donaciones-banigualdad.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación banigualdad">
           </a>
           <p class="fs-6 text-secondary">Fundación Banigualdad</p>
 
@@ -114,7 +115,7 @@
                     <div class="card mb-3" style="max-width: 1080px;">
                       <div class="row g-0">
                         <div class="col-md-8">
-                          <img src="img/donaciones-banigualdad.jpg" class="img-fluid rounded-start" alt="fundación banigualdad">
+                          <img src="{% static 'img/donaciones-banigualdad.jpg' %}" class="img-fluid rounded-start" alt="fundación banigualdad">
                         </div>
                         <div class="col-md-4">
                           <div class="card-body">
@@ -138,7 +139,7 @@
 
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal-4">
-            <img src="img/donaciones-lasrosas.jpg" class="img-fluid img-thumbnail border" width="60%" alt="fundación las rosas">
+            <img src="{% static 'img/donaciones-lasrosas.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación las rosas">
           </a>
           <p class="fs-6 text-secondary">Fundación Las Rosas</p>
 
@@ -155,7 +156,7 @@
                     <div class="card mb-3" style="max-width: 1080px;">
                       <div class="row g-0">
                         <div class="col-md-8">
-                          <img src="img/donaciones-lasrosas.jpg" class="img-fluid rounded-start" alt="fundación las rosas">
+                          <img src="{% static 'img/donaciones-lasrosas.jpg' %}" class="img-fluid rounded-start" alt="fundación las rosas">
                         </div>
                         <div class="col-md-4">
                           <div class="card-body">

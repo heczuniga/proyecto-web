@@ -1,3 +1,4 @@
+{% load static %}
 <script type="text/javascript">
 
   /* Manejo de los clicks en el carrusel */
@@ -36,15 +37,15 @@
 
 </script>
 
-<!-- Inicio miga de pan -->
+    <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
           </ol>
         </nav>
-      </div>
-      <!-- Fin miga de pan -->
+    </div>
+    <!-- Fin miga de pan -->
   
      <!-- Inicio carrusel de imágenes -->
      <div class="container-fluid">
@@ -63,7 +64,7 @@
           <div class="carousel-inner">
               <div class="carousel-item active">
                 <a href="#" id="carrusel-2">
-                  <img src="img/sección-nosotros.png" class="d-block w-100" alt="sección nosotros">
+                  <img src="{% static 'img/sección-nosotros.png' %}" class="d-block w-100" alt="sección nosotros">
                   <div class="carousel-caption d-md-block text-dark">
                 </a>
                   <h2></h2>
@@ -72,7 +73,7 @@
               </div>
               <div class="carousel-item">
                 <a href="#" id="carrusel-3">
-                  <img src="img/sección-contacto.png" class="d-block w-100" alt="sección contacto">
+                  <img src="{% static 'img/sección-contacto.png' %}" class="d-block w-100" alt="sección contacto">
                 </a>
                 <div class="carousel-caption d-md-block">
                   <h5></h5>
@@ -81,7 +82,7 @@
               </div>
               <div class="carousel-item">
                 <a href="#" id="carrusel-4">
-                  <img src="img/sección-donaciones.png" class="d-block w-100" alt="sección donaciones">
+                  <img src="{% static 'img/sección-donaciones.png' %}" class="d-block w-100" alt="sección donaciones">
                 </a>
                 <div class="carousel-caption d-md-block">
                   <h5></h5>
@@ -90,7 +91,7 @@
               </div>
               <div class="carousel-item">
                 <a href="#" id="carrusel-5">
-                  <img src="img/sección-tienda.png" class="d-block w-100" alt="sección tienda">
+                  <img src="{% static 'img/sección-tienda.png' %}" class="d-block w-100" alt="sección tienda">
                 </a>
                 <div class="carousel-caption d-md-block">
                   <h5></h5>
