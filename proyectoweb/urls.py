@@ -26,6 +26,7 @@ from core.views import tienda_correas
 from core.views import tienda_identificadores
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('inicio', inicio, name="inicio"),
     path('nosotros', nosotros, name="nosotros"),

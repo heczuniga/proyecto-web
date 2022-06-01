@@ -1,10 +1,31 @@
+
 from django.shortcuts import render
+from .forms import ContactoForm
 
 # Create your views here.
 
 # Vista de página base
 def index(request):
-    
+
+    contactoForm = ContactoForm()
+
+    datos = {
+        'form': contactoForm
+    }
+    print(request.method)
+
+    if request.method == 'POST':
+        
+        formulario = ContactoForm(request.POST)
+
+        if formulario.is_valid:
+            
+            formulario.save()
+
+            datos['mensaje'] = "Datos guardados"
+        
+            return render(request, "core/index.html", datos)
+
     return render(request, 'core/index.html')
 
 # Vista de página de inicio
@@ -20,7 +41,13 @@ def nosotros(request):
 # Vista de página de contacto
 def contacto(request):
     
-    return render(request, 'core/contacto.html')
+    contactoForm = ContactoForm()
+    
+    datos = {
+        'form': contactoForm
+    }
+
+    return render(request, "core/contacto.html", datos)
 
 # Vista de página de donaciones
 def donaciones(request):

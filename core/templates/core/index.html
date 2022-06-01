@@ -70,8 +70,28 @@
           }
 
         /* Activamos el menú en su opción inicio y cargamos opción inicio */
-        $("#menu-1").addClass("active");
-        $("#central").load("inicio");
+        mensaje = $("#mensaje").text();
+        if (mensaje != "") {
+        /* Mensaje no vacío indica que viene redireccionado desde la grabación del formulario. hacemos lo mismo que si se selecciona opción formulario */
+
+            /* Marcamos como no activos el resto de los menús */
+            $("#menu-1").removeClass("active");
+            $("#menu-2").removeClass("active");
+            $("#menu-4").removeClass("active");
+            $("#menu-5").removeClass("active");
+
+            /* Marcamos el menú seleccionado como activo */
+            $("#menu-3").addClass("active");
+
+            /* Cargamos el contenido central de la página */
+            $("#central").load("contacto");
+
+            return false;
+        } else {
+        /* Mensaje vacío indica que viene desde la URL o link a index. Llamada normal */
+            $("#menu-1").addClass("active");
+            $("#central").load("inicio");
+        }
 
         $("#menu-1").on("click", function() {
 
@@ -120,7 +140,7 @@
 
             /* Cargamos el contenido central de la página */
             $("#central").load("contacto");
-            
+
             return false;
         });
     
@@ -170,6 +190,9 @@
 </head>
 <body>
 
+    <!-- Mensaje oculto cuando se guarda el formulario -->
+    <p id="mensaje" style="display: none;">{{ mensaje }}</p>
+
     <!-- Inicio encabezado -->
     <header class="encabezado">
         <div class="container-fluid">
@@ -217,7 +240,6 @@
     <!-- Contenido central a ser reemplazado -->
     <div id="central">
     </div>
-
 
     <!-- Inicio pie de página -->
     <footer class="pie-de-pagina mt-5 encabezado">

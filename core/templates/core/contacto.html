@@ -1,52 +1,75 @@
 
 <script type="text/javascript">
 
-  var valueSeleccione = "seleccione";
-  var seleccioneRegion = "(Seleccione región)";
-  var seleccioneComuna = "(Seleccione comuna)";
+  /* Leemos el masaje para determinar si viene por link directo o redireccionado desde la grabación del formulario */
+  mensaje = $("#mensaje").text();
+
+  var valueSeleccione = "---------";
+  var seleccioneRegion = "---------";
+  var seleccioneComuna = "---------";
 
   /* Llamamos a la API que llena los select de región y comuna */
   var urlAPIRegiones = "https://apis.digital.gob.cl/dpa/regiones";
   var urlAPIComunas = "https://apis.digital.gob.cl/dpa/comunas";
 
-  /* API de regiones */
-  /* Agregamos el ítem de selección */
-  $('#region').append('<option value="' + valueSeleccione + '">' + seleccioneRegion + '</option>');
-  $.get(urlAPIRegiones, function(data){
-    $.each(data, function(i, item){
-      /* Agregamos las regiones */
-        $('#region').append('<option value="' + item.codigo + '">' + item.nombre + '</option>');
-      });
-  });
+  /* Las regiones y comunas vienen desde la BD en esta versión */
 
-  /* API de comunas */
-  /* Agregamos el ítem de selección */
-  $('#comuna').append('<option value="' + valueSeleccione + '">' + seleccioneComuna + '</option>');
-  $.get(urlAPIComunas, function(data){
-    $.each(data, function(i, item){
-      /* Agregamos las comunas */
-        $('#comuna').append('<option value="' + item.codigo + '" cod-region="' + item.codigo.substr(0, 2) + '">' + item.nombre + '</option>\n');
-      });
+  // /* API de regiones */
+  // /* Agregamos el ítem de selección */
+  // $('#region').append('<option value="' + valueSeleccione + '">' + seleccioneRegion + '</option>');
+  // $.get(urlAPIRegiones, function(data){
+  //   $.each(data, function(i, item){
+  //     /* Agregamos las regiones */
+  //       $('#region').append('<option value="' + item.codigo + '">' + item.nombre + '</option>');
+  //     });
+  // });
 
-      /* Ocultamos las comunas la primera vez */
-      $('#comuna option[value!="' + valueSeleccione +'"]').hide();
+  // /* API de comunas */
+  // /* Agregamos el ítem de selección */
+  // $('#comuna').append('<option value="' + valueSeleccione + '">' + seleccioneComuna + '</option>');
+  // $.get(urlAPIComunas, function(data){
+  //   $.each(data, function(i, item){
+  //     /* Agregamos las comunas */
+  //       $('#comuna').append('<option value="' + item.codigo + '">' + item.nombre + '</option>\n');
+  //     });
 
-  });
+  /* Ocultamos las comunas la primera vez */
+  $('#id_codComuna option[value!="' + valueSeleccione +'"]').hide();
+
+  // });
 
   /* Filtramos las comunas de acuerdo a la región seleccionada */
-  $("#region").on('change',function(){
+  $("#id_codRegion").on('change',function(){
 
-    var region = $("#region").val();
+    var region = $("#id_codRegion").val();
 
-    $('#comuna option[cod-region!="'+ region +'"]').hide();
-    $('#comuna option[value="' + valueSeleccione + '"]').show();
-    $('#comuna').val(valueSeleccione);
-    $('#comuna option[cod-region="'+ region +'"]').show();
+    /* Ocultamnos las comunas que no son de la región escogida */
+    $('#id_codComuna option').filter(function(){
+            return this.value.substr(0, 2) != region;
+        }).hide();
+
+    /* Mostramos el indicador de selección según corresponda */
+    $('#id_codComuna option[value="' + valueSeleccione + '"]').show();
+    $('#id_codComuna').val(valueSeleccione);
+
+    /* Mostramos las comunas que son de la región escogida */
+    $('#id_codComuna option').filter(function(){
+            return this.value.substr(0, 2) == region;
+        }).show();
 
   });
 
-  /* Ocultamos el error al principio */
+  /* Ocultamos el texto de error al principio */
   $("#error").hide();
+
+  if (mensaje != "") {
+    $("#exito").show();
+    $('html,body').animate({ scrollTop: $("#exito").offset().top }, 'fast');
+    $("#mensaje").text("");
+  } else {
+    $("#exito").hide();
+  }
+
   
   var Fn = {
 
@@ -63,10 +86,12 @@
     }
   }
 
-  /* Si presiona el botón limpiar, se ocultan también los errores */
+  /* Si presiona el botón limpiar, se ocultan también los errores y el mensaje de éxito*/
   $("#limpiar").click(function(){
     $("#error").hide();
+    $("#exito").hide();
     $('#comuna option[value!="' + valueSeleccione + '"]').hide();
+    $('html,body').animate({ scrollTop: $("#menu-1").offset().top }, 'fast');
 
   })
 
@@ -154,13 +179,14 @@
 
     <!-- Inicio sección contacto -->
     <div class="container-fluid">
-      <form method="post" id="formulario" action="https://www.duoc.cl">
+      <form method="post" id="formulario" action="">
 
         <div class="row pb-3">
           <div class="col-lg-4">
+            {% csrf_token %}
             <div class="form-group">
-              <label for="nombres" id="label-nombres">Nombres (*)</label>
-              <input type="text" class="form-control form-control-sm" id="nombres" name="nombres" placeholder="(Ingrese su nombre)">
+              <label for="nombres" id="label-nombres">{{ form.nombres.label }}</label>
+              <div>{{ form.nombres }}</div>
             </div>
           </div>
           <div class="col-lg-8"></div>
@@ -169,8 +195,8 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="apellidos" id="label-apellidos">Apellidos (*)</label>
-              <input type="text" class="form-control form-control-sm" id="apellidos" name="apellidos" placeholder="(Ingrese sus apellidos)">
+              <label for="apellidos" id="label-apellidos">{{ form.apellidos.label }}</label>
+              <div>{{ form.apellidos }}</div>
             </div>
           </div>
           <div class="col-lg-8"></div>
@@ -179,8 +205,8 @@
         <div class="row pb-3">
           <div class="col-lg-3">
             <div class="form-group">
-              <label for="celular" id="label-celular">Celular (*)</label>
-              <input type="text" class="form-control form-control-sm" id="celular" name="celular" placeholder="9NNNNNNNN">
+              <label for="celular" id="label-celular">{{ form.celular.label }}</label>
+              <div>{{ form.celular }}</div>
               <figcaption id="caption-comentario" class="figure-caption">Celular largo 9 y comenzar con dígito 9</figcaption>
             </div>
           </div>
@@ -190,8 +216,8 @@
         <div class="row pb-3">
           <div class="col-lg-3">
             <div class="form-group">
-              <label for="correo-electronico" id="label-correo-electronico">Correo electrónico (*)</label>
-              <input type="text" class="form-control form-control-sm" id="correo-electronico" name="correo-electronico" placeholder="(Ingrese se correo electrónico)">
+              <label for="correo-electronico" id="label-correo-electronico">{{ form.correo.label }}</label>
+              <div>{{ form.correo }}</div>
             </div>
           </div>
           <div class="col-lg-9"></div>
@@ -200,8 +226,8 @@
         <div class="row pb-3">
           <div class="col-lg-5">
             <div class="form-group">
-              <label for="direccion" id="label-direccion">Dirección (*)</label>
-              <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" placeholder="(Ingrese su dirección)">
+              <label for="direccion" id="label-direccion">{{ form.direccion.label }}</label>
+              <div>{{ form.direccion }}</div>
             </div>
           </div>
           <div class="col-lg-10"></div>
@@ -210,9 +236,8 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="region" id="label-region">Región (*)</label>
-              <select class="form-select form-select-sm" id="region" aria-label="Default select example">
-              </select>
+              <label for="region" id="label-region">{{ form.codRegion.label }}</label>
+              <div>{{ form.codRegion }}</div>
             </div>
           </div>
           <div class="col-lg-10"></div>
@@ -221,9 +246,8 @@
         <div class="row pb-3">
           <div class="col-lg-4">
             <div class="form-group">
-              <label for="comuna" id="label-comuna">Comuna (*)</label>
-              <select class="form-select form-select-sm" id="comuna" aria-label="Default select example">
-              </select>
+              <label for="comuna" id="label-comuna">{{ form.codComuna.label }}</label>
+              <div>{{ form.codComuna }}</div>
             </div>
           </div>
           <div class="col-lg-10"></div>
@@ -232,8 +256,12 @@
         <button type="submit" class="btn btn-success" id="enviar">Enviar formulario</button>
         <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
 
+        <!-- Inicio sección éxito en la grabación del formulario -->
+        <div id="exito" class="alert alert-success m-4 pt-3" role="alert">Los datos del formulario se han recibido correctamente! Pronto nos comunicaremos contigo.</div>
+        <!-- Fin sección éxito en la grabación del formulario -->
+
         <!-- Inicio sección de errores del formulario -->
-        <div id="error" class="alert alert-danger m-2 pt-3" role="alert">Texto de error con alerta</div>
+        <div id="error" class="alert alert-danger m-4 pt-3" role="alert">Texto de error con alerta</div>
         <!-- Fin sección de errores del formulario -->
 
       </form>
