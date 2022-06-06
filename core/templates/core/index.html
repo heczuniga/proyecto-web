@@ -1,266 +1,112 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <div>
+    {% include 'core/header.html' %}      
+  </div>
 
-    <!-- Íconos de Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <script type="text/javascript">
 
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+    $(document).ready(function() {
 
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-2").removeClass("active");
+      $("#menu-3").removeClass("active");
+      $("#menu-4").removeClass("active");
+      $("#menu-5").removeClass("active");
 
-    <!-- favicon -->
-    <link  rel="icon" href="{% static 'img/logo.png' %}" type="image/png" />
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-1").addClass("active");
 
-    <script type="text/javascript">
-      $(document).ready(function() {
+    });
 
-        function geoloc() {
-          if (navigator.geolocation){
-             navigator.geolocation.getCurrentPosition(showPosition,showError);
-
-          }
-          else {
-            alert("Lo sentimos, tu dispositivo no admite la geolocalización");
-            }
-        }
-
-        function showPosition(position){
-          latitud=position.coords.latitude;
-          longitud=position.coords.longitude;
-
-          $.get("http://api.weatherstack.com/current?access_key=bc6e10faea832b9b6bb4f0ebd11fd907&query=" + latitud + "," + longitud, function(data){
-
-            $("#texto-ubicacion").text(data.location.name);
-            $("#texto-pais").text(data.location.country);
-            $("#texto-region").text(data.location.region);
-            $("#texto-zona-horaria").text(data.location.timezone_id);
-            $("#texto-hora-local").text(data.location.localtime);
-            $("#texto-temperatura").text(data.current.temperature + "°C");
-            $("#texto-clima").text(data.current.weather_descriptions);
-            $("#img-clima").attr("src", data.current.weather_icons);
-
-            })
-        }
-
-        function showError(error){
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              alert("El usuario ha denegado el permiso a la localización");
-              break;
-            case error.POSITION_UNAVAILABLE:
-              alert("La información de la localización no está disponible");
-              break;
-            case error.TIMEOUT:
-              alert("<p>El tiempo de espera para buscar la localización ha expirado");
-              break;
-            case error.UNKNOWN_ERROR:
-              alert("Ha ocurrido un error desconocido");
-              break;
-            }
-          }
-
-        /* Activamos el menú en su opción inicio y cargamos opción inicio */
-        mensaje = $("#mensaje").text();
-        if (mensaje != "") {
-        /* Mensaje no vacío indica que viene redireccionado desde la grabación del formulario. hacemos lo mismo que si se selecciona opción formulario */
-
-            /* Marcamos como no activos el resto de los menús */
-            $("#menu-1").removeClass("active");
-            $("#menu-2").removeClass("active");
-            $("#menu-4").removeClass("active");
-            $("#menu-5").removeClass("active");
-
-            /* Marcamos el menú seleccionado como activo */
-            $("#menu-3").addClass("active");
-
-            /* Cargamos el contenido central de la página */
-            $("#central").load("contacto");
-
-            return false;
-        } else {
-        /* Mensaje vacío indica que viene desde la URL o link a index. Llamada normal */
-            $("#menu-1").addClass("active");
-            $("#central").load("inicio");
-        }
-
-        $("#menu-1").on("click", function() {
-
-            /* Marcamos como no activos el resto de los menús */
-            $("#menu-2").removeClass("active");
-            $("#menu-3").removeClass("active");
-            $("#menu-4").removeClass("active");
-            $("#menu-5").removeClass("active");
-
-            /* Marcamos el menú seleccionado como activo */
-            $("#menu-1").addClass("active");
-
-            /* Cargamos el contenido central de la página */
-            $("#central").load("inicio");
-            
-            return false;
-        });
-    
-        $("#menu-2").on("click", function() {
-
-            /* Marcamos como no activos el resto de los menús */
-            $("#menu-1").removeClass("active");
-            $("#menu-3").removeClass("active");
-            $("#menu-4").removeClass("active");
-            $("#menu-5").removeClass("active");
-
-            /* Marcamos el menú seleccionado como activo */
-            $("#menu-2").addClass("active");
-
-            /* Cargamos el contenido central de la página */
-            $("#central").load("nosotros");
-            
-            return false;
-        });
-    
-        $("#menu-3").on("click", function() {
-
-            /* Marcamos como no activos el resto de los menús */
-            $("#menu-1").removeClass("active");
-            $("#menu-2").removeClass("active");
-            $("#menu-4").removeClass("active");
-            $("#menu-5").removeClass("active");
-
-            /* Marcamos el menú seleccionado como activo */
-            $("#menu-3").addClass("active");
-
-            /* Cargamos el contenido central de la página */
-            $("#central").load("contacto");
-
-            return false;
-        });
-    
-        $("#menu-4").on("click", function() {
-          /* Activamos la geolocalización */
-          geoloc();
-
-
-          /* Marcamos como no activos el resto de los menús */
-            $("#menu-1").removeClass("active");
-            $("#menu-2").removeClass("active");
-            $("#menu-3").removeClass("active");
-            $("#menu-5").removeClass("active");
-
-            /* Marcamos el menú seleccionado como activo */
-            $("#menu-4").addClass("active");
-
-            /* Cargamos el contenido central de la página */
-            $("#central").load("donaciones");
-
-
-            return false;
-        });
-
-        $("#menu-5").on("click", function() {
-
-          /* Marcamos como no activos el resto de los menús */
-          $("#menu-1").removeClass("active");
-          $("#menu-2").removeClass("active");
-          $("#menu-3").removeClass("active");
-          $("#menu-4").removeClass("active");
-
-          /* Marcamos el menú seleccionado como activo */
-          $("#menu-5").addClass("active");
-
-          /* Cargamos el contenido central de la página */
-          $("#central").load("tienda");
-
-          return false;
-        });
-
-      });
   </script>
 
 
-    <title>PET friends</title>
-</head>
-<body>
+  <!-- Inicio miga de pan -->
+  <div class="container-fluid pb-auto miga-de-pan">
+    <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Fin miga de pan -->
 
-    <!-- Mensaje oculto cuando se guarda el formulario -->
-    <p id="mensaje" style="display: none;">{{ mensaje }}</p>
-
-    <!-- Inicio encabezado -->
-    <header class="encabezado">
-        <div class="container-fluid">
-            <div class="d-flex flex-row-reverse">
-                <div class="row">
-                    <div class="col"><a href="#">Login</a></div>
-                    <div class="col"><a href="#">Registro</a></div>
-                    <div class="col"><a href="#"><i class="bi bi-cart-fill"></i></a></div>
-                </div>
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-dark encabezado">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="/">
-                    <img src="{% static 'img/logo.png' %}" alt="logo" width="45rem">
-                    <strong>PET</strong>friends
-                  </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link" id="menu-1" aria-current="page" href="#">Inicio</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="menu-2" href="#">Nosotros</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="menu-3" href="#">Contacto</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="menu-4" href="#">Donaciones</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" id="menu-5" href="#">Tienda</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <!-- Fin encabezado -->
-
-    <!-- Contenido central a ser reemplazado -->
-    <div id="central">
-    </div>
-
-    <!-- Inicio pie de página -->
-    <footer class="pie-de-pagina mt-5 encabezado">
-      <div class="container-fluid" id="pie-de-pagina">
-        <div class="row align-items-center">
-          <div class="col-sm-9 fs-6"><span class="d-none d-sm-inline-block">PETfriends:</span> Avenida Nueva Esperanza 2022, La Pintana</div>
-          <div class="col-sm-3 text-start text-sm-end">
-            <span class="d-none d-sm-inline-block">Encuéntranos en:</span>
-            <a href="#" alt="whatsapp"><i class="bi bi-whatsapp"></i></a>
-            <a href="#" alt="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" alt="instagram" class="bi bi-instagram"></i></a>
-            <a href="#" alt="youtube"><i class="bi bi-youtube"></i></a>
-            <a href="#" alt="tiktok"><i class="bi bi-tiktok"></i></a>
+   <!-- Inicio carrusel de imágenes -->
+   <div class="container-fluid">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        
+        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
           </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="4000">
+              <a href="/nosotros" id="carrusel-2">
+                <img src="{% static 'img/sección-nosotros.png' %}" class="d-block w-100" alt="sección nosotros">
+                <div class="carousel-caption d-md-block text-dark">
+              </a>
+                <h2></h2>
+                <p class="text-light fs-1">Nosotros</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+              <a href="/contacto" id="carrusel-3">
+                <img src="{% static 'img/sección-contacto.png' %}" class="d-block w-100" alt="sección contacto">
+              </a>
+              <div class="carousel-caption d-md-block">
+                <h5></h5>
+                <p class="text-dark fs-1">Contacto</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+              <a href="/donaciones" id="carrusel-4">
+                <img src="{% static 'img/sección-donaciones.png' %}" class="d-block w-100" alt="sección donaciones">
+              </a>
+              <div class="carousel-caption d-md-block">
+                <h5></h5>
+                <p class="text-light fs-1">Donaciones</p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="4000">
+              <a href="/tienda/1" id="carrusel-5">
+                <img src="{% static 'img/sección-tienda.png' %}" class="d-block w-100" alt="sección tienda">
+              </a>
+              <div class="carousel-caption d-md-block">
+                <h5></h5>
+                <p class="text-light fs-1">Tienda</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
+      <div class="col-2"></div>
+    </div>
+   </div>
+    <!-- Fin carrusel de imágenes -->
 
-    </footer>
-    <!-- Fin pie de página -->
+    <!-- Inicio texto central -->
+    <div class="container-fluid">
+      <div class="row text-center pt-4">
+        <h4><span class="badge bg-secondary">PETfriends</span> un lugar donde amamos a los perros.</h4>
+      </div>
+    </div>
+    <!-- Fin texto central -->
 
-    <!-- JS de Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-</body>
-</html>
+  <div>
+    {% include 'core/footer.html' %}      
+  </div>

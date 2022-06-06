@@ -1,4 +1,4 @@
 
 # Ignora las configuraciones del servidor GoLive
 settings.json
-../db.sqlite3
+#../db.sqlite3

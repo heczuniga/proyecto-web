@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from msilib.schema import LockPermissions
 from django.contrib import admin
 from django.urls import path
 from core.views import index
@@ -32,8 +33,5 @@ urlpatterns = [
     path('nosotros', nosotros, name="nosotros"),
     path('contacto', contacto, name="contacto"),
     path('donaciones', donaciones, name="donaciones"),
-    path('tienda', tienda, name="tienda"),
-    path('tienda_bandanas', tienda_bandanas, name="tienda_bandanas"),
-    path('tienda_correas', tienda_correas, name="tienda_correas"),
-    path('tienda_identificadores', tienda_identificadores, name="tienda_identificadores"),
+    path('tienda/<int:categoria>/', tienda, name="tienda"),
 ]

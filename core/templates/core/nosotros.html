@@ -1,8 +1,29 @@
 {% load static %}
 
+  <div>
+    {% include 'core/header.html' %}      
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-1").removeClass("active");
+      $("#menu-3").removeClass("active");
+      $("#menu-4").removeClass("active");
+      $("#menu-5").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-2").addClass("active");
+
+    });
+
+  </script>
+
   <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Inicio</a></li>
           <li class="breadcrumb-item active" aria-current="page">Nosotros</li>
@@ -38,3 +59,9 @@
       </div>
     </div>
     <!-- Fin sección nosotros -->
+
+    <div>
+      {% include 'core/footer.html' %}      
+    </div>
+  
+  

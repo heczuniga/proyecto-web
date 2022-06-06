@@ -1,30 +1,13 @@
 
 from django.shortcuts import render
+from .models import Categoria
+from .models import Producto
 from .forms import ContactoForm
 
 # Create your views here.
 
 # Vista de página base
 def index(request):
-
-    contactoForm = ContactoForm()
-
-    datos = {
-        'form': contactoForm
-    }
-    print(request.method)
-
-    if request.method == 'POST':
-        
-        formulario = ContactoForm(request.POST)
-
-        if formulario.is_valid:
-            
-            formulario.save()
-
-            datos['mensaje'] = "Datos guardados"
-        
-            return render(request, "core/index.html", datos)
 
     return render(request, 'core/index.html')
 
@@ -42,10 +25,22 @@ def nosotros(request):
 def contacto(request):
     
     contactoForm = ContactoForm()
-    
+
     datos = {
         'form': contactoForm
     }
+
+    if request.method == 'POST':
+        
+        formulario = ContactoForm(request.POST)
+
+        if formulario.is_valid:
+            
+            formulario.save()
+
+            datos['mensaje'] = "Los datos del formulario se han recibido correctamente! Pronto nos comunicaremos contigo."
+        
+            return render(request, "core/contacto.html", datos)
 
     return render(request, "core/contacto.html", datos)
 
@@ -55,9 +50,17 @@ def donaciones(request):
     return render(request, 'core/donaciones.html')
 
 # Vista de página de tienda
-def tienda(request):
-    
-    return render(request, 'core/tienda.html')
+def tienda(request, categoria):
+
+    #   Recuparamos las categorías de un tipo específico
+    categorias = Categoria.objects.extra(select={"active":"case codCategoria = " + str(categoria) + " when 1 then 'active' else '' end "}).all()
+
+    #   Recuperamos los productos de dicha categoría
+    productos = Producto.objects.extra(select={"precio_formateado":"'$6.900'"}).filter(categoria_id = categoria)
+    datos = {'categorias': categorias,
+             'productos': productos}
+
+    return render(request, 'core/tienda.html', datos)
 
 # Vista de página de tienda de bandanas
 def tienda_bandanas(request):

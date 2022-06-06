@@ -1,63 +1,48 @@
 {% load static %}
+{% load humanize %}
+
+  <div>
+    {% include 'core/header.html' %}      
+  </div>
 
   <script type="text/javascript">
 
-    /* Cargamos la categoría inicial */
-    $("#tienda").load("tienda_bandanas");
-
-    $("#menu-tienda-1").click(function() {
+   $(document).ready(function() {
 
       /* Marcamos como no activos el resto de los menús */
-      $("#menu-tienda-2").removeClass("active");
-      $("#menu-tienda-3").removeClass("active");
+      $("#menu-1").removeClass("active");
+      $("#menu-2").removeClass("active");
+      $("#menu-3").removeClass("active");
+      $("#menu-4").removeClass("active");
 
       /* Marcamos el menú seleccionado como activo */
-      $("#menu-tienda-1").addClass("active");
+      $("#menu-5").addClass("active");
 
-      /* Cargamos el contenido de la categoría respectiva */
-      $("#tienda").load("tienda_bandanas");
+      $(".boton").click(function () {
 
-      return false;
+        $("#mensaje-agregar-carro").hide();
 
-    });
+        /* Determinamos el id del producto que se ha seleccionado para pasárselos al modal */
+        var idProducto = $(this).attr("id");
 
-    $("#menu-tienda-2").on("click", function() {
+        /* Modificamos los datos del modal */
+        $("#modal-nombre-corto").text($("#nombre-corto-prod-" + idProducto).text());
+        $("#modal-nombre-largo").text($("#nombre-largo-prod-" + idProducto).text());
+        $("#modal-imagen").attr("src", $("#imagen-prod-" + idProducto).attr("src"));
+        $("#modal-descripcion").text($("#descripcion-prod-" + idProducto).text());
+        $("#modal-precio").text($("#precio-prod-" + idProducto).text());
+      })
+        
+      $("#btn-agregar-carro").click(function () {
+        $("#mensaje-agregar-carro").show();
+      })
 
-      /* Marcamos como no activos el resto de los menús */
-      $("#menu-tienda-1").removeClass("active");
-      $("#menu-tienda-3").removeClass("active");
-
-      /* Marcamos el menú seleccionado como activo */
-      $("#menu-tienda-2").addClass("active");
-
-      /* Cargamos el contenido de la categoría respectiva */
-      $("#tienda").load("tienda_correas");
-
-      return false;
-
-    });
-
-    $("#menu-tienda-3").click(function() {
-
-      /* Marcamos como no activos el resto de los menús */
-      $("#menu-tienda-1").removeClass("active");
-      $("#menu-tienda-2").removeClass("active");
-
-      /* Marcamos el menú seleccionado como activo */
-      $("#menu-tienda-3").addClass("active");
-
-      /* Cargamos el contenido de la categoría respectiva */
-      $("#tienda").load("tienda_identificadores");
-
-      return false;
-
-    });
-
+   });
   </script>
-
+  
     <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Inicio</a></li>
           <li class="breadcrumb-item active" aria-current="page">Tienda</li>
@@ -71,14 +56,83 @@
       <div class="row">
         <div class="col-12 col-lg-1">
           <div class="btn-group-vertical">
-            <a href="#" id="menu-tienda-1" class="btn btn-success active" aria-current="page">Bandanas</a>
-            <a href="#" id="menu-tienda-2" class="btn btn-success">Correas</a>
-            <a href="#" id="menu-tienda-3" class="btn btn-success">Identificadores</a>
+            {% for c in categorias %}
+              <a href="/tienda/{{ c.codCategoria }}" id="menu-tienda-1" class="btn btn-success {{ c.active }}" aria-current="page">{{ c.nombreCategoria }}</a>
+            {% endfor %}
           </div>
         </div>
         <div class="col-12 col-lg-11">
-          <div id="tienda"></div>
+          <div id="tienda">
+
+            <!-- Inicio sección productos -->
+            <div class="container-fluid">
+              <div class="row">
+                {% for p in productos %}
+                <div class="col-lg-2 me-3">
+
+                  <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/' %}{{ p.imagen }}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
+                    <div class="card-body">
+                      <h5 class="card-title" id="nombre-corto-prod-{{ p.idProducto }}">{{ p.nombreCorto }}</h5>
+                      <p class="card-text" id="nombre-largo-prod-{{ p.idProducto }}">{{ p.nombreLargo }}</p>
+                      <p class="card-text" id="precio-prod-{{ p.idProducto }}">${{ p.precio | intcomma }}</p>
+                      <a href="#" id="{{ p.idProducto }}" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success boton">Comprar</a>
+                      <p class="visually-hidden" id="descripcion-prod-{{ p.idProducto }}">{{ p.descripcion }}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <!-- Fin sección productos -->
+            
+          </div>
         </div>
       </div>
     </div>
-    <!-- Inicio menú tienda -->
+    <!-- Fin menú tienda -->
+
+<!-- Inicio modal descripción de producto -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label-02" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-nombre-corto">Nombre corto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card mb-3" style="max-width: 1080px;">
+          <div class="row g-0">
+            <div class="col-md-8">
+              <img src="" id="modal-imagen" class="img-fluid rounded-start" alt="fundación abrázame">
+            </div>
+
+            <div class="col-md-4">
+              <div class="card-body">
+                <h5 class="card-title" id="modal-nombre-largo">Nombre largo</h5>
+                <p class="card-text text-start" id="modal-descripcion">Lorem ipsum dolor sit, amet consectetur
+                  adipisicing elit. Laudantium assumenda quis, mollitia impedit cumque adipisci nostrum nesciunt
+                  delectus iure dolore optio eveniet. Magnam odio reprehenderit quasi consectetur provident iusto
+                  deserunt.</p>
+                <h3 class="card-text" id="modal-precio">Precio</h3>
+                <button type="button" id="btn-agregar-carro" class="btn btn-success mt-5">Agregar al carro</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-success" id="mensaje-agregar-carro" role="alert">
+          Producto agregado al carro!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin modal descripción de producto -->
+
+
+    <div>
+      {% include 'core/footer.html' %}      
+    </div>
+  

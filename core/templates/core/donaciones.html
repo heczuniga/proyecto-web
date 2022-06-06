@@ -1,8 +1,77 @@
 {% load static %}
 
+  <div>
+    {% include 'core/header.html' %}      
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-1").removeClass("active");
+      $("#menu-2").removeClass("active");
+      $("#menu-3").removeClass("active");
+      $("#menu-5").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-4").addClass("active");
+
+      function geoloc() {
+        if (navigator.geolocation){
+           navigator.geolocation.getCurrentPosition(showPosition,showError);
+  
+        }
+        else {
+          alert("Lo sentimos, tu dispositivo no admite la geolocalización");
+          }
+      }
+  
+      function showPosition(position){
+        latitud=position.coords.latitude;
+        longitud=position.coords.longitude;
+  
+        $.get("http://api.weatherstack.com/current?access_key=bc6e10faea832b9b6bb4f0ebd11fd907&query=" + latitud + "," + longitud, function(data){
+  
+          $("#texto-ubicacion").text(data.location.name);
+          $("#texto-pais").text(data.location.country);
+          $("#texto-region").text(data.location.region);
+          $("#texto-zona-horaria").text(data.location.timezone_id);
+          $("#texto-hora-local").text(data.location.localtime);
+          $("#texto-temperatura").text(data.current.temperature + "°C");
+          $("#texto-clima").text(data.current.weather_descriptions);
+          $("#img-clima").attr("src", data.current.weather_icons);
+  
+          })
+      }
+  
+      function showError(error){
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            alert("El usuario ha denegado el permiso a la localización");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("La información de la localización no está disponible");
+            break;
+          case error.TIMEOUT:
+            alert("<p>El tiempo de espera para buscar la localización ha expirado");
+            break;
+          case error.UNKNOWN_ERROR:
+            alert("Ha ocurrido un error desconocido");
+            break;
+          }
+        }
+  
+        /* Activamos la geolocalización */
+        geoloc();
+  
+    });
+  </script>
+  
+
     <!-- Inicio miga de pan -->
     <div class="container-fluid pb-auto miga-de-pan">
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Inicio</a></li>
           <li class="breadcrumb-item active" aria-current="page">Donaciones</li>
@@ -227,3 +296,8 @@
       </div>
     </div>
     <!-- Fin sección información del clima -->
+
+    <div>
+      {% include 'core/footer.html' %}      
+    </div>
+  
