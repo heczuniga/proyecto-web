@@ -52,11 +52,11 @@ def donaciones(request):
 # Vista de página de tienda
 def tienda(request, categoria):
 
-    #   Recuparamos las categorías de un tipo específico
+    # Recuperamos las categorías de un tipo específico agregando una columna que ayuda a manejar el active en el menú de categorías de productos
     categorias = Categoria.objects.extra(select={"active":"case codCategoria = " + str(categoria) + " when 1 then 'active' else '' end "}).all()
 
-    #   Recuperamos los productos de dicha categoría
-    productos = Producto.objects.extra(select={"precio_formateado":"'$6.900'"}).filter(categoria_id = categoria)
+    # Recuperamos los productos de dicha categoría
+    productos = Producto.objects.filter(categoria_id = categoria)
     datos = {'categorias': categorias,
              'productos': productos}
 
