@@ -1,5 +1,4 @@
 from django.db import models
-from pydantic import validate_email
 
 # Create your models here.
 # Create your models here.
