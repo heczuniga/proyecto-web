@@ -1,5 +1,6 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from numpy import delete
 from .models import Categoria
 from .models import Producto
 from .forms import ContactoForm
@@ -100,5 +101,11 @@ def administracion_fundaciones(request):
 
     return render(request, 'core/administracion-fundaciones.html', datos)
 
+# Vista para eliminar productos
+def form_eliminar_producto(request, idProducto):
+
+    producto = Producto.objects.get(idProducto = idProducto)
+    producto.delete()
+    return redirect(to="administracion_productos")
 
 
