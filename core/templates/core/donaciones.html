@@ -17,6 +17,10 @@
       /* Marcamos el menú seleccionado como activo */
       $("#menu-4").addClass("active");
 
+      $(".imagen").click (function () {
+        var idProducto = $(this).attr("id");
+      })
+
       function geoloc() {
         if (navigator.geolocation){
            navigator.geolocation.getCurrentPosition(showPosition,showError);
@@ -83,173 +87,55 @@
     <!-- Inicio sección donaciones -->
     <div class="container-fluid">
       <div class="row justify-content-center pt-4">
+        {% for f in fundaciones %}
         <div class="col-12 col-md-6 col-lg-3 text-center">
-          <a href="" data-bs-toggle="modal" data-bs-target="#modal-1">
-            <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="ayuda a un peludo">
+          <a href="" data-bs-toggle="modal" data-bs-target="#modal">
+            <img src="{{ f.imagen.url }}" class="img-fluid img-thumbnail border imagen" width="60%" alt="ayuda a un peludo">
           </a>
-          <p class="fs-6 text-secondary">Ayuda a un peludo</p>
-
-          <!-- Inicio modal 1 -->
-            <div class="modal fade" id="modal-1" tabindex="-1" aria-labelledby="modal-label-01" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-label-01">Ayuda a un peludo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="card mb-3" style="max-width: 1080px;">
-                      <div class="row g-0">
-                        <div class="col-md-8">
-                          <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid rounded-start" alt="ayuda a un peludo">
-                        </div>
-                        <div class="col-md-4">
-                          <div class="card-body">
-                            <h5 class="card-title">Fundación Ayuda a un peludo</h5>
-                            <p class="card-text text-start">Fundación sin fines de lucro dedicada a juntar a mascotas (perros y gatos) con personas que deseen adoptarlos.</p>
-                            <a href="#">
-                              <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
-                            </a>
-                            <button type="button" class="btn btn-success mt-5">Donación</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          <!-- Fin modal 1 -->
-            
+          <p class="fs-6 text-secondary">{{ f.nombreCorto }}</p>
+          <p class="visually-hidden">{{ f.idFundacion }}</p>
+          <p class="visually-hidden">{{ f.nombreLargo }}</p>
+          <p class="visually-hidden">{{ f.descripcion }}</p>
+          <p class="visually-hidden">{{ f.sitioWeb }}</p>
         </div>
-        <div class="col-12 col-md-6 col-lg-3 text-center">
-          <a href="" data-bs-toggle="modal" data-bs-target="#modal-2">
-            <img src="{% static 'img/donaciones-abrazame.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación abrázame">
-          </a>
-          <p class="fs-6 text-secondary">Fundación Abrázame</p>
-
-          <!-- Inicio modal 2 -->
-            <div class="modal fade" id="modal-2" tabindex="-1" aria-labelledby="modal-label-02" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-label-02">Fundación Abrázame</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="card mb-3" style="max-width: 1080px;">
-                      <div class="row g-0">
-                        <div class="col-md-8">
-                          <img src="{% static 'img/donaciones-abrazame.jpg' %}" class="img-fluid rounded-start" alt="fundación abrázame">
-                        </div>
-                        <div class="col-md-4">
-                          <div class="card-body">
-                            <h5 class="card-title">Fundación Abrázame</h5>
-                            <p class="card-text text-start">Fundación sin fines de lucro dedicada a proteger a los niños, niñas y adolescentes residentes en hogares.</p>
-                            <a href="#">
-                              <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
-                            </a>
-                            <button type="button" class="btn btn-success mt-5">Donación</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          <!-- Fin modal 2 -->
-
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 text-center">
-          <a href="" data-bs-toggle="modal" data-bs-target="#modal-3">
-            <img src="{% static 'img/donaciones-banigualdad.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación banigualdad">
-          </a>
-          <p class="fs-6 text-secondary">Fundación Banigualdad</p>
-
-          <!-- Inicio modal 3 -->
-            <div class="modal fade" id="modal-3" tabindex="-1" aria-labelledby="modal-label-03" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-label-03">Fundación Banigualdad</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="card mb-3" style="max-width: 1080px;">
-                      <div class="row g-0">
-                        <div class="col-md-8">
-                          <img src="{% static 'img/donaciones-banigualdad.jpg' %}" class="img-fluid rounded-start" alt="fundación banigualdad">
-                        </div>
-                        <div class="col-md-4">
-                          <div class="card-body">
-                            <h5 class="card-title">Fundación Banigualdad</h5>
-                            <p class="card-text text-start">Fundación sin fines de lucro que financia, capacita y acompaña a pequeños emprendedores que buscan salir adelante gracias a sus negocios.</p>
-                            <a href="#">
-                              <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
-                            </a>
-                            <button type="button" class="btn btn-success mt-5">Donación</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          <!-- Fin modal 3 -->
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-3 text-center">
-          <a href="" data-bs-toggle="modal" data-bs-target="#modal-4">
-            <img src="{% static 'img/donaciones-lasrosas.jpg' %}" class="img-fluid img-thumbnail border" width="60%" alt="fundación las rosas">
-          </a>
-          <p class="fs-6 text-secondary">Fundación Las Rosas</p>
-
-          <!-- Inicio modal 4 -->
-            <div class="modal fade" id="modal-4" tabindex="-1" aria-labelledby="modal-label-04" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-label-04">Fundación Las Rosas</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="card mb-3" style="max-width: 1080px;">
-                      <div class="row g-0">
-                        <div class="col-md-8">
-                          <img src="{% static 'img/donaciones-lasrosas.jpg' %}" class="img-fluid rounded-start" alt="fundación las rosas">
-                        </div>
-                        <div class="col-md-4">
-                          <div class="card-body">
-                            <h5 class="card-title">Fundación Las Rosas</h5>
-                            <p class="card-text text-start">Fundación sin fines de lucro con la misión de acoger a las personas mayores más pobres del país, entregándoles amor, cariño y los cuidados necesarios para que vivan su vejez con la dignidad que todos merecemos.</p>
-                            <a href="#">
-                              <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
-                            </a>
-                            <button type="button" class="btn btn-success mt-5">Donación</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          <!-- Fin modal 4 -->
-          
-        </div>
+        {% endfor %}
       </div>
     </div>
     <!-- Fin sección donaciones -->
+
+    <!-- Inicio modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-label">Ayuda a un peludo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="card mb-3" style="max-width: 1080px;">
+              <div class="row g-0">
+                <div class="col-md-8">
+                  <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid rounded-start" alt="ayuda a un peludo">
+                </div>
+                <div class="col-md-4">
+                  <div class="card-body">
+                    <h5 class="card-title">Fundación Ayuda a un peludo</h5>
+                    <p class="card-text text-start">Fundación sin fines de lucro dedicada a juntar a mascotas (perros y gatos) con personas que deseen adoptarlos.</p>
+                    <a href="#">
+                      <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
+                    </a>
+                    <button type="button" class="btn btn-success mt-5">Donación</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Fin modal -->
 
     <!-- Inicio sección información del clima -->
     <div class="container-fluid">

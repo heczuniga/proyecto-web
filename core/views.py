@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Categoria
 from .models import Producto
 from .forms import ContactoForm
+from .models import Fundacion
 
 # Create your views here.
 
@@ -46,8 +47,13 @@ def contacto(request):
 
 # Vista de página de donaciones
 def donaciones(request):
-    
-    return render(request, 'core/donaciones.html')
+
+    fundaciones = Fundacion.objects.all()
+    datos = {
+        'fundaciones': fundaciones
+
+    }
+    return render(request,'core/donaciones.html', datos)
 
 # Vista de página de tienda
 def tienda(request, categoria):
@@ -76,15 +82,6 @@ def tienda_correas(request):
 def tienda_identificadores(request):
     
     return render(request, 'core/tienda-identificadores.html')
-
-# Vista página de productos
-def producto(request):
-    productos=Producto.objects.all()
-    datos={
-        'productos':productos
-
-    }
-    return render(request,'core/productos.html', datos)
 
 # Modulo administración productos
 def administracion_productos(request):
