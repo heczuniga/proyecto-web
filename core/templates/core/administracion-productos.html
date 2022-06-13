@@ -1,0 +1,105 @@
+{% load static %}
+
+  <div>
+    {% include 'core/header-administracion.html' %}      
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-2").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-1").addClass("active");
+
+    });
+
+  </script>
+
+
+  <!-- Inicio miga de pan -->
+  <div class="container-fluid pb-auto miga-de-pan">
+    <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Fin miga de pan -->
+
+   
+  <!-- Inicio Sección Administración de productos -->
+  <div class="container-fluid">
+    <div>
+      <button type="button" class="btn btn-success">Agregar</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Identificador</th>
+            <th scope="col">Nombre corto</th>
+            <th scope="col">Nombre largo</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Categoría</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Bandana flores</td>
+            <td>Bandana de flores</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
+            <td>$5,900</td>
+            <td>Imagen</td>
+            <td>Bandanas</td>
+            <td>
+              <button type="button" class="btn btn-success">Modificar</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary">Eliminar</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>Bandana flores</td>
+            <td>Bandana de flores</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
+            <td>$5,900</td>
+            <td>Imagen</td>
+            <td>Bandanas</td>
+            <td>
+              <button type="button" class="btn btn-success">Modificar</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary">Eliminar</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>Bandana flores</td>
+            <td>Bandana de flores</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
+            <td>$5,900</td>
+            <td>Imagen</td>
+            <td>Bandanas</td>
+            <td>
+              <button type="button" class="btn btn-success">Modificar</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>    
+  </div>
+  <!-- Fin Sección Administración de productos -->
+
+  <div>
+    {% include 'core/footer-administracion.html' %}      
+  </div>

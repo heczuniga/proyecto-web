@@ -76,3 +76,23 @@ def tienda_correas(request):
 def tienda_identificadores(request):
     
     return render(request, 'core/tienda-identificadores.html')
+
+# Vista página de productos
+def producto(request):
+    productos=Producto.objects.all()
+    datos={
+        'productos':productos
+
+    }
+    return render(request,'core/productos.html', datos)
+
+# Modulo administración productos
+def administracion_productos(request):
+
+    return render(request, 'core/administracion-productos.html')
+
+# Modulo administración fundaciones
+def administracion_fundaciones(request):
+
+    return render(request, 'core/administracion-fundaciones.html')
+

@@ -44,10 +44,22 @@ class Producto(models.Model):
     nombreLargo = models.CharField(max_length=200, null=False, verbose_name="Nombre largo del producto")
     descripcion = models.CharField(max_length=1000, null=False, verbose_name="Descripción del producto")
     precio = models.IntegerField(null=False, verbose_name="Precio del producto")
-    imagen = models.CharField(max_length=100, null=False, verbose_name="Imagen del producto")
+    imagen = models.ImageField(upload_to="productos", null=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.RESTRICT)
     
     def __str__(self) -> str:
         return self.nombreCorto
+
+class Fundacion(models.Model):
+    idFundacion = models.AutoField(primary_key=True, verbose_name="Identificador de la fundación")
+    nombreCorto = models.CharField(max_length=100, null=False, verbose_name="Nombre corto de la fundación")
+    nombreLargo = models.CharField(max_length=200, null=False, verbose_name="Nombre largo de la fundación")
+    descripcion = models.CharField(max_length=1000, null=False, verbose_name="Descripción de la fundación")
+    sitioWeb = models.URLField(max_length=200, null=True, verbose_name="Sitio web de la fundación")
+    imagen = models.ImageField(upload_to="fundaciones", null=True)
+
+    def __str__(self) -> str:
+        return self.nombreCorto
+
 
     

@@ -16,15 +16,16 @@ Including another URLconf
 from msilib.schema import LockPermissions
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static 
 from core.views import index
 from core.views import inicio
 from core.views import nosotros
 from core.views import contacto
 from core.views import donaciones
 from core.views import tienda
-from core.views import tienda_bandanas
-from core.views import tienda_correas
-from core.views import tienda_identificadores
+from core.views import administracion_productos
+from core.views import administracion_fundaciones
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +35,9 @@ urlpatterns = [
     path('contacto', contacto, name="contacto"),
     path('donaciones', donaciones, name="donaciones"),
     path('tienda/<int:categoria>/', tienda, name="tienda"),
+    path('administracion_productos', administracion_productos, name="administracion_productos"),
+    path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
 ]
+#Se enlaza las variables MEDIA
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
