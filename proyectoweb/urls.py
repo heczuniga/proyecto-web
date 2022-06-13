@@ -26,6 +26,7 @@ from core.views import donaciones
 from core.views import tienda
 from core.views import administracion_productos
 from core.views import administracion_fundaciones
+from core.views import form_eliminar_producto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,7 +38,10 @@ urlpatterns = [
     path('tienda/<int:categoria>/', tienda, name="tienda"),
     path('administracion_productos', administracion_productos, name="administracion_productos"),
     path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
+    path('form_eliminar_producto/<idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
 ]
 #Se enlaza las variables MEDIA
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
