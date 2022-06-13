@@ -86,10 +86,19 @@ def tienda_identificadores(request):
 # Modulo administración productos
 def administracion_productos(request):
 
-    return render(request, 'core/administracion-productos.html')
+    # Recuperamos los productos
+    productos = Producto.objects.all()
+    datos = {'productos': productos}
+
+    return render(request, 'core/administracion-productos.html', datos)
 
 # Modulo administración fundaciones
 def administracion_fundaciones(request):
 
-    return render(request, 'core/administracion-fundaciones.html')
+    fundaciones = Fundacion.objects.all()
+    datos = {'fundaciones' : fundaciones}
+
+    return render(request, 'core/administracion-fundaciones.html', datos)
+
+
 

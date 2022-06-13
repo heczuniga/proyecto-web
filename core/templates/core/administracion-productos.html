@@ -38,26 +38,27 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Identificador</th>
+            <th scope="col">Id</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre corto</th>
             <th scope="col">Nombre largo</th>
             <th scope="col">Descripción</th>
             <th scope="col">Precio</th>
-            <th scope="col">Imagen</th>
             <th scope="col">Categoría</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
+        {% for p in productos %}
           <tr>
-            <th scope="row">1</th>
-            <td>Bandana flores</td>
-            <td>Bandana de flores</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>$5,900</td>
-            <td>Imagen</td>
-            <td>Bandanas</td>
+            <th scope="row">{{ p.idProducto }}</th>
+            <td><img class="img-thumbnail" src="{{ p.imagen.url }}" alt=""></td>
+            <td>{{ p.nombreCorto }}</td>
+            <td>{{ p.nombreLargo }}</td>
+            <td>{{ p.descripcion }}</td>
+            <td>${{ p.precio }}</td>
+            <td>{{ p.categoria }}</td>
             <td>
               <button type="button" class="btn btn-success">Modificar</button>
             </td>
@@ -65,36 +66,7 @@
               <button type="button" class="btn btn-secondary">Eliminar</button>
             </td>
           </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Bandana flores</td>
-            <td>Bandana de flores</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>$5,900</td>
-            <td>Imagen</td>
-            <td>Bandanas</td>
-            <td>
-              <button type="button" class="btn btn-success">Modificar</button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-secondary">Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Bandana flores</td>
-            <td>Bandana de flores</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>$5,900</td>
-            <td>Imagen</td>
-            <td>Bandanas</td>
-            <td>
-              <button type="button" class="btn btn-success">Modificar</button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-secondary">Eliminar</button>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>    
   </div>

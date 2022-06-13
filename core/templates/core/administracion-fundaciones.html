@@ -38,24 +38,25 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Identificador</th>
+            <th scope="col">Id</th>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre corto</th>
             <th scope="col">Nombre largo</th>
             <th scope="col">Descripción</th>
             <th scope="col">Sitio web</th>
-            <th scope="col">Imagen</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
+          {% for f in fundaciones %}
           <tr>
-            <th scope="row">1</th>
-            <td>Ayuda peludo</td>
-            <td>Ayuda a un peludo</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>www.ayudapeludo.cl</td>
-            <td>Imagen</td>
+            <th scope="row">{{ f.idFundacion }}</th>
+            <td><img class="img-thumbnail" src="{{ f.imagen.url }}" alt=""></td>
+            <td>{{ f.nombreCorto }}</td>
+            <td>{{ f.nombreLargo }}</td>
+            <td>{{ f.descripcion }}</td>
+            <td><a href="{{ f.sitioWeb }}">{{ f.sitioWeb }}</a></td>
             <td>
               <button type="button" class="btn btn-success">Modificar</button>
             </td>
@@ -63,34 +64,7 @@
               <button type="button" class="btn btn-secondary">Eliminar</button>
             </td>
           </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Ayuda peludo</td>
-            <td>Ayuda a un peludo</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>www.ayudapeludo.cl</td>
-            <td>Imagen</td>
-            <td>
-              <button type="button" class="btn btn-success">Modificar</button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-secondary">Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>Ayuda peludo</td>
-            <td>Ayuda a un peludo</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil facere, incidunt reprehenderit obcaecati praesentium esse reiciendis deserunt sunt vero asperiores in minima aperiam voluptas voluptates consequatur cum atque voluptate molestiae.</td>
-            <td>www.ayudapeludo.cl</td>
-            <td>Imagen</td>
-            <td>
-              <button type="button" class="btn btn-success">Modificar</button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-secondary">Eliminar</button>
-            </td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>    
   </div>
