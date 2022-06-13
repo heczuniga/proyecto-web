@@ -108,4 +108,10 @@ def form_eliminar_producto(request, idProducto):
     producto.delete()
     return redirect(to="administracion_productos")
 
+# Vista para eliminar fundaciones
+def form_eliminar_fundacion(request, idFundacion):
+
+    fundacion = Fundacion.objects.get(idFundacion = idFundacion)
+    fundacion.delete()
+    return redirect(to="administracion_fundaciones")
 

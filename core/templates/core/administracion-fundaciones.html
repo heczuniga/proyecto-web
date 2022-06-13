@@ -61,7 +61,7 @@
               <button type="button" class="btn btn-success">Modificar</button>
             </td>
             <td>
-            <button type="button" class="btn btn-secondary">Eliminar</button>
+              <a href="{% url 'form_eliminar_fundacion' f.idFundacion %}"><button type="button" class="btn btn-secondary">Eliminar</button></a>
             </td>
           </tr>
           {% endfor %}

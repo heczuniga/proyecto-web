@@ -27,6 +27,7 @@ from core.views import tienda
 from core.views import administracion_productos
 from core.views import administracion_fundaciones
 from core.views import form_eliminar_producto
+from core.views import form_eliminar_fundacion
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('administracion_productos', administracion_productos, name="administracion_productos"),
     path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
     path('form_eliminar_producto/<idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
+    path('form_eliminar_fundacion/<idFundacion>', form_eliminar_fundacion, name="form_eliminar_fundacion"),
 ]
 #Se enlaza las variables MEDIA
 if settings.DEBUG:

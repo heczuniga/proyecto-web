@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
   <div>
     {% include 'core/header-administracion.html' %}      
@@ -57,7 +58,7 @@
             <td>{{ p.nombreCorto }}</td>
             <td>{{ p.nombreLargo }}</td>
             <td>{{ p.descripcion }}</td>
-            <td>${{ p.precio }}</td>
+            <td>${{ p.precio | intcomma }}</td>
             <td>{{ p.categoria }}</td>
             <td>
               <button type="button" class="btn btn-success">Modificar</button>
