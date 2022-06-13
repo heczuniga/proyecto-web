@@ -71,7 +71,7 @@
                 <div class="col-lg-2 me-3">
 
                   <div class="card" style="width: 18rem;">
-                    <img src="{% static 'img/' %}{{ p.imagen }}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
+                    <img src="{{ p.imagen.url }}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
                     <div class="card-body">
                       <h5 class="card-title" id="nombre-corto-prod-{{ p.idProducto }}">{{ p.nombreCorto }}</h5>
                       <p class="card-text" id="nombre-largo-prod-{{ p.idProducto }}">{{ p.nombreLargo }}</p>
