@@ -62,3 +62,36 @@ a:hover {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+
+.encabezado-administracion {
+
+    color: whitesmoke;
+    background-color: darkgreen;
+}
+
+.encabezado-administracion a {
+
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.encabezado-administracion a:hover {
+
+    color: lightgray;
+}
+
+.miga-de-pan-administracion {
+
+    background-color: yellowgreen;
+}
+
+.miga-de-pan-administracion a {
+
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.miga-de-pan-administracion a:hover {
+
+    color: lightgray;
+}

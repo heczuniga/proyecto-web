@@ -25,8 +25,12 @@ from core.views import contacto
 from core.views import donaciones
 from core.views import tienda
 from core.views import administracion_productos
-from core.views import administracion_fundaciones
+from core.views import form_agregar_producto
+from core.views import form_modificar_producto
 from core.views import form_eliminar_producto
+from core.views import administracion_fundaciones
+from core.views import form_agregar_fundacion
+from core.views import form_modificar_fundacion
 from core.views import form_eliminar_fundacion
 
 urlpatterns = [
@@ -37,9 +41,14 @@ urlpatterns = [
     path('contacto', contacto, name="contacto"),
     path('donaciones', donaciones, name="donaciones"),
     path('tienda/<int:categoria>/', tienda, name="tienda"),
+    path('administracion', administracion_productos, name="administracion_productos"),
     path('administracion_productos', administracion_productos, name="administracion_productos"),
-    path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
+    path('form_agregar_producto', form_agregar_producto, name="form_agregar_producto"),
+    path('form_modificar_producto/<idProducto>/', form_modificar_producto, name="form_modificar_producto"),
     path('form_eliminar_producto/<idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
+    path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
+    path('form_agregar_fundacion', form_agregar_fundacion, name="form_agregar_fundacion"),
+    path('form_modificar_fundacion/<idFundacion>/', form_modificar_fundacion, name="form_modificar_fundacion"),
     path('form_eliminar_fundacion/<idFundacion>', form_eliminar_fundacion, name="form_eliminar_fundacion"),
 ]
 #Se enlaza las variables MEDIA

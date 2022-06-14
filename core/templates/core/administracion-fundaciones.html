@@ -8,32 +8,47 @@
 
     $(document).ready(function() {
 
+      var idFundacion;
+
       /* Marcamos como no activos el resto de los menús */
       $("#menu-1").removeClass("active");
 
       /* Marcamos el menú seleccionado como activo */
       $("#menu-2").addClass("active");
 
+      /* Construcción del modal de la confirmación de eliminación */
+      $(".boton-eliminar").click(function () {
+        idFundacion = $(this).attr("id");
+        var nombreCorto = $("#nombre-corto-" + idFundacion).text();
+
+        $("#mensaje-modal").text("Está seguro que desea eliminar la fundación \"" + nombreCorto + "\"?")
+
+      })
+
+      /* Manejo de la confirmación de la eliminación */
+      $("#confirmar-eliminacion").click(function () {
+        $(location).prop("href", "form_eliminar_fundacion/" + idFundacion);
+      })
+
     });
 
   </script>
 
-
   <!-- Inicio miga de pan -->
-  <div class="container-fluid pb-auto miga-de-pan">
+  <div class="container-fluid pb-auto miga-de-pan-administracion">
     <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/administracion">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administración de fundaciones</li>
       </ol>
     </nav>
   </div>
   <!-- Fin miga de pan -->
-
    
   <!-- Inicio Sección Administración de productos -->
   <div class="container-fluid">
     <div>
-      <button type="button" class="btn btn-success">Agregar</button>
+      <a class="btn btn-success" href="form_agregar_fundacion" role="button">Agregar</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -52,23 +67,51 @@
           {% for f in fundaciones %}
           <tr>
             <th scope="row">{{ f.idFundacion }}</th>
-            <td><img class="img-thumbnail" src="{{ f.imagen.url }}" alt=""></td>
-            <td>{{ f.nombreCorto }}</td>
+            <td>
+            {% if f.imagen %}
+              <img class="img-thumbnail" src="{{ f.imagen.url }}" alt="imagen fundacion" width="100 rem">
+            {% else %}
+              <img class="img-thumbnail" src="{% static 'img/sin-imagen.png' %}" alt="imagen producto" width="100 rem">
+            {% endif %}
+            </td>
+            <td id="nombre-corto-{{ f.idFundacion }}">{{ f.nombreCorto }}</td>
             <td>{{ f.nombreLargo }}</td>
             <td>{{ f.descripcion }}</td>
             <td><a href="{{ f.sitioWeb }}">{{ f.sitioWeb }}</a></td>
             <td>
-              <button type="button" class="btn btn-success">Modificar</button>
+              <a class="btn btn-success" href="{% url 'form_modificar_fundacion' f.idFundacion %}" role="button">Modificar</a>
             </td>
             <td>
-              <a href="{% url 'form_eliminar_fundacion' f.idFundacion %}"><button type="button" class="btn btn-secondary">Eliminar</button></a>
+              <button id="{{ f.idFundacion }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Eliminar
+              </button>
             </td>
-          </tr>
+        </tr>
           {% endfor %}
         </tbody>
       </table>    
   </div>
   <!-- Fin Sección Administración de productos -->
+
+  <!-- Inicio modal de confirmación de eliminación -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal-confirmacion" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-confirmacion">Eliminar producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="mensaje-modal" class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button id="confirmar-eliminacion" type="button" class="btn btn-success" data-bs-dismiss="modal">Eliminar</button>
+          <button id="cancelar-eliminacion"type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin modal de confirmación de eliminación -->
 
   <div>
     {% include 'core/footer-administracion.html' %}      

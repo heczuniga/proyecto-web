@@ -17,9 +17,19 @@
       /* Marcamos el menú seleccionado como activo */
       $("#menu-4").addClass("active");
 
-      $(".imagen").click (function () {
-        var idProducto = $(this).attr("id");
+      $(".imagen").click(function () {
+
+        /* Determinamos el id del producto que se ha seleccionado para pasárselos al modal */
+        var idFundacion = $(this).attr("id");
+
+        /* Modificamos los datos del modal */
+        $("#modal-nombre-corto").text($("#nombre-corto-fund-" + idFundacion).text());
+        $("#modal-nombre-largo").text($("#nombre-largo-fund-" + idFundacion).text());
+        $("#modal-imagen").attr("src", $("#" + idFundacion).attr("src"));
+        $("#modal-descripcion").text($("#descripcion-fund-" + idFundacion).text());
+        $("#modal-url").text($("#url-fund-" + idFundacion).text());
       })
+
 
       function geoloc() {
         if (navigator.geolocation){
@@ -90,13 +100,12 @@
         {% for f in fundaciones %}
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal">
-            <img src="{{ f.imagen.url }}" class="img-fluid img-thumbnail border imagen" width="60%" alt="ayuda a un peludo">
+            <img id="{{ f.idFundacion }}" src="{{ f.imagen.url }}" class="img-fluid img-thumbnail border imagen" width="60%" alt="ayuda a un peludo">
           </a>
-          <p class="fs-6 text-secondary">{{ f.nombreCorto }}</p>
-          <p class="visually-hidden">{{ f.idFundacion }}</p>
-          <p class="visually-hidden">{{ f.nombreLargo }}</p>
-          <p class="visually-hidden">{{ f.descripcion }}</p>
-          <p class="visually-hidden">{{ f.sitioWeb }}</p>
+          <p id="nombre-corto-fund-{{ f.idFundacion }}" class="fs-6 text-secondary">{{ f.nombreCorto }}</p>
+          <p id="nombre-largo-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.nombreLargo }}</p>
+          <p id="descripcion-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.descripcion }}</p>
+          <p id="url-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.sitioWeb }}</p>
         </div>
         {% endfor %}
       </div>
@@ -108,7 +117,7 @@
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modal-label">Ayuda a un peludo</h5>
+            <h5 id="modal-nombre-corto" class="modal-title" id="modal-label">Ayuda a un peludo</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -116,14 +125,14 @@
             <div class="card mb-3" style="max-width: 1080px;">
               <div class="row g-0">
                 <div class="col-md-8">
-                  <img src="{% static 'img/donaciones-ayudapeludo.jpg' %}" class="img-fluid rounded-start" alt="ayuda a un peludo">
+                  <img id="modal-imagen" src="" class="img-fluid rounded-start" alt="ayuda a un peludo">
                 </div>
                 <div class="col-md-4">
                   <div class="card-body">
-                    <h5 class="card-title">Fundación Ayuda a un peludo</h5>
-                    <p class="card-text text-start">Fundación sin fines de lucro dedicada a juntar a mascotas (perros y gatos) con personas que deseen adoptarlos.</p>
+                    <h5 id="modal-nombre-largo" class="card-title">Fundación Ayuda a un peludo</h5>
+                    <p id="modal-descripcion" class="card-text text-start">Fundación sin fines de lucro dedicada a juntar a mascotas (perros y gatos) con personas que deseen adoptarlos.</p>
                     <a href="#">
-                      <p class="card-text"><small class="text-muted">Visitar sitio web</small></p>
+                      <p class="card-text"><small class="text-muted"><a id="modal-url" href="">Visitar sitio web</a></small></p>
                     </a>
                     <button type="button" class="btn btn-success mt-5">Donación</button>
                   </div>
