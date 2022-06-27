@@ -13,6 +13,7 @@
 
       /* Marcamos como no activos el resto de los menús */
       $("#menu-2").removeClass("active");
+      $("#menu-3").removeClass("active");
 
       /* Marcamos el menú seleccionado como activo */
       $("#menu-1").addClass("active");
@@ -28,7 +29,7 @@
 
       /* Manejo de la confirmación de la eliminación */
       $("#confirmar-eliminacion").click(function () {
-        $(location).prop("href", "form_eliminar_producto/" + idProducto);
+        $(location).prop("href", "/form_eliminar_producto/" + idProducto);
       })
 
     });
@@ -40,7 +41,7 @@
   <div class="container-fluid pb-auto miga-de-pan-administracion">
     <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/administracion">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/administracion/">Inicio</a></li>
         <li class="breadcrumb-item active" aria-current="page">Administración de productos</li>
       </ol>
     </nav>
@@ -51,7 +52,7 @@
   <!-- Inicio Sección Administración de productos -->
   <div class="container-fluid">
     <div>
-      <a class="btn btn-success" href="form_agregar_producto" role="button">Agregar</a>
+      <a class="btn btn-success" href="/form_agregar_producto/" role="button">Agregar</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -72,17 +73,19 @@
           <tr>
             <th scope="row">{{ p.idProducto }}</th>
             <td>
-              {% if p.imagen %}
-                <img class="img-thumbnail" src="{{ p.imagen.url }}" alt="imagen producto" width="100 rem">
-              {% else %}
-                <img class="img-thumbnail" src="{% static 'img/sin-imagen.png' %}" alt="imagen producto" width="100 rem">
-              {% endif %}
+              <a href="{% url 'form_modificar_producto' p.idProducto %}">
+                {% if p.imagen %}
+                  <img class="img-thumbnail" src="{{ p.imagen }}" alt="imagen producto" width="100 rem">
+                {% else %}
+                  <img class="img-thumbnail" src="{% static 'img/sin-imagen.png' %}" alt="imagen producto" width="100 rem">
+                {% endif %}
+              </a>
             </td>
             <td id="nombre-corto-{{ p.idProducto }}">{{ p.nombreCorto }}</td>
             <td>{{ p.nombreLargo }}</td>
             <td>{{ p.descripcion }}</td>
             <td>${{ p.precio | intcomma }}</td>
-            <td>{{ p.categoria }}</td>
+            <td>{{ p.categoria_desc }}</td>
             <td>
               <a class="btn btn-success" href="{% url 'form_modificar_producto' p.idProducto %}" role="button">Modificar</a>
             </td>

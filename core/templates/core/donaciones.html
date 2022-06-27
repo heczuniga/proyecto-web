@@ -77,7 +77,7 @@
         }
   
         /* Activamos la geolocalización */
-        geoloc();
+        // geoloc();
   
     });
   </script>
@@ -100,12 +100,17 @@
         {% for f in fundaciones %}
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal">
-            <img id="{{ f.idFundacion }}" src="{{ f.imagen.url }}" class="img-fluid img-thumbnail border imagen" width="60%" alt="ayuda a un peludo">
+            {% if f.imagen %}
+            <img id="{{ f.idFundacion }}" src="{{ f.imagen }}" class="img-fluid border imagen" width="80%" alt="imagen fundacion">
+            {% else %}
+            <img id="{{ f.idFundacion }}" src="{% static 'img/sin-imagen.png' %}" class="img-fluid img-thumbnail border imagen" width="80%" alt="ayuda a un peludo">
+            {% endif %}
           </a>
           <p id="nombre-corto-fund-{{ f.idFundacion }}" class="fs-6 text-secondary">{{ f.nombreCorto }}</p>
           <p id="nombre-largo-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.nombreLargo }}</p>
           <p id="descripcion-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.descripcion }}</p>
           <p id="url-fund-{{ f.idFundacion }}" class="visually-hidden">{{ f.sitioWeb }}</p>
+          <button type="button" class="btn btn-success mt-1">Donar</button>
         </div>
         {% endfor %}
       </div>
@@ -134,7 +139,7 @@
                     <a href="#">
                       <p class="card-text"><small class="text-muted"><a id="modal-url" href="">Visitar sitio web</a></small></p>
                     </a>
-                    <button type="button" class="btn btn-success mt-5">Donación</button>
+                    <button type="button" class="btn btn-success mt-5">Donar</button>
                   </div>
                 </div>
               </div>
@@ -148,7 +153,7 @@
 
     <!-- Inicio sección información del clima -->
     <div class="container-fluid">
-      <div class="row pt-4">
+      <div class="row pt-5">
         <h5>Quieres ir a donar? Te ayudamos con la información del clima del día de hoy</h5>
       </div>
       <div class="row">

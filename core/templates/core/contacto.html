@@ -4,260 +4,298 @@
     {% include 'core/header.html' %}      
   </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-  $(document).ready(function() {
+    $(document).ready(function() {
 
-    var valueSeleccione = "---------";
-    var seleccioneRegion = "---------";
-    var seleccioneComuna = "---------";
+      var valueSeleccione = "seleccione";
+      var seleccioneRegion = "(Seleccione región)";
+      var seleccioneComuna = "(Seleccione comuna)";
+    
+      /* Llamamos a la API que llena los select de región y comuna */
+      var urlAPIRegiones = "https://apis.digital.gob.cl/dpa/regiones";
+      var urlAPIComunas = "https://apis.digital.gob.cl/dpa/comunas";
 
-    /* Marcamos como no activos el resto de los menús */
-    $("#menu-1").removeClass("active");
-    $("#menu-2").removeClass("active");
-    $("#menu-4").removeClass("active");
-    $("#menu-5").removeClass("active");
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-1").removeClass("active");
+      $("#menu-2").removeClass("active");
+      $("#menu-4").removeClass("active");
+      $("#menu-5").removeClass("active");
 
-    /* Marcamos el menú seleccionado como activo */
-    $("#menu-3").addClass("active");
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-3").addClass("active");
+      
 
+      /* API de regiones */
+      /* Agregamos el ítem de selección */
+      $.get(urlAPIRegiones, function(data){
+        $('#region').append('<option value="' + valueSeleccione + '">' + seleccioneRegion + '</option>');
+        $.each(data, function(i, item){
+          /* Agregamos las regiones */
+            $('#region').append('<option value="' + item.codigo + '">' + item.nombre + '</option>');
+          });
+      });
+    
+      /* API de comunas */
+      /* Agregamos el ítem de selección */
+      $.get(urlAPIComunas, function(data){
+        $('#comuna').append('<option value="' + valueSeleccione + '">' + seleccioneComuna + '</option>');
+        $.each(data, function(i, item){
+          /* Agregamos las comunas */
+            $('#comuna').append('<option value="' + item.codigo + '">' + item.nombre + '</option>\n');
+          });
+    
+          /* Ocultamos las comunas la primera vez */
+          $('#comuna option[value!="' + valueSeleccione +'"]').hide();
+    
+      });
+    
+      /* Filtramos las comunas de acuerdo a la región seleccionada */
+      $("#region").on('change',function(){
 
-    /* Ocultamos el texto de error al principio */
-    $("#error").hide();
+        var region = $("#region").val();
 
-    /* Leemos el mensaje para determinar si viene desde la grabación del formulario y mostrar el mensaje de grabación o no */
-    mensaje = $("#exito").text();
-    if (mensaje != "") {
-    /* Grabó, mostramos el mensaje y redirijimos lapágina al anchor del mensaje */
-      $('html,body').animate({ scrollTop: $("#exito").offset().top }, 'fast');
-      $("#exito").show();
-    } else {
+        /* Ocultamnos las comunas que no son de la región escogida */
+        $('#comuna option').filter(function(){
+                return this.value.substr(0, 2) != region;
+            }).hide();
+
+        /* Mostramos el indicador de selección según corresponda */
+        $('#comuna option[value="' + valueSeleccione + '"]').show();
+        $('#comuna').val(valueSeleccione);
+
+        /* Mostramos las comunas que son de la región escogida */
+        $('#comuna option').filter(function(){
+                return this.value.substr(0, 2) == region;
+            }).show();
+
+      });
+
+      /* Ocultamos los mensajes al principio */
       $("#exito").hide();
-    }
-
-    /* Ocultamos las comunas la primera vez */
-    $('#id_codComuna option[value!="' + valueSeleccione +'"]').hide();
-
-    /* Filtramos las comunas de acuerdo a la región seleccionada */
-    $("#id_codRegion").on('change',function(){
-
-      var region = $("#id_codRegion").val();
-
-      /* Ocultamnos las comunas que no son de la región escogida */
-      $('#id_codComuna option').filter(function(){
-              return this.value.substr(0, 2) != region;
-          }).hide();
-
-      /* Mostramos el indicador de selección según corresponda */
-      $('#id_codComuna option[value="' + valueSeleccione + '"]').show();
-      $('#id_codComuna').val(valueSeleccione);
-
-      /* Mostramos las comunas que son de la región escogida */
-      $('#id_codComuna option').filter(function(){
-              return this.value.substr(0, 2) == region;
-          }).show();
-
-    });
-
-    var Fn = {
-
-      /* Valida celular en base a uso de expresiones regulares */
-      validaCelular : function(celular){
-        var re = /^[9][0-9]{8}$/;
-        return re.test(celular);
-      },
-
-      /* Valida correo en base a uso de expresiones regulares */
-      validaCorreo : function(email){
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-      }
-    }
-
-    /* Si presiona el botón limpiar, se ocultan también los errores y el mensaje de éxito*/
-    $("#limpiar").click(function(){
       $("#error").hide();
-      $("#exito").hide();
-      $('#comuna option[value!="' + valueSeleccione + '"]').hide();
-      $('html,body').animate({ scrollTop: $("#menu-1").offset().top }, 'fast');
 
-    })
+      /* Leemos el mensaje para determinar si viene desde la grabación del formulario y mostrar el mensaje de grabación o no */
+      mensaje = $("#exito").text();
+      if (mensaje != "") {
+      /* Grabó, mostramos el mensaje y redirijimos lapágina al anchor del mensaje */
+        $('html,body').animate({ scrollTop: $("#exito").offset().top }, 'fast');
+        $("#exito").show();
+      } else {
+        $("#exito").hide();
+      }
 
-          /* Validamos el formulario */
-          $("#formulario").submit(function() {
-            var label;
-            var mensaje = "";
-            var bullet = "<span>&#8226;</span> ";
+      /* Leemos el error para determinar si viene desde la grabación del formulario y mostrar el mensaje de grabación o no */
+      error = $("#error").text();
+      if (error != "") {
+      /* Grabó, mostramos el mensaje y redirijimos lapágina al anchor del mensaje */
+        $('html,body').animate({ scrollTop: $("#error").offset().top }, 'fast');
+        $("#error").show();
+      } else {
+        $("#error").hide();
+      }
 
-            /* Validamos que venga un nombre */
-            if ($("#nombres").val().trim().length == 0) {
-              label = $("#label-nombres").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
 
-            /* Validamos que venga un apellido */
-            if ($("#apellidos").val().trim().length == 0) {
-              label = $("#label-apellidos").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+      var Fn = {
+    
+        /* Valida celular en base a uso de expresiones regulares */
+        validaCelular : function(celular){
+          var re = /^[9][0-9]{8}$/;
+          return re.test(celular);
+        },
+    
+        /* Valida correo en base a uso de expresiones regulares */
+        validaCorreo : function(email){
+          var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+        }
+      }
+    
+      /* Si presiona el botón limpiar, se ocultan también los errores */
+      $("#limpiar").click(function(){
+        $("#exito").hide();
+        $("#error").hide();
+        $('#comuna option[value!="' + valueSeleccione + '"]').hide();
+    
+      })
+    
+      /* Validamos el formulario */
+      $("#formulario").submit(function() {
+        var label;
+        var mensaje = "";
+        var bullet = "<span>&#8226;</span> ";
 
-            /* Validamos que venga un teléfono */
-            if ($("#celular").val().trim().length == 0) {
-              label = $("#label-celular").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+        /* Validamos que venga un nombre */
+        if ($("#nombres").val().trim().length == 0) {
+          label = $("#label-nombres").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-            /* Validamos que el teléfono tenga solo digitos */
-            if (Fn.validaCelular($("#celular").val().trim()) == false) {
-              label = $("#label-celular").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Celular debe venir en el formato indicado (9 números y comenzar con dígito 9)" + "<br>";
-            }
+        /* Validamos que venga un apellido */
+        if ($("#apellidos").val().trim().length == 0) {
+          label = $("#label-apellidos").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-            /* Validamos que venga un correo */
-            if ($("#correo-electronico").val().trim().length == 0) {
-              label = $("#label-correo-electronico").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+        /* Validamos que venga un teléfono */
+        if ($("#celular").val().trim().length == 0) {
+          label = $("#label-celular").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-            /* Validamos que el teléfono tenga solo digitos */
-            if (Fn.validaCorreo($("#correo-electronico").val().trim()) == false) {
-              label = $("#label-correo-electronico").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> El correo electrónico debe venir en formato válido" + "<br>";
-            }
+        /* Validamos que el teléfono tenga solo digitos */
+        if (Fn.validaCelular($("#celular").val().trim()) == false) {
+          label = $("#label-celular").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Celular debe venir en el formato indicado (9 números y comenzar con dígito 9)" + "<br>";
+        }
 
-            /* Validamos que venga una dirección */
-            if ($("#direccion").val().trim().length == 0) {
-              label = $("#label-direccion").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+        /* Validamos que venga un correo */
+        if ($("#correo").val().trim().length == 0) {
+          label = $("#label-correo").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-            /* Validamos que se seleccione región */
-            if ($("#region").val() == valueSeleccione) {
-              label = $("#label-region").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+        /* Validamos que el teléfono tenga solo digitos */
+        if (Fn.validaCorreo($("#correo").val().trim()) == false) {
+          label = $("#label-correo").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> El correo electrónico debe venir en formato válido" + "<br>";
+        }
 
-            /* Validamos que se seleccione comuna */
-            if ($("#comuna").val() == valueSeleccione) {
-              label = $("#label-comuna").text().replace(" (*)", "");
-              mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
-            }
+        /* Validamos que venga una dirección */
+        if ($("#direccion").val().trim().length == 0) {
+          label = $("#label-direccion").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-            /* Si hay error, lo mostramos y evitamos que se envíe el formulario */
-            if (mensaje != "") {
-                $("#error").html(mensaje);
-                $("#error").show();
-                event.preventDefault();
-            }
+        /* Validamos que se seleccione región */
+        if ($("#region").val() == valueSeleccione) {
+          label = $("#label-region").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-          })
+        /* Validamos que se seleccione comuna */
+        if ($("#comuna").val() == valueSeleccione) {
+          label = $("#label-comuna").text().replace(" (*)", "");
+          mensaje = mensaje + bullet + "<strong>" + label + ":</strong> Debe ingresar un valor para este campo" + "<br>";
+        }
 
-    });
+        /* Si hay error, lo mostramos y evitamos que se envíe el formulario */
+        if (mensaje != "") {
+            $("#error").html(mensaje);
+            $("#error").show();
+            $('html,body').animate({ scrollTop: $("#error").offset().top }, 'fast');
+            event.preventDefault();
+        }
 
-</script>
+      })
 
-    <!-- Inicio miga de pan -->
-    <div class="container-fluid pb-auto miga-de-pan">
-      <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Contacto</li>
-        </ol>
-      </nav>
-    </div>
-    <!-- Fin miga de pan -->
-
-    <!-- Inicio sección contacto -->
-    <div class="container-fluid">
-      <form method="post" id="formulario" action="/contacto">
-
-        <div class="row pb-3">
-          <div class="col-lg-4">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="nombres" id="label-nombres">{{ form.nombres.label }}</label>
-              <div>{{ form.nombres }}</div>
+     });
+  </script>
+  
+      <!-- Inicio miga de pan -->
+      <div class="container-fluid pb-auto miga-de-pan">
+        <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contacto</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- Fin miga de pan -->
+  
+      <!-- Inicio sección contacto -->
+      <div class="container-fluid">
+        <form method="post" id="formulario" action="/contacto/">
+          {% csrf_token %}
+          <div class="row pb-3">
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="form-control-sm" for="nombres" id="label-nombres">Nombres (*)</label>
+                <input type="text" maxlength="100" class="form-control form-control-sm" id="nombres" name="nombres" placeholder="(Ingrese su nombre)">
+              </div>
             </div>
+            <div class="col-lg-8"></div>
           </div>
-          <div class="col-lg-8"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label for="apellidos" id="label-apellidos">{{ form.apellidos.label }}</label>
-              <div>{{ form.apellidos }}</div>
+  
+          <div class="row pb-3">
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="form-control-sm" for="apellidos" id="label-apellidos">Apellidos (*)</label>
+                <input type="text" maxlength="100" class="form-control form-control-sm" id="apellidos" name="apellidos" placeholder="(Ingrese sus apellidos)">
+              </div>
             </div>
+            <div class="col-lg-8"></div>
           </div>
-          <div class="col-lg-8"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label for="celular" id="label-celular">{{ form.celular.label }}</label>
-              <div>{{ form.celular }}</div>
-              <figcaption id="caption-comentario" class="figure-caption">Celular largo 9 y comenzar con dígito 9</figcaption>
+  
+          <div class="row pb-3">
+            <div class="col-lg-2">
+              <div class="form-group">
+                <label class="form-control-sm" for="celular" id="label-celular">Celular (*)</label>
+                <input type="text" maxlength="9" class="form-control form-control-sm" id="celular" name="celular" placeholder="9NNNNNNNN">
+                <figcaption id="caption-comentario" class="figure-caption">Celular largo 9 y comenzar con dígito 9</figcaption>
+              </div>
             </div>
+            <div class="col-lg-9"></div>
           </div>
-          <div class="col-lg-9"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-3">
-            <div class="form-group">
-              <label for="correo-electronico" id="label-correo-electronico">{{ form.correo.label }}</label>
-              <div>{{ form.correo }}</div>
+  
+          <div class="row pb-3">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-control-sm" for="correo" id="label-correo">Correo electrónico (*)</label>
+                <input type="text" maxlength="100" class="form-control form-control-sm" id="correo" name="correo" placeholder="(Ingrese se correo electrónico)">
+              </div>
             </div>
+            <div class="col-lg-9"></div>
           </div>
-          <div class="col-lg-9"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-5">
-            <div class="form-group">
-              <label for="direccion" id="label-direccion">{{ form.direccion.label }}</label>
-              <div>{{ form.direccion }}</div>
+  
+          <div class="row pb-3">
+            <div class="col-lg-5">
+              <div class="form-group">
+                <label class="form-control-sm" for="direccion" id="label-direccion">Dirección (*)</label>
+                <input type="text" maxlength="250" class="form-control form-control-sm" id="direccion" name="direccion" placeholder="(Ingrese su dirección)">
+              </div>
             </div>
+            <div class="col-lg-10"></div>
           </div>
-          <div class="col-lg-10"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label for="region" id="label-region">{{ form.codRegion.label }}</label>
-              <div>{{ form.codRegion }}</div>
+  
+          <div class="row pb-3">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-control-sm" for="region" id="label-region">Región (*)</label>
+                <select class="form-select form-select-sm" id="region" name="codRegion" aria-label="Default select example">
+                </select>
+              </div>
             </div>
+            <div class="col-lg-10"></div>
           </div>
-          <div class="col-lg-10"></div>
-        </div>
-
-        <div class="row pb-3">
-          <div class="col-lg-4">
-            <div class="form-group">
-              <label for="comuna" id="label-comuna">{{ form.codComuna.label }}</label>
-              <div>{{ form.codComuna }}</div>
+  
+          <div class="row pb-3">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-control-sm" for="comuna" id="label-comuna">Comuna (*)</label>
+                <select class="form-select form-select-sm" id="comuna" name="codComuna" aria-label="Default select example">
+                </select>
+              </div>
             </div>
+            <div class="col-lg-10"></div>
           </div>
-          <div class="col-lg-10"></div>
-        </div>
-
-        <button type="submit" class="btn btn-success" id="enviar">Enviar formulario</button>
-        <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
-
+  
+          <button type="submit" class="btn btn-success" id="enviar">Enviar formulario</button>
+          <button type="reset" class="btn btn-secondary" id="limpiar">Limpiar formulario</button>
+  
         <!-- Inicio sección éxito en la grabación del formulario -->
         <div id="exito" class="alert alert-success m-4 pt-3" role="alert">{{ mensaje }}</div>
         <!-- Fin sección éxito en la grabación del formulario -->
 
         <!-- Inicio sección de errores del formulario -->
-        <div id="error" class="alert alert-danger m-4 pt-3" role="alert">Texto de error con alerta</div>
+        <div id="error" class="alert alert-danger m-4 pt-3" role="alert">{{ error }}</div>
         <!-- Fin sección de errores del formulario -->
-
-      </form>
-    </div>
-    <!-- Fin sección contacto -->
-
+  
+        </form>
+      </div>
+      <!-- Fin sección contacto -->
+  
+ 
     <div>
       {% include 'core/footer.html' %}      
     </div>

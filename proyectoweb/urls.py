@@ -16,6 +16,7 @@ Including another URLconf
 from msilib.schema import LockPermissions
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static 
 from core.views import index
@@ -28,28 +29,41 @@ from core.views import administracion_productos
 from core.views import form_agregar_producto
 from core.views import form_modificar_producto
 from core.views import form_eliminar_producto
+from core.views import administracion_categorias
+from core.views import form_agregar_categoria
+from core.views import form_modificar_categoria
+from core.views import form_eliminar_categoria
 from core.views import administracion_fundaciones
 from core.views import form_agregar_fundacion
 from core.views import form_modificar_fundacion
 from core.views import form_eliminar_fundacion
+from core.views import administracion_contactos
+from core.views import form_eliminar_contacto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('inicio', inicio, name="inicio"),
     path('nosotros', nosotros, name="nosotros"),
-    path('contacto', contacto, name="contacto"),
+    path('contacto/', contacto, name="contacto"),
     path('donaciones', donaciones, name="donaciones"),
-    path('tienda/<int:categoria>/', tienda, name="tienda"),
-    path('administracion', administracion_productos, name="administracion_productos"),
-    path('administracion_productos', administracion_productos, name="administracion_productos"),
-    path('form_agregar_producto', form_agregar_producto, name="form_agregar_producto"),
-    path('form_modificar_producto/<idProducto>/', form_modificar_producto, name="form_modificar_producto"),
-    path('form_eliminar_producto/<idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
-    path('administracion_fundaciones', administracion_fundaciones, name="administracion_fundaciones"),
-    path('form_agregar_fundacion', form_agregar_fundacion, name="form_agregar_fundacion"),
-    path('form_modificar_fundacion/<idFundacion>/', form_modificar_fundacion, name="form_modificar_fundacion"),
-    path('form_eliminar_fundacion/<idFundacion>', form_eliminar_fundacion, name="form_eliminar_fundacion"),
+    path('tienda/<int:codCategoria>/', tienda, name="tienda"),
+    path('administracion_categorias/', administracion_categorias, name="administracion_categorias"),
+    path('form_agregar_categoria/', form_agregar_categoria, name="form_agregar_categoria"),
+    path('form_modificar_categoria/<int:codCategoria>/', form_modificar_categoria, name="form_modificar_categoria"),
+    path('form_eliminar_categoria/<int:codCategoria>/', form_eliminar_categoria, name="form_eliminar_categoria"),
+    path('administracion/', administracion_productos, name="administracion_productos"),
+    path('administracion_productos/', administracion_productos, name="administracion_productos"),
+    path('form_agregar_producto/', form_agregar_producto, name="form_agregar_producto"),
+    path('form_modificar_producto/<int:idProducto>/', form_modificar_producto, name="form_modificar_producto"),
+    path('form_eliminar_producto/<int:idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
+    path('administracion_fundaciones/', administracion_fundaciones, name="administracion_fundaciones"),
+    path('form_agregar_fundacion/', form_agregar_fundacion, name="form_agregar_fundacion"),
+    path('form_modificar_fundacion/<int:idFundacion>/', form_modificar_fundacion, name="form_modificar_fundacion"),
+    path('form_eliminar_fundacion/<int:idFundacion>/', form_eliminar_fundacion, name="form_eliminar_fundacion"),
+    path('administracion_contactos/', administracion_contactos, name="administracion_contactos"),
+    path('form_eliminar_contacto/<int:idContacto>/', form_eliminar_contacto, name="form_eliminar_contacto"),
+    path('api/', include('api_rest.urls')),
 ]
 #Se enlaza las variables MEDIA
 if settings.DEBUG:

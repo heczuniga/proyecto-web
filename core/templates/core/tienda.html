@@ -31,8 +31,26 @@
         $("#modal-imagen").attr("src", $("#imagen-prod-" + idProducto).attr("src"));
         $("#modal-descripcion").text($("#descripcion-prod-" + idProducto).text());
         $("#modal-precio").text($("#precio-prod-" + idProducto).text());
+
       })
-        
+
+      /* Se hace clic cobre la imagen es lo mismo que ver detalle */
+      $(".link-imagen").click(function () {
+
+        $("#mensaje-agregar-carro").hide();
+
+        /* Determinamos el id del producto que se ha seleccionado para pasárselos al modal */
+        var idProducto = $(this).attr("cod");
+
+        /* Modificamos los datos del modal */
+        $("#modal-nombre-corto").text($("#nombre-corto-prod-" + idProducto).text());
+        $("#modal-nombre-largo").text($("#nombre-largo-prod-" + idProducto).text());
+        $("#modal-imagen").attr("src", $("#imagen-prod-" + idProducto).attr("src"));
+        $("#modal-descripcion").text($("#descripcion-prod-" + idProducto).text());
+        $("#modal-precio").text($("#precio-prod-" + idProducto).text());
+
+      })
+
       $("#btn-agregar-carro").click(function () {
         $("#mensaje-agregar-carro").show();
       })
@@ -54,10 +72,10 @@
     <!-- Inicio menú tienda -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 col-lg-1">
+        <div class="col-12 col-lg-1 ps-1">
           <div class="btn-group-vertical">
             {% for c in categorias %}
-              <a href="/tienda/{{ c.codCategoria }}" id="menu-tienda-1" class="btn btn-success {{ c.active }}" aria-current="page">{{ c.nombreCategoria }}</a>
+              <a href="/tienda/{{ c.codCategoria }}" id="menu-tienda-1" class="btn btn-success {% if c.codCategoria == categoria %}active{% endif %}" aria-current="page">{{ c.nombreCategoria }}</a>
             {% endfor %}
           </div>
         </div>
@@ -67,21 +85,53 @@
             <!-- Inicio sección productos -->
             <div class="container-fluid">
               <div class="row">
+     
                 {% for p in productos %}
+                <div class="col-12 col-md-6 col-lg-3 ps-6 pb-3">
+                  <div class="card-body border">
+                    <div class="text-center pb-3">
+                      <a class="link-imagen" cod="{{ p.idProducto }}" href="" data-bs-toggle="modal" data-bs-target="#modal">
+                        {% if p.imagen %}
+                          <img id="imagen-prod-{{ p.idProducto }}" src="{{ p.imagen }}" class="img-fluid imagen" width="200 rem" alt="ayuda a un peludo">
+                        {% else %}
+                          <img id="imagen-prod-{{ p.idProducto }}" src="{% static 'img/sin-imagen.png' %}" class="img-fluid imagen" width="200 rem" alt="ayuda a un peludo">
+                        {% endif %}
+                      </a>
+                    </div>
+                    <h5 class="card-title" id="nombre-corto-prod-{{ p.idProducto }}">{{ p.nombreCorto }}</h5>
+                    <p class="card-text" id="nombre-largo-prod-{{ p.idProducto }}">{{ p.nombreLargo }}</p>
+                    <h5 class="card-text" id="precio-prod-{{ p.idProducto }}">${{ p.precio | intcomma }}</h5>
+                    <a href="#" id="agregar-{{ p.idProducto }}" class="btn btn-success boton">Agregar al carro</a>
+                    <a href="#" id="{{ p.idProducto }}" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-secondary boton">Detalle</a>
+                    <p class="visually-hidden" id="descripcion-prod-{{ p.idProducto }}">{{ p.descripcion }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+        
+     
+                <!-- {% for p in productos %}
                 <div class="col-lg-2 me-3">
+                  <div class="card" style="width: 16rem;">
 
-                  <div class="card" style="width: 18rem;">
-                    <img src="{{ p.imagen.url }}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
+                    <div>
+                      {% if p.imagen %}
+                      <img src="{{ p.imagen }}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
+                      {% else %}
+                      <img src="{% static 'img/sin-imagen.png' %}" id="imagen-prod-{{ p.idProducto }}" class="card-img-top" alt="imagen producto">
+                      {% endif %}
+                    </div>
+
                     <div class="card-body">
                       <h5 class="card-title" id="nombre-corto-prod-{{ p.idProducto }}">{{ p.nombreCorto }}</h5>
                       <p class="card-text" id="nombre-largo-prod-{{ p.idProducto }}">{{ p.nombreLargo }}</p>
                       <p class="card-text" id="precio-prod-{{ p.idProducto }}">${{ p.precio | intcomma }}</p>
-                      <a href="#" id="{{ p.idProducto }}" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success boton">Comprar</a>
+                      <a href="#" id="{{ p.idProducto }}" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-success boton">Agregar al carro</a>
+                      <a href="#" id="{{ p.idProducto }}" data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-secondary boton">Detalle</a>
                       <p class="visually-hidden" id="descripcion-prod-{{ p.idProducto }}">{{ p.descripcion }}</p>
                     </div>
                   </div>
                 </div>
-                {% endfor %}
+                {% endfor %} -->
               </div>
             </div>
             <!-- Fin sección productos -->

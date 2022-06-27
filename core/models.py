@@ -1,8 +1,7 @@
+
 from django.db import models
 
-# Create your models here.
-# Create your models here.
-
+# Modelos del sistema
 class Region(models.Model):
     codRegion = models.CharField(primary_key=True, max_length=2, verbose_name="Código de la región")
     nomRegion = models.CharField(max_length=100, verbose_name="Nombre de la región")
@@ -61,5 +60,3 @@ class Fundacion(models.Model):
     def __str__(self) -> str:
         return self.nombreCorto
 
-
-    
