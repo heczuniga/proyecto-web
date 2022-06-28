@@ -192,7 +192,7 @@ class ListaCategorias(APIView):
     def get(self, request):
         # Recuperamos las categorías
         order_by = ['codCategoria']
-        categorias = Categoria.objects.all().extra(select={'total_productos': '(select count(idProducto) from core_producto where categoria_id = codCategoria)'})
+        categorias = Categoria.objects.all()
 
         print(categorias)
 

@@ -101,9 +101,9 @@
         <div class="col-12 col-md-6 col-lg-3 text-center">
           <a href="" data-bs-toggle="modal" data-bs-target="#modal">
             {% if f.imagen %}
-            <img id="{{ f.idFundacion }}" src="{{ f.imagen }}" class="img-fluid border imagen" width="80%" alt="imagen fundacion">
+              <img id="{{ f.idFundacion }}" src="{{ f.imagen }}" class="img-fluid border imagen" width="250 rem" alt="imagen fundacion">
             {% else %}
-            <img id="{{ f.idFundacion }}" src="{% static 'img/sin-imagen.png' %}" class="img-fluid img-thumbnail border imagen" width="80%" alt="ayuda a un peludo">
+              <img id="{{ f.idFundacion }}" src="{% static 'img/sin-imagen.png' %}" class="img-fluid img-thumbnail border imagen" width="250 rem" alt="ayuda a un peludo">
             {% endif %}
           </a>
           <p id="nombre-corto-fund-{{ f.idFundacion }}" class="fs-6 text-secondary">{{ f.nombreCorto }}</p>
