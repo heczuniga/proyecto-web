@@ -5,7 +5,7 @@ from core.models import Contacto
 from core.models import Fundacion
 from core.models import Categoria
 from django.forms import ValidationError
-
+import requests
 
 # Serializer de productos
 class ProductoSerializer(serializers.ModelSerializer):
@@ -39,7 +39,21 @@ class FundacionSerializer(serializers.ModelSerializer):
 # Serializer de categorias
 class CategoriaSerializer(serializers.ModelSerializer):
 
+    total_productos = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Categoria
         fields = "__all__"
 
+    # Recuperamos el total de productos de cada categoría que es un dato importante para armar algunas vistas
+    def get_total_productos(self, data):
+        
+        url_api = f'http://127.0.0.1:8000/api/productos/categoria/{data.codCategoria}/'
+        response = requests.get(url_api).json()
+
+        total_productos = len(response)
+        datos = {
+            'total_productos' : total_productos,
+        }
+
+        return datos['total_productos']

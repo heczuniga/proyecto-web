@@ -39,6 +39,7 @@ from core.views import form_modificar_fundacion
 from core.views import form_eliminar_fundacion
 from core.views import administracion_contactos
 from core.views import form_eliminar_contacto
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -63,6 +64,7 @@ urlpatterns = [
     path('form_eliminar_fundacion/<int:idFundacion>/', form_eliminar_fundacion, name="form_eliminar_fundacion"),
     path('administracion_contactos/', administracion_contactos, name="administracion_contactos"),
     path('form_eliminar_contacto/<int:idContacto>/', form_eliminar_contacto, name="form_eliminar_contacto"),
+    path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),
     path('api/', include('api_rest.urls')),
 ]
 #Se enlaza las variables MEDIA

@@ -16,7 +16,6 @@
     $("#menu-1").addClass("active");
 
     /* Ocultamos el texto de error al principio */
-    $("#exito").hide();
     $("#error").hide();
 
     /* Leemos el mensaje para determinar si viene desde la grabación del formulario y mostrar el mensaje de grabación o no */
@@ -37,22 +36,6 @@
       $('html,body').animate({ scrollTop: $("#menu-1").offset().top }, 'fast');
 
     })
-
-      /* Validamos el formulario */
-      $("#formulario").submit(function() {
-        var label;
-        var mensaje = "";
-        var bullet = "<span>&#8226;</span> ";
-
-        /* Si hay error, lo mostramos y evitamos que se envíe el formulario */
-        if (mensaje != "") {
-            $("#error").html(mensaje);
-            $("#error").show();
-            $('html,body').animate({ scrollTop: $("#error").offset().top }, 'fast');
-            event.preventDefault();
-        }
-
-      })
 
   });
 
@@ -143,7 +126,7 @@
                   <option id="" value="" name="">(Seleccione categoría)</option>
                   {% for c in categorias %}
                     <option id="{{ c.codCategoria }}" value="{{ c.codCategoria }}" name="{{ c.codCategoria }}">{{ c.nombreCategoria }}</option>
-                  {% endfor  %}
+                  {% endfor %}
                 </select>
               </div>
             </div>

@@ -75,7 +75,9 @@
         <div class="col-12 col-lg-1 ps-1">
           <div class="btn-group-vertical">
             {% for c in categorias %}
-              <a href="/tienda/{{ c.codCategoria }}" id="menu-tienda-1" class="btn btn-success {% if c.codCategoria == categoria %}active{% endif %}" aria-current="page">{{ c.nombreCategoria }}</a>
+              {% if c.total_productos > 0 %}
+                <a href="/tienda/{{ c.codCategoria }}" id="menu-tienda-1" class="btn btn-success {% if c.codCategoria == categoria %}active{% endif %}" aria-current="page">{{ c.nombreCategoria }}</a>
+              {% endif %}
             {% endfor %}
           </div>
         </div>

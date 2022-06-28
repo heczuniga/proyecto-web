@@ -59,6 +59,7 @@
           <tr>
             <th scope="col">Código</th>
             <th scope="col">Nombre</th>
+            <th class="text-center" scope="col">Cantidad de productos asociados</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
@@ -66,15 +67,18 @@
         <tbody>
         {% for c in categorias %}
           <tr>
-            <th id="{{ c.codCategoria }}" scope="row">{{ c.codCategoria }}</th>
+            <td id="{{ c.codCategoria }}" scope="row">{{ c.codCategoria }}</td>
             <td id="nombre-{{ c.codCategoria }}">{{ c.nombreCategoria }}</td>
+            <td class="text-center" id="total-productos-{{ c.codCategoria }}">{{ c.total_productos }}</td>
             <td>
               <a class="btn btn-success" href="{% url 'form_modificar_categoria' c.codCategoria %}" role="button">Modificar</a>
             </td>
             <td>
-              <button id="{{ c.codCategoria }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Eliminar
-              </button>
+              {% if c.total_productos == 0 %}
+                <button id="{{ c.codCategoria }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Eliminar
+                </button>
+              {% endif %}
             </td>
           </tr>
           {% endfor %}
