@@ -20,6 +20,7 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static 
 from core.views import index
+from core.views import login
 from core.views import inicio
 from core.views import nosotros
 from core.views import contacto
@@ -44,10 +45,11 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
-    path('inicio', inicio, name="inicio"),
-    path('nosotros', nosotros, name="nosotros"),
+    path('inicio/', inicio, name="inicio"),
+    path('login/', login, name="login"),
+    path('nosotros/', nosotros, name="nosotros"),
     path('contacto/', contacto, name="contacto"),
-    path('donaciones', donaciones, name="donaciones"),
+    path('donaciones/', donaciones, name="donaciones"),
     path('tienda/<int:codCategoria>/', tienda, name="tienda"),
     path('administracion_categorias/', administracion_categorias, name="administracion_categorias"),
     path('form_agregar_categoria/', form_agregar_categoria, name="form_agregar_categoria"),
