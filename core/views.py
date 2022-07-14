@@ -6,15 +6,9 @@ from .models import Producto
 from .models import Fundacion
 
 from django.urls import reverse_lazy
-<<<<<<< HEAD
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView
-=======
-from django.utils.decorators.cache import never_cache
-from django.decorators.csrf import csrf_protect
-from django.contrib.generic.edit import FormView
->>>>>>> 1c6e6a00bbe61afabbc91dd22f05a04cb6cb38b0
 from django.contrib.auth import login
 from django.contrib.auth import logout
 
