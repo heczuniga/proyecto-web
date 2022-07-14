@@ -14,10 +14,16 @@ from api_rest.serializer import FundacionSerializer
 from api_rest.serializer import CategoriaSerializer
 from rest_framework import status
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import BasicAuthentication
 
 # API's relacionadas con productos
 class ListaProductos(APIView):
     
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+        
     def get(self, request):
         order_by = ['categoria','nombreCorto']
         productos = Producto.objects.all().order_by(*order_by)

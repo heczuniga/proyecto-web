@@ -4,6 +4,14 @@ from numpy import delete
 from .models import Categoria
 from .models import Producto
 from .models import Fundacion
+
+from django.urls import reverse_lazy
+from django.utils.decorators.cache import never_cache
+from django.decorators.csrf import csrf_protect
+from django.contrib.generic.edit import FormView
+from django.contrib.auth import login
+from django.contrib.auth import logout
+
 from rest_framework import status
 import requests
 
@@ -11,6 +19,11 @@ import requests
 def index(request):
 
     return render(request, 'core/index.html')
+
+# Vista de página base
+def login(request):
+
+    return render(request, 'core/login.html')
 
 
 # Vista de página de inicio
@@ -214,7 +227,7 @@ def form_modificar_categoria(request, codCategoria):
             # Si actualizó bien los datos, se recargan los atributos para que se vean modificados en la página
             response_categoria = requests.get(url_api).json()
             datos = {
-                'categorias' : response_categorias,
+                # 'categorias' : response_categorias,
                 'categoria' : response_categoria,
                 }
 
@@ -236,7 +249,7 @@ def form_eliminar_categoria(request, codCategoria):
     datos = {}
     
     if response.status_code != status.HTTP_204_NO_CONTENT:
-        datos['error'] = "Se ha producido un error al eliminar la categoría. La categoría debe tener productos asociados."
+        datos['error'] = "Se ha producido un error al eliminar la categoría. Es posible que la categoría tenga productos asociados."
     
     return redirect(to="/administracion_categorias/")
 

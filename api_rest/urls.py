@@ -14,6 +14,7 @@ from api_rest.views import Fundaciones
 from api_rest.views import ListaCategorias
 from api_rest.views import CrearCategoria
 from api_rest.views import Categorias
+from rest_framework.authtoken import views
 
 urlpatterns = [
     path('productos/lista/', ListaProductos.as_view()),
@@ -29,4 +30,5 @@ urlpatterns = [
     path('categorias/lista/', ListaCategorias.as_view()),
     path('categorias/', CrearCategoria.as_view()),
     path('categorias/<int:codCategoria>/', Categorias.as_view()),
+    path('generar_token/', views.obtain_auth_token),
 ]
