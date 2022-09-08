@@ -21,8 +21,8 @@ from rest_framework.authentication import BasicAuthentication
 # API's relacionadas con productos
 class ListaProductos(APIView):
     
-    # authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    # # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
         
     def get(self, request):
         order_by = ['categoria','nombreCorto']
