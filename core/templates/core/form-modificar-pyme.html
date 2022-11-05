@@ -78,9 +78,9 @@
           <div class="col-lg-2">
             {% csrf_token %}
             <div class="form-group">
-              <label class="form-control-sm" for="nombre" id="label-nombre">Nombre (*)</label>
+              <label class="form-control-sm" for="nombre-corto" id="label-nombre-corto">Nombre corto (*)</label>
               <div>
-                <input type="text" maxlength="100" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="(Ingrese nombre)" value="{{ pyme.nombre }}" required>
+                <input type="text" maxlength="100" class="form-control form-control-sm" id="nombreCorto" name="nombreCorto" placeholder="(Ingrese nombre corto)" value="{{ pyme.nombreCorto }}" required>
               </div>
             </div>
           </div>
@@ -90,9 +90,21 @@
         <div class="row pb-3">
           <div class="col-lg-3">
             <div class="form-group">
-              <label class="form-control-sm" for="rut" id="label-rut">RUT (*)</label>
+              <label class="form-control-sm" for="nombre-corto" id="label-nombre-corto">Nombre largo (*)</label>
               <div>
-                <input type="text" maxlength="200" class="form-control form-control-sm" id="rut" name="rut" placeholder="(Ingrese RUT)" value="{{ pyme.rut }}" required>
+                <input type="text" maxlength="200" class="form-control form-control-sm" id="nombreLargo" name="nombreLargo" placeholder="(Ingrese nombre largo)" value="{{ pyme.nombreLargo }}" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-sm" for="descripcion" id="label-descripcion">Descripción (*)</label>
+              <div>
+                <textarea class="form-control-sm" name="descripcion" id="descripcion" cols="65" rows="6" placeholder="(Ingrese descripción)" required>{{ pyme.descripcion }}</textarea>
               </div>
             </div>
           </div>

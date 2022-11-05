@@ -251,22 +251,22 @@ def form_eliminar_categoria(request, codCategoria):
 
 
 # Vista de página para administración de fundaciones
-def administracion_fundaciones(request):
+def administracion_pymes(request):
 
-    url_api = 'http://127.0.0.1:8000/api/fundaciones/lista/'
+    url_api = 'http://127.0.0.1:8000/api/pymes/lista/'
     
-    # Recuperamos los fundaciones
+    # Recuperamos los PYMEs
     response = requests.get(url_api).json()
     
-    datos = {'fundaciones' : response}
+    datos = {'pymes' : response}
 
-    return render(request, 'core/administracion-fundaciones.html', datos)
+    return render(request, 'core/administracion-pymes.html', datos)
 
 
-# Vista de formulario para agregar fundaciones
-def form_agregar_fundacion(request):
+# Vista de formulario para agregar PYMEs
+def form_agregar_pyme(request):
 
-    url_api = 'http://127.0.0.1:8000/api/fundaciones/'
+    url_api = 'http://127.0.0.1:8000/api/pymes/'
 
     datos = {}
 
@@ -275,56 +275,56 @@ def form_agregar_fundacion(request):
         response = requests.post(url_api, data=request.POST, files=request.FILES)
 
         if response.status_code == status.HTTP_201_CREATED:
-            datos['mensaje'] = "La fundación fue agregada correctamente.."
+            datos['mensaje'] = "La PYME fue agregada correctamente.."
         else:
-            datos['error'] = "Se ha producido un error al agregar la fundación. Verifica tus datos y reintenta."
+            datos['error'] = "Se ha producido un error al agregar la PYME. Verifica tus datos y reintenta."
 
-        return render(request, "core/form-agregar-fundacion.html", datos)
+        return render(request, "core/form-agregar-pyme.html", datos)
     
-    return render(request, "core/form-agregar-fundacion.html", datos)
+    return render(request, "core/form-agregar-pyme.html", datos)
 
 
-# Vista de formulario para modificar fundaciones
-def form_modificar_fundacion(request, idFundacion):
+# Vista de formulario para modificar PYMEs
+def form_modificar_pyme(request, idPyme):
 
-    url_api = f'http://127.0.0.1:8000/api/fundaciones/{idFundacion}/'
+    url_api = f'http://127.0.0.1:8000/api/pymes/{idPyme}/'
 
-    response_fundacion = requests.get(url_api).json()
+    response_pyme = requests.get(url_api).json()
     datos = {
-        'fundacion' : response_fundacion,
+        'pyme' : response_pyme,
         }
 
     if request.method == 'POST':
 
         if request.FILES:
-            response_fundaciones = requests.put(url_api, data=request.POST, files=request.FILES)
+            response_pymes = requests.put(url_api, data=request.POST, files=request.FILES)
         else:
-            response_fundaciones = requests.put(url_api, data=request.POST)
+            response_pymes = requests.put(url_api, data=request.POST)
        
-        if response_fundaciones.status_code == status.HTTP_202_ACCEPTED:
+        if response_pymes.status_code == status.HTTP_202_ACCEPTED:
 
             # Si actualizó bien los datos, se recargan los atributos para que se vean modificados en la página
-            response_fundacion = requests.get(url_api).json()
+            response_pyme = requests.get(url_api).json()
             datos = {
-                'fundacion' : response_fundacion
+                'pyme' : response_pyme
                 }
 
-            datos['mensaje'] = "La fundación fue modificada correctamente."
+            datos['mensaje'] = "La PYME fue modificada correctamente."
         else:
-            datos['error'] = "Se ha producido un error al modificar la fundación. Verifica tus datos y reintenta."
+            datos['error'] = "Se ha producido un error al modificar la PYME. Verifica tus datos y reintenta."
 
-        return render(request, "core/form-modificar-fundacion.html", datos)
+        return render(request, "core/form-modificar-pyme.html", datos)
 
-    return render(request, "core/form-modificar-fundacion.html", datos)
+    return render(request, "core/form-modificar-pyme.html", datos)
 
 
-# Vista para eliminar fundaciones
-def form_eliminar_fundacion(request, idFundacion):
+# Vista para eliminar PYMEs
+def form_eliminar_pyme(request, idPyme):
 
-    url_api = f'http://127.0.0.1:8000/api/fundaciones/{idFundacion}/'
+    url_api = f'http://127.0.0.1:8000/api/pymes/{idPyme}/'
 
     response = requests.delete(url_api)
-    return redirect(to="/administracion_fundaciones/")
+    return redirect(to="/administracion_pymes/")
 
 
 # Vista de página para administración de contactos ingresados

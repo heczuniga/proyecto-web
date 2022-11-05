@@ -34,10 +34,10 @@ from core.views import administracion_categorias
 from core.views import form_agregar_categoria
 from core.views import form_modificar_categoria
 from core.views import form_eliminar_categoria
-from core.views import administracion_fundaciones
-from core.views import form_agregar_fundacion
-from core.views import form_modificar_fundacion
-from core.views import form_eliminar_fundacion
+from core.views import administracion_pymes
+from core.views import form_agregar_pyme
+from core.views import form_modificar_pyme
+from core.views import form_eliminar_pyme
 from core.views import administracion_contactos
 from core.views import form_eliminar_contacto
 from django.views.generic.base import RedirectView
@@ -60,10 +60,10 @@ urlpatterns = [
     path('form_agregar_producto/', form_agregar_producto, name="form_agregar_producto"),
     path('form_modificar_producto/<int:idProducto>/', form_modificar_producto, name="form_modificar_producto"),
     path('form_eliminar_producto/<int:idProducto>', form_eliminar_producto, name="form_eliminar_producto"),
-    path('administracion_fundaciones/', administracion_fundaciones, name="administracion_fundaciones"),
-    path('form_agregar_fundacion/', form_agregar_fundacion, name="form_agregar_fundacion"),
-    path('form_modificar_fundacion/<int:idFundacion>/', form_modificar_fundacion, name="form_modificar_fundacion"),
-    path('form_eliminar_fundacion/<int:idFundacion>/', form_eliminar_fundacion, name="form_eliminar_fundacion"),
+    path('administracion_pymes/', administracion_pymes, name="administracion_pymes"),
+    path('form_agregar_pyme/', form_agregar_pyme, name="form_agregar_pyme"),
+    path('form_modificar_pyme/<int:idPyme>/', form_modificar_pyme, name="form_modificar_pyme"),
+    path('form_eliminar_pyme/<int:idPyme>/', form_eliminar_pyme, name="form_eliminar_pyme"),
     path('administracion_contactos/', administracion_contactos, name="administracion_contactos"),
     path('form_eliminar_contacto/<int:idContacto>/', form_eliminar_contacto, name="form_eliminar_contacto"),
     path('favicon.ico/', RedirectView.as_view(url='/static/img/favicon.ico')),

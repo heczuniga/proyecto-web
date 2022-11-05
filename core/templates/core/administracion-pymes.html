@@ -8,7 +8,7 @@
 
     $(document).ready(function() {
 
-      var idPyme;
+      var idFundacion;
 
       /* Marcamos como no activos el resto de los menús */
       $("#menu-1").removeClass("active");
@@ -20,10 +20,9 @@
       /* Construcción del modal de la confirmación de eliminación */
       $(".boton-eliminar").click(function () {
         idPyme = $(this).attr("id");
+        var nombreCorto = $("#nombre-corto-" + idPyme).text();
 
-        var nombre = $("#nombre-" + idPyme).text();
-
-        $("#mensaje-modal").text("Está seguro que desea eliminar la PYME \"" + nombre + "\"?")
+        $("#mensaje-modal").text("Está seguro que desea eliminar la PYME \"" + nombreCorto + "\"?")
 
       })
 
@@ -57,34 +56,36 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Imagen</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">RUT</th>
+            <th scope="col">Nombre corto</th>
+            <th scope="col">Nombre largo</th>
+            <th scope="col">Descripción</th>
             <th scope="col">Sitio web</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          {% for p in pymes %}
+          {% for py in pymes %}
           <tr>
-            <th scope="row">{{ p.idPyme }}</th>
+            <th scope="row">{{ py.idPyme }}</th>
             <td>
-            <a href="{% url 'form_modificar_pyme' p.idPyme %}">
-              {% if p.imagen %}
-                <img class="img-thumbnail" src="{{ p.imagen }}" alt="imagen PYME" width="100 rem">
+            <a href="{% url 'form_modificar_pyme' py.idPyme %}">
+              {% if py.imagen %}
+                <img class="img-thumbnail" src="{{ py.imagen }}" alt="imagen pyme" width="100 rem">
               {% else %}
-                <img class="img-thumbnail" src="{% static 'img/sin-imagen.png' %}" alt="imagen PYME" width="100 rem">
+                <img class="img-thumbnail" src="{% static 'img/sin-imagen.png' %}" alt="imagen pyme" width="100 rem">
               {% endif %}
             </a>
             </td>
-            <td id="nombre-{{ p.idPyme }}">{{ p.nombre }}</td>
-            <td>{{ p.rut }}</td>
-            <td><a href="{{ p.sitioWeb }}">{{ p.sitioWeb }}</a></td>
+            <td id="nombre-corto-{{ py.idPyme }}">{{ py.nombreCorto }}</td>
+            <td>{{ py.nombreLargo }}</td>
+            <td>{{ py.descripcion }}</td>
+            <td><a href="{{ py.sitioWeb }}">{{ py.sitioWeb }}</a></td>
             <td>
-              <a class="btn btn-success" href="{% url 'form_modificar_pyme' p.idPyme %}" role="button">Modificar</a>
+              <a class="btn btn-success" href="{% url 'form_modificar_pyme' py.idPyme %}" role="button">Modificar</a>
             </td>
             <td>
-              <button id="{{ p.idPyme }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button id="{{ py.idPyme }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Eliminar
               </button>
             </td>
@@ -93,7 +94,7 @@
         </tbody>
       </table>    
   </div>
-  <!-- Fin Sección Administración de pymes -->
+  <!-- Fin Sección Administración de PYMEs -->
 
   <!-- Inicio modal de confirmación de eliminación -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal-confirmacion" aria-hidden="true">
