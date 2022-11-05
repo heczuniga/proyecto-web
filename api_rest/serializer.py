@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from api_rest.models import Producto
 from api_rest.models import Fundacion
-from api_rest.models import Categoria
+from api_rest.models import Parametro
 from django.forms import ValidationError
 import requests
 
@@ -25,8 +25,8 @@ class FundacionSerializer(serializers.ModelSerializer):
 
 
 # Serializer de categorias
-class CategoriaSerializer(serializers.ModelSerializer):
+class ParametroSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Categoria
+        model = Parametro
         fields = "__all__"

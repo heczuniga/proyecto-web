@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from api_rest.models import Producto
 from api_rest.models import Fundacion
-from api_rest.models import Categoria
+from api_rest.models import Parametro
 from api_rest.serializer import ProductoSerializer
 from api_rest.serializer import FundacionSerializer
-from api_rest.serializer import CategoriaSerializer
+from api_rest.serializer import ParametroSerializer
 from rest_framework import status
 from rest_framework import serializers
 
@@ -24,15 +24,6 @@ class ListaProductos(APIView):
         productos = Producto.objects.all().order_by(*order_by)
         serializer = ProductoSerializer(productos, many=True)
         return Response(serializer.data)
-
-class ListaProductosCategoria(APIView):
-    
-    def get(self, request, codCategoria):
-        order_by = ['nombreCorto']
-        productos = Producto.objects.filter(categoria_id = codCategoria).order_by(*order_by)
-        serializer = ProductoSerializer(productos, many=True)
-        return Response(serializer.data)
-
 
 class CrearProducto(APIView):
 
@@ -135,27 +126,23 @@ class Fundaciones(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# API's relacionadas con categorías de productos
-class ListaCategorias(APIView):
+# API's relacionadas con los parámetros del sistema
+class ListaParametros(APIView):
 
     def get(self, request):
-        # Recuperamos las categorías
-        order_by = ['codCategoria']
-        categorias = Categoria.objects.all()
+        # Recuperamos los parámetros
+        order_by = ['codParametro']
+        parametros = Parametro.objects.all()
 
-        print(categorias)
-
-        serializer = CategoriaSerializer(categorias, many=True)
-
-        print(serializer)
+        serializer = ParametroSerializer(parametros, many=True)
 
         return Response(serializer.data)
 
 
-class CrearCategoria(APIView):
+class CrearParametro(APIView):
 
     def post(self, request):
-        serializer = CategoriaSerializer(data=request.data)
+        serializer = ParametroSerializer(data=request.data)
         
         if serializer.is_valid():
             serializer.save()
@@ -165,25 +152,25 @@ class CrearCategoria(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Categorias(APIView):
+class Parametros(APIView):
     
-    def get_categoria_by_id(self, codCategoria):
+    def get_parametro_by_id(self, codParametro):
         try:
-            return Categoria.objects.get(codCategoria=codCategoria)
+            return Parametro.objects.get(codParametro=codParametro)
         except:
-            categoria = Categoria()
-            categoria.nombreCategoria = "Categoría no existente"
-            return categoria
+            parametro = Parametro()
+            parametro.nombreParametro = "Parámetro no existente"
+            return parametro
     
-    def get(self, request, codCategoria):
-        categoria = self.get_categoria_by_id(codCategoria)
+    def get(self, request, codParametro):
+        parametro = self.get_parametro_by_id(codParametro)
         
-        serializer = CategoriaSerializer(categoria)
+        serializer = ParametroSerializer(parametro)
         return Response(serializer.data)
     
-    def put(self, request, codCategoria):
-        categoria = self.get_categoria_by_id(codCategoria)
-        serializer = CategoriaSerializer(categoria, data=request.data)
+    def put(self, request, codParametro):
+        parametro = self.get_parametro_by_id(codParametro)
+        serializer = ParametroSerializer(parametro, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -191,8 +178,8 @@ class Categorias(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, codCategoria):
-        categoria = self.get_categoria_by_id(codCategoria)
+    def delete(self, request, codParametro):
+        parametro = self.get_parametro_by_id(codParametro)
         
-        categoria.delete()
+        parametro.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

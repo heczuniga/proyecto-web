@@ -1,12 +1,13 @@
 from django.db import models
 
 # Modelos del sistema
-class Categoria(models.Model):
-    codCategoria = models.IntegerField(primary_key=True, verbose_name="Código de la categoría")
-    nombreCategoria = models.CharField(max_length=50, null=False, verbose_name="Nombre de la categoría")
+class Parametro(models.Model):
+    codParametro = models.IntegerField(primary_key=True, verbose_name="Código del parámetro")
+    nombreParametro = models.CharField(max_length=50, null=False, verbose_name="Nombre del parámetro")
+    valor = models.CharField(max_length=10, null=False, verbose_name="Valor del parámetro")
 
     def __str__(self) -> str:
-        return self.nombreCategoria
+        return self.nombreParametro
     
 class Producto(models.Model):
     idProducto = models.AutoField(primary_key=True, verbose_name="Identificador del producto (*)")
