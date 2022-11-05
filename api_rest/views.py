@@ -4,10 +4,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from core.models import Producto
-from core.models import Contacto
-from core.models import Fundacion
-from core.models import Categoria
+from api_rest.models import Producto
+from api_rest.models import Contacto
+from api_rest.models import Fundacion
+from api_rest.models import Categoria
 from api_rest.serializer import ProductoSerializer
 from api_rest.serializer import ContactoSerializer
 from api_rest.serializer import FundacionSerializer

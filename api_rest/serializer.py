@@ -1,9 +1,9 @@
 
 from rest_framework import serializers
-from core.models import Producto
-from core.models import Contacto
-from core.models import Fundacion
-from core.models import Categoria
+from api_rest.models import Producto
+from api_rest.models import Contacto
+from api_rest.models import Fundacion
+from api_rest.models import Categoria
 from django.forms import ValidationError
 import requests
 

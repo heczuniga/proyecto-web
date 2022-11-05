@@ -1,0 +1,110 @@
+{% load static %}
+{% load humanize %}
+
+  <div>
+    {% include 'core/header-administracion.html' %}      
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      var idContacto
+
+      /* Marcamos como no activos el resto de los menús */
+      $("#menu-1").removeClass("active");
+      $("#menu-2").removeClass("active");
+
+      /* Marcamos el menú seleccionado como activo */
+      $("#menu-3").addClass("active");
+
+      /* Construcción del modal de la confirmación de eliminación */
+      $(".boton-eliminar").click(function () {
+        idParametro = $(this).attr("id");
+
+        $("#mensaje-modal").text("Está seguro que desea eliminar el parámetro " + idParametro + "?");
+
+      })
+
+      /* Manejo de la confirmación de la eliminación */
+      $("#confirmar-eliminacion").click(function () {
+        $(location).prop("href", "/form_eliminar_parametro/" + idParametro);
+      })
+
+    });
+
+  </script>
+
+
+  <!-- Inicio miga de pan -->
+  <div class="container-fluid pb-auto miga-de-pan-administracion">
+    <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="8" height="8"%3E%3Cpath d="M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z" fill="currentColor"/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/administracion/">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administración de parámetros</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Fin miga de pan -->
+
+   
+  <!-- Inicio Sección Administración de parámetros -->
+  <div class="container-fluid">
+    <div>
+      <a class="btn btn-success" href="/form_agregar_parametro/" role="button">Agregar</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Parámetro</th>
+            <th scope="col">Valor</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for p in parametros %}
+          <tr>
+            <th scope="row">{{ p.idParametro }}</th>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.valor }}</td>
+            <td>
+              <button id="{{ p.idParametro }}" type="button" class="btn btn-success boton-modificar">
+                Modificar
+              </button>
+            </td>
+            <td>
+              <button id="{{ p.idParametro }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>    
+  </div>
+  <!-- Fin Sección Administración de parametros -->
+
+  <!-- Inicio modal de confirmación de eliminación -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal-confirmacion" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-confirmacion">Eliminar parámetro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="mensaje-modal" class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button id="confirmar-eliminacion" type="button" class="btn btn-success" data-bs-dismiss="modal">Eliminar</button>
+          <button id="cancelar-eliminacion"type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin modal de confirmación de eliminación -->
+
+  <div>
+    {% include 'core/footer-administracion.html' %}      
+  </div>

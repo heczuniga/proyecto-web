@@ -1,9 +1,5 @@
 
 from django.shortcuts import render, redirect
-from numpy import delete
-from .models import Categoria
-from .models import Producto
-from .models import Fundacion
 
 from django.urls import reverse_lazy
 from django.views.decorators.cache import never_cache

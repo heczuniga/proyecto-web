@@ -1,0 +1,119 @@
+{% load static %}
+
+  <div>
+    {% include 'core/header-administracion.html' %}      
+  </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    /* Marcamos como no activos el resto de los menús */
+    $("#menu-1").removeClass("active");
+    $("#menu-2").removeClass("active");
+
+    /* Marcamos el menú seleccionado como activo */
+    $("#menu-3").addClass("active");
+
+    /* Ocultamos el texto de error al principio */
+    $("#error").hide();
+
+    /* Leemos el mensaje para determinar si viene desde la grabación del formulario y mostrar el mensaje de grabación o no */
+    mensaje = $("#exito").text();
+    if (mensaje != "") {
+    /* Grabó, mostramos el mensaje y redirijimos lapágina al anchor del mensaje */
+      $('html,body').animate({ scrollTop: $("#exito").offset().top }, 'fast');
+      $("#exito").show();
+    } else {
+      $("#exito").hide();
+    }
+
+    /* Si presiona el botón limpiar, se ocultan también los errores y el mensaje de éxito*/
+    $("#limpiar").click(function() {
+      $("#error").hide();
+      $("#exito").hide();
+      $('#comuna option[value!="' + valueSeleccione + '"]').hide();
+      $('html,body').animate({ scrollTop: $("#menu-1").offset().top }, 'fast');
+
+    })
+
+
+  });
+
+</script>
+
+    <!-- Inicio miga de pan -->
+    <div class="container-fluid pb-auto miga-de-pan">
+      <nav style="--bs-breadcrumb-divider: url(>;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/administracion/">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Administración de parámetros</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- Fin miga de pan -->
+
+    <!-- Inicio sección contacto -->
+    <div class="container-fluid">
+      <form method="post" id="formulario" enctype="multipart/form-data" action="/form_agregar_parametro/">
+
+        <div class="row pb-3">
+          <div class="col-lg-1">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="form-control-sm" for="id-parametro" id="label-id-parametro">Id (*)</label>
+              <div>
+                <input type="number" pattern="^[0-9]+" min="1" max="999" maxlength="3" class="form-control form-control-sm" id="idParametro" name="idParametro" placeholder="(Id)" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <div class="row pb-3">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label class="form-control-sm" for="nombre" id="label-nombre">Nombre (*)</label>
+              <div>
+                <input type="text" maxlength="50" class="form-control form-control-sm" id="nombre" name="nombre" placeholder="(Ingrese nombre)" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <div class="row pb-1">
+          <div class="col-lg-1">
+            <div class="form-group">
+              <label class="form-control-sm" for="valor" id="label-valor">Valor (*)</label>
+              <div>
+                <input type="text" maxlength="10" class="form-control form-control-sm" id="valor" name="valor" placeholder="(Ingrese valor)" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8"></div>
+        </div>
+
+        <div>
+          <br>
+        </div>
+        
+        <button type="submit" class="btn btn-success" id="enviar">Guardar</button>
+        <a class="btn btn-secondary" href="/administracion_parametros/" role="button">Volver</a>
+
+        <!-- Inicio sección éxito en la grabación del formulario -->
+        <div id="exito" class="alert alert-success m-4 pt-3" role="alert">{{ mensaje }}</div>
+        <!-- Fin sección éxito en la grabación del formulario -->
+
+        <!-- Inicio sección de errores del formulario -->
+        <div id="error" class="alert alert-danger m-4 pt-3" role="alert">{{ error }}</div>
+        <!-- Fin sección de errores del formulario -->
+
+      </form>
+    </div>
+    <!-- Fin sección contacto -->
+
+    <div>
+      {% include 'core/footer-administracion.html' %}      
+    </div>
+  
