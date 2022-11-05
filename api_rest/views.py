@@ -5,10 +5,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from api_rest.models import Producto
-from api_rest.models import Fundacion
+from api_rest.models import Pyme
 from api_rest.models import Parametro
 from api_rest.serializer import ProductoSerializer
-from api_rest.serializer import FundacionSerializer
+from api_rest.serializer import PymeSerializer
 from api_rest.serializer import ParametroSerializer
 from rest_framework import status
 from rest_framework import serializers
@@ -70,20 +70,20 @@ class Productos(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# API's relacionadas con fundaciones
-class ListaFundaciones(APIView):
+# API's relacionadas con PYMEs
+class ListaPymes(APIView):
     
     def get(self, request):
         order_by = ['nombreCorto']
-        fundaciones = Fundacion.objects.all().order_by(*order_by)
-        serializer = FundacionSerializer(fundaciones, many=True)
+        pymes = Pyme.objects.all().order_by(*order_by)
+        serializer = PymeSerializer(pymes, many=True)
         return Response(serializer.data)
 
 
-class CrearFundacion(APIView):
+class CrearPyme(APIView):
 
     def post(self, request):
-        serializer = FundacionSerializer(data=request.data)
+        serializer = PymeSerializer(data=request.data)
         
         if serializer.is_valid():
             serializer.save()
@@ -93,25 +93,25 @@ class CrearFundacion(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Fundaciones(APIView):
+class Pymes(APIView):
     
-    def get_fundacion_by_id(self, idFundacion):
+    def get_pyme_by_id(self, idPyme):
         try:
-            return Fundacion.objects.get(idFundacion=idFundacion)
+            return Pyme.objects.get(idPyme=idPyme)
         except:
-            fundacion = Fundacion()
-            fundacion.nombreCorto = "Fundación no existente"
-            return fundacion
+            pyme = Pyme()
+            pyme.nombreCorto = "PYME no existente"
+            return pyme
     
-    def get(self, request, idFundacion):
-        fundacion = self.get_fundacion_by_id(idFundacion)
+    def get(self, request, idPyme):
+        pyme = self.get_pyme_by_id(idPyme)
         
-        serializer = FundacionSerializer(fundacion)
+        serializer = PymeSerializer(pyme)
         return Response(serializer.data)
     
-    def put(self, request, idFundacion):
-        fundacion = self.get_fundacion_by_id(idFundacion)
-        serializer = FundacionSerializer(fundacion, data=request.data)
+    def put(self, request, idPyme):
+        pyme = self.get_pyme_by_id(idPyme)
+        serializer = PymeSerializer(pyme, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -119,10 +119,10 @@ class Fundaciones(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, idFundacion):
-        fundacion = self.get_fundacion_by_id(idFundacion)
+    def delete(self, request, idPyme):
+        pyme = self.get_pyme_by_id(idPyme)
         
-        fundacion.delete()
+        pyme.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

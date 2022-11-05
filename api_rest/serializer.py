@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from api_rest.models import Producto
-from api_rest.models import Fundacion
+from api_rest.models import Pyme
 from api_rest.models import Parametro
 from django.forms import ValidationError
 import requests
@@ -16,11 +16,11 @@ class ProductoSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# Serializer de fundaciones
-class FundacionSerializer(serializers.ModelSerializer):
+# Serializer de PYMEs
+class PymeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Fundacion
+        model = Pyme
         fields = "__all__"
 
 
