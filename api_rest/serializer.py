@@ -9,7 +9,7 @@ import requests
 # Serializer de productos
 class ProductoSerializer(serializers.ModelSerializer):
 
-    categoria_desc = serializers.CharField(source='categoria.nombreCategoria', read_only=True)
+    nombrePyme = serializers.CharField(source='pyme.nombreCorto', read_only=True)
     
     class Meta:
         model = Producto

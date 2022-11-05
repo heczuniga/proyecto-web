@@ -27,6 +27,7 @@ class Producto(models.Model):
     descripcion = models.TextField(max_length=1000, null=False, verbose_name="Descripción del producto (*)")
     precio = models.IntegerField(null=False, verbose_name="Precio del producto (*)")
     imagen = models.ImageField(upload_to="productos", null=True, blank=True, verbose_name="Imagen del producto (*)")
+    pyme = models.ForeignKey(Pyme, on_delete=models.RESTRICT, verbose_name="PYME que vende el producto (*)")
     
     def __str__(self) -> str:
         return self.nombreCorto

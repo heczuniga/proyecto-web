@@ -101,13 +101,13 @@ def administracion_productos(request):
 # Vista de formulario para agregar productos
 def form_agregar_producto(request):
 
-    url_api_lista_categorias = 'http://127.0.0.1:8000/api/categorias/lista/'
+    url_api_lista_pymes = 'http://127.0.0.1:8000/api/pymes/lista/'
     url_api_productos = 'http://127.0.0.1:8000/api/productos/'
 
-    # Recuperamos los categorias
-    response_categorias = requests.get(url_api_lista_categorias).json()
+    # Recuperamos los PYMEs
+    response_pymes = requests.get(url_api_lista_pymes).json()
 
-    datos = {'categorias' : response_categorias}
+    datos = {'pymes' : response_pymes}
 
     if request.method == 'POST':
 
