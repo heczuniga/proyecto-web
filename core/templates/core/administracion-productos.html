@@ -63,7 +63,7 @@
             <th scope="col">Nombre largo</th>
             <th scope="col">Descripción</th>
             <th scope="col">Precio</th>
-            <th scope="col">Categoría</th>
+            <th scope="col">PYME</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
@@ -85,7 +85,7 @@
             <td>{{ p.nombreLargo }}</td>
             <td>{{ p.descripcion }}</td>
             <td>${{ p.precio | intcomma }}</td>
-            <td>{{ p.categoria_desc }}</td>
+            <td>{{ p.nombrePyme }}</td>
             <td>
               <a class="btn btn-success" href="{% url 'form_modificar_producto' p.idProducto %}" role="button">Modificar</a>
             </td>

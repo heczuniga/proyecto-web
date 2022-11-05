@@ -126,14 +126,14 @@ def form_agregar_producto(request):
 # Vista de formulario para modificar productos
 def form_modificar_producto(request, idProducto):
 
-    url_api_lista_categorias = 'http://127.0.0.1:8000/api/categorias/lista/'
+    url_api_lista_pymes = 'http://127.0.0.1:8000/api/pymes/lista/'
     url_api_productos = f'http://127.0.0.1:8000/api/productos/{idProducto}/'
 
-    # Recuperamos los categorias
-    response_categorias = requests.get(url_api_lista_categorias).json()
+    # Recuperamos los PYMEs
+    response_pymes = requests.get(url_api_lista_pymes).json()
     response_producto = requests.get(url_api_productos).json()
     datos = {
-        'categorias' : response_categorias,
+        'pymes' : response_pymes,
         'producto' : response_producto,
         }
 
@@ -149,7 +149,7 @@ def form_modificar_producto(request, idProducto):
             # Si actualizó bien los datos, se recargan los atributos para que se vean modificados en la página
             response_producto = requests.get(url_api_productos).json()
             datos = {
-                'categorias' : response_categorias,
+                'pymes' : response_pymes,
                 'producto' : response_producto,
                 }
 
