@@ -9,7 +9,7 @@
 
     $(document).ready(function() {
 
-      var idContacto
+      var codParametro
 
       /* Marcamos como no activos el resto de los menús */
       $("#menu-1").removeClass("active");
@@ -20,15 +20,16 @@
 
       /* Construcción del modal de la confirmación de eliminación */
       $(".boton-eliminar").click(function () {
-        idParametro = $(this).attr("id");
+        codParametro = $(this).attr("id");
+        var nombreParametro = $("#nombre-" + codParametro).text();
 
-        $("#mensaje-modal").text("Está seguro que desea eliminar el parámetro " + idParametro + "?");
+        $("#mensaje-modal").text("Está seguro que desea eliminar el parámetro \"" + nombreParametro + "\"?")
 
       })
 
       /* Manejo de la confirmación de la eliminación */
       $("#confirmar-eliminacion").click(function () {
-        $(location).prop("href", "/form_eliminar_parametro/" + idParametro);
+        $(location).prop("href", "/form_eliminar_parametro/" + codParametro);
       })
 
     });
@@ -56,25 +57,24 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Parámetro</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th class="text-center" scope="col">Valor</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-        {% for p in parametros %}
+        {% for pa in parametros %}
           <tr>
-            <th scope="row">{{ p.idParametro }}</th>
-            <td>{{ p.nombre }}</td>
-            <td>{{ p.valor }}</td>
+            <td id="{{ pa.codParametro }}" scope="row">{{ pa.codParametro }}</td>
+            <td id="nombre-{{ pa.codParametro }}">{{ pa.nombreParametro }}</td>
+            <td class="text-center" id="valor-{{ pa.codParametro }}">{{ pa.valor }}</td>
             <td>
-              <button id="{{ p.idParametro }}" type="button" class="btn btn-success boton-modificar">
-                Modificar
-              </button>
+              <a class="btn btn-success" href="{% url 'form_modificar_parametro' pa.codParametro %}" role="button">Modificar</a>
             </td>
             <td>
-              <button id="{{ p.idParametro }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button id="{{ pa.codParametro }}" type="button" class="btn btn-secondary boton-eliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Eliminar
               </button>
             </td>
@@ -83,7 +83,7 @@
         </tbody>
       </table>    
   </div>
-  <!-- Fin Sección Administración de parametros -->
+  <!-- Fin Sección Administración de parámetros -->
 
   <!-- Inicio modal de confirmación de eliminación -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal-confirmacion" aria-hidden="true">

@@ -172,21 +172,21 @@ def form_eliminar_producto(request, idProducto):
 
 
 # Vista de página para administración de categorías
-def administracion_categorias(request):
+def administracion_parametros(request):
 
-    url_api = "http://127.0.0.1:8000/api/categorias/lista/"
+    url_api = "http://127.0.0.1:8000/api/parametros/lista/"
 
     # Recuperamos los productos
     response = requests.get(url_api).json()
-    datos = {'categorias': response}
+    datos = {'parametros': response}
 
-    return render(request, 'core/administracion-categorias.html', datos)
+    return render(request, 'core/administracion-parametros.html', datos)
 
 
 # Vista de formulario para agregar categorías
-def form_agregar_categoria(request):
+def form_agregar_parametro(request):
 
-    url_api = 'http://127.0.0.1:8000/api/categorias/'
+    url_api = 'http://127.0.0.1:8000/api/parametros/'
 
     datos = {}
 
@@ -195,59 +195,58 @@ def form_agregar_categoria(request):
         response = requests.post(url_api, data=request.POST, files=request.FILES)
 
         if response.status_code == status.HTTP_201_CREATED:
-            datos['mensaje'] = "La categoría fue agregada correctamente.."
+            datos['mensaje'] = "El parámetro fue agregado correctamente.."
         else:
-            datos['error'] = "Se ha producido un error al agregar la categoría. Verifica tus datos y reintenta."
+            datos['error'] = "Se ha producido un error al agregar el parámetro. Verifica tus datos y reintenta."
 
-        return render(request, "core/form-agregar-categoria.html", datos)
+        return render(request, "core/form-agregar-parametro.html", datos)
     
-    return render(request, "core/form-agregar-categoria.html", datos)
+    return render(request, "core/form-agregar-parametro.html", datos)
 
 
 # Vista de formulario para modificar categorías
-def form_modificar_categoria(request, codCategoria):
+def form_modificar_parametro(request, codParametro):
 
-    url_api = f'http://127.0.0.1:8000/api/categorias/{codCategoria}/'
+    url_api = f'http://127.0.0.1:8000/api/parametros/{codParametro}/'
 
-    response_categoria = requests.get(url_api).json()
+    response_parametro = requests.get(url_api).json()
     datos = {
-        'categoria' : response_categoria,
+        'parametro' : response_parametro,
         }
 
     if request.method == 'POST':
 
-        response_categorias = requests.put(url_api, data=request.POST)
+        response_parametros = requests.put(url_api, data=request.POST)
        
-        if response_categorias.status_code == status.HTTP_202_ACCEPTED:
+        if response_parametros.status_code == status.HTTP_202_ACCEPTED:
 
             # Si actualizó bien los datos, se recargan los atributos para que se vean modificados en la página
-            response_categoria = requests.get(url_api).json()
+            response_parametro = requests.get(url_api).json()
             datos = {
-                # 'categorias' : response_categorias,
-                'categoria' : response_categoria,
+                'parametro' : response_parametro,
                 }
 
-            datos['mensaje'] = "La categoría fue modificada correctamente."
+            datos['mensaje'] = "El parámetro fue modificado correctamente."
         else:
-            datos['error'] = "Se ha producido un error al modificar la categoría. Verifica tus datos y reintenta."
+            datos['error'] = "Se ha producido un error al modificar el parámetro. Verifica tus datos y reintenta."
 
-        return render(request, "core/form-modificar-categoria.html", datos)
+        return render(request, "core/form-modificar-parametro.html", datos)
 
-    return render(request, "core/form-modificar-categoria.html", datos)
+    return render(request, "core/form-modificar-parametro.html", datos)
 
 
 # Vista para eliminar categorías
-def form_eliminar_categoria(request, codCategoria):
+def form_eliminar_parametro(request, codParametro):
 
-    url_api = f'http://127.0.0.1:8000/api/categorias/{codCategoria}/'
+    url_api = f'http://127.0.0.1:8000/api/parametros/{codParametro}/'
     response = requests.delete(url_api)
 
     datos = {}
     
     if response.status_code != status.HTTP_204_NO_CONTENT:
-        datos['error'] = "Se ha producido un error al eliminar la categoría. Es posible que la categoría tenga productos asociados."
+        datos['error'] = "Se ha producido un error al eliminar el parámetro."
     
-    return redirect(to="/administracion_categorias/")
+    return redirect(to="/administracion_parametros/")
 
 
 # Vista de página para administración de fundaciones

@@ -30,10 +30,10 @@ from core.views import administracion_productos
 from core.views import form_agregar_producto
 from core.views import form_modificar_producto
 from core.views import form_eliminar_producto
-from core.views import administracion_categorias
-from core.views import form_agregar_categoria
-from core.views import form_modificar_categoria
-from core.views import form_eliminar_categoria
+from core.views import administracion_parametros
+from core.views import form_agregar_parametro
+from core.views import form_modificar_parametro
+from core.views import form_eliminar_parametro
 from core.views import administracion_pymes
 from core.views import form_agregar_pyme
 from core.views import form_modificar_pyme
@@ -51,10 +51,10 @@ urlpatterns = [
     path('contacto/', contacto, name="contacto"),
     path('donaciones/', donaciones, name="donaciones"),
     path('tienda/<int:codCategoria>/', tienda, name="tienda"),
-    path('administracion_categorias/', administracion_categorias, name="administracion_categorias"),
-    path('form_agregar_categoria/', form_agregar_categoria, name="form_agregar_categoria"),
-    path('form_modificar_categoria/<int:codCategoria>/', form_modificar_categoria, name="form_modificar_categoria"),
-    path('form_eliminar_categoria/<int:codCategoria>/', form_eliminar_categoria, name="form_eliminar_categoria"),
+    path('administracion_parametros/', administracion_parametros, name="administracion_parametros"),
+    path('form_agregar_parametro/', form_agregar_parametro, name="form_agregar_parametro"),
+    path('form_modificar_parametro/<int:codParametro>/', form_modificar_parametro, name="form_modificar_parametro"),
+    path('form_eliminar_parametro/<int:codParametro>/', form_eliminar_parametro, name="form_eliminar_parametro"),
     path('administracion/', administracion_productos, name="administracion_productos"),
     path('administracion_productos/', administracion_productos, name="administracion_productos"),
     path('form_agregar_producto/', form_agregar_producto, name="form_agregar_producto"),
