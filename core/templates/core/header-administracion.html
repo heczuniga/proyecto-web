@@ -32,12 +32,8 @@
         <div class="container-fluid">
             <div class="d-flex flex-row-reverse">
                 <div class="row">
-                {% if user.is_authenticated %}
-                    <div class="col">{{ user.username }} <i class="bi bi-person-check-fill"></i> <a href="#">Logout</a></div>
-                {% else %}
-                    <div class="col"><a href="/login/">Login</a></div>
-                {% endif %}
-                  </div>
+                    <div class="col"><a href="/login/">Logout</a></div>
+                </div>
             </div>
             <nav class="navbar navbar-expand-lg navbar-dark encabezado-administracion">
                 <div class="container-fluid">

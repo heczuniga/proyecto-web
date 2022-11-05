@@ -16,9 +16,6 @@ from rest_framework import serializers
 # API's relacionadas con productos
 class ListaProductos(APIView):
     
-    # # authentication_classes = [SessionAuthentication, BasicAuthentication]
-    # permission_classes = [IsAuthenticated]
-        
     def get(self, request):
         order_by = ['nombreCorto']
         productos = Producto.objects.all().order_by(*order_by)
